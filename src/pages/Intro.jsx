@@ -209,10 +209,10 @@ function Intro() {
                     <Content style={{ padding: '0, 50px' }}>
                         <div className="site-layout-content">
                             <div className='left'>
-                                <div className='name'>Sizuo (Darren) Liu</div>
+                                <div className='name'>Darren (Sizuo) Liu</div>
                                 <div className="email">darrenliu0701@gmail.com</div>
                                 <div className="education">
-                                    Currently student at
+                                    Current student at
                                     <Button type="dashed" size={button_size} onClick={showBU} style={text_btn_style}>Binghamton University</Button>
                                 </div>
 
