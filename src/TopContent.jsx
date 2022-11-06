@@ -14,8 +14,6 @@ import Menu from '@mui/material/Menu';
 import Avatar from '@mui/material/Avatar';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
-import Tooltip from '@mui/material/Tooltip';
-import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 
@@ -85,7 +83,7 @@ function TopContent(props) {
     };
 
     return (
-        <>
+        <div style={{position: 'fixed', width: '100%', top: '0px'}}>
             {/* <div className='top_content'>Darren Liu's Blog</div> */}
 
             <Box sx={{ flexGrow: 1 }}>
@@ -185,7 +183,7 @@ function TopContent(props) {
                     Still working on this section...
                 </Alert>
             </Dialog>
-        </>
+        </div>
     )
 }
 

@@ -11,7 +11,9 @@
 }
 
 .top_dock{
-    margin-top: 20px;
+    position: fixed;
+    top: 80px;
+    width: 100%;
 }
 
 .top_content {

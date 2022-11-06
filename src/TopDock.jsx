@@ -26,7 +26,7 @@ function TopDock(props) {
     
     return (
         <div className='top_dock'>
-            <Nav fill variant="tabs" activeKey={props.curr_page} onSelect={props.handleSelect}>
+            <Nav fill variant="tabs" activeKey={props.curr_page} onSelect={props.handleSelect} style={{backgroundColor: 'white'}}>
                 <Nav.Item>
                     <Nav.Link eventKey={1} href="/intro" style={{fontSize: '20px'}}>Introduction</Nav.Link>
                 </Nav.Item>

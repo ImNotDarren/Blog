@@ -170,7 +170,7 @@ function Intro() {
 
     return (
 
-        <>
+        <div>
             <div className="darren_avatar">
                 <Avatar size={100} icon={<img src={darren_avatar} alt="" />} />
             </div>
@@ -305,7 +305,7 @@ function Intro() {
                                     </Popover>
                                 </div>
 
-                                <Divider orientation="right" plain>
+                                <Divider orientation="left" plain>
                                     <div className="link_title">My Songs</div>
                                 </Divider>
 
@@ -350,7 +350,7 @@ function Intro() {
                 </Content>
 
             </Layout>
-        </>
+        </div>
 
     )
 }

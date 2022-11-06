@@ -17,7 +17,8 @@ function Home() {
             {/* <TopContent login_state={login}/> */}
             <TopContent />
             <TopDock activeKey={path}/>
-            <Outlet/>
+            <div style={{height: '129px'}}></div>
+            <Outlet />
             <Copyright />
         </div>
     )
