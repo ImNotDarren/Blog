@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import '../CSS/page.css'
 import 'antd/dist/antd.css';
-import { Layout, Button, Modal, Popover, Avatar, Divider } from 'antd';
+import { Layout, Button, Modal, Popover, Avatar, Divider, Timeline } from 'antd';
 import { GithubOutlined, LinkedinOutlined, InstagramOutlined, PlayCircleOutlined } from '@ant-design/icons';
 import darren_avatar from '../assets/avatars/darren_avatar.jpg'
 import murderer from '../assets/album_covers/murderer.jpg'
 import van_goghs_dream from '../assets/album_covers/van_goghs_dream.jpg'
 import original_song from '../assets/album_covers/original_song.jpg'
 import well from '../assets/album_covers/well.jpg'
+import darren from '../assets/album_covers/darren.jpg'
 
 const { Content } = Layout;
 
@@ -19,7 +20,82 @@ function Intro() {
 
 
     const button_size = "large"
+    const music_button_size = "middle"
     const link_size = "large"
+
+    const darren_style = {
+        marginLeft: '15px',
+        marginRight: '15px',
+        color: '#3069cb',
+        fontSize: '15px',
+        fontWeight: '600'
+    }
+
+    const text_btn_style = {
+        marginLeft: '8px',
+        color: 'rgb(106, 106, 106)',
+        fontSize: '18px',
+        fontWeight: '600'
+
+    }
+
+    const murderer_style = {
+        marginLeft: '15px',
+        color: 'rgb(40, 40, 40)',
+        fontSize: '15px',
+        fontWeight: '600'
+    }
+
+    const van_goghs_dream_style = {
+        marginLeft: '15px',
+        color: 'rgb(226, 69, 134)',
+        fontSize: '15px',
+        fontWeight: '600'
+    }
+
+    const original_song_style = {
+        marginLeft: '15px',
+        color: 'rgb(211, 198, 60)',
+        fontSize: '15px',
+        fontWeight: '600'
+    }
+
+    const well_style = {
+        marginLeft: '15px',
+        color: 'rgb(255, 128, 43)',
+        fontSize: '15px',
+        fontWeight: '600'
+    }
+
+    const link_btn_style = {
+        marginLeft: '8px',
+        color: 'rgb(106, 106, 106)',
+        fontSize: '18px',
+        verticalAlign: 'middle'
+    }
+
+    const avatar_style = {
+        position: 'absolute'
+    }
+
+    const darren_content = (
+        <a href="">
+            <div className="intro_album_cover_div">
+                <img className="intro_album_cover" src={darren} alt="" />
+            </div>
+            <div className='intro_album_name'>DARREN</div>
+        </a>
+    )
+
+    const pending_ach = (
+        <div className="achievement">
+            Brand new album
+            <Popover placement='top' content={darren_content} trigger="click">
+                <Button type="dashed" size={music_button_size} style={darren_style}>DARREN</Button>
+            </Popover>
+            coming in 2024
+        </div>
+    )
 
     const murderer_content = (
         <a href="">
@@ -56,53 +132,6 @@ function Intro() {
             <div className='intro_album_name'>We'll</div>
         </a>
     )
-
-    const text_btn_style = {
-        marginLeft: '8px',
-        color: 'rgb(106, 106, 106)',
-        fontSize: '18px',
-        fontWeight: '600'
-        
-    }
-
-    const murderer_style = {
-        marginLeft: '15px',
-        color: 'rgb(40, 40, 40)',
-        fontSize: '18px',
-        fontWeight: '600'
-    }
-    
-    const van_goghs_dream_style = {
-        marginLeft: '15px',
-        color: 'rgb(226, 69, 134)',
-        fontSize: '18px',
-        fontWeight: '600'
-    }
-
-    const original_song_style = {
-        marginLeft: '15px',
-        color: 'rgb(211, 198, 60)',
-        fontSize: '18px',
-        fontWeight: '600'
-    }
-
-    const well_style = {
-        marginLeft: '15px',
-        color: 'rgb(255, 128, 43)',
-        fontSize: '18px',
-        fontWeight: '600'
-    }
-
-    const link_btn_style = {
-        marginLeft: '8px',
-        color: 'rgb(106, 106, 106)',
-        fontSize: '18px',
-        verticalAlign: 'middle'
-    }
-
-    const avatar_style = {
-        position: 'absolute'
-    }
 
     const showBU = () => {
         setVisibleBU(true)
@@ -267,7 +296,7 @@ function Intro() {
                                 <Divider orientation="left" plain>
                                     <div className="link_title">My Pages</div>
                                 </Divider>
-                                
+
                                 <div className="link_box_out">
                                     <div className="link_box">
                                         <div className="link_btn">
@@ -309,41 +338,51 @@ function Intro() {
                                     <div className="link_title">My Songs</div>
                                 </Divider>
 
-                                <div className="achievement">
-                                    2020.04.26 - First album:
-                                    <Popover placement='top' content={murderer_content} trigger="click">
-                                        <Button type="dashed" size={button_size} style={murderer_style}>Murderer</Button>
-                                    </Popover>
+                                <div style={{margin: '10px'}}>
+                                    <Timeline pending={pending_ach}>
+                                        <Timeline.Item>
+                                            <div className="achievement">
+                                                2020.04.26 - First album:
+                                                <Popover placement='top' content={murderer_content} trigger="click">
+                                                    <Button type="dashed" size={music_button_size} style={murderer_style}>Murderer</Button>
+                                                </Popover>
+                                            </div>
+                                        </Timeline.Item>
+                                        <Timeline.Item>
+                                            <div className="achievement">
+                                                2021.04.11 - Single:
+                                                <Popover placement='top' content={van_goghs_dream_content} trigger="click">
+                                                    <Button type="dashed" size={music_button_size} style={van_goghs_dream_style}>Playboy</Button>
+                                                </Popover>
+                                            </div>
+                                        </Timeline.Item>
+                                        <Timeline.Item>
+                                            <div className="achievement">
+                                                2021.05.01 - Single:
+                                                <Popover placement='top' content={original_song_content} trigger="click">
+                                                    <Button type="dashed" size={music_button_size} style={original_song_style}>Original Song</Button>
+                                                </Popover>
+                                            </div>
+                                        </Timeline.Item>
+                                        <Timeline.Item>
+                                            <div className="achievement">
+                                                2021.07.01 - Single:
+                                                <Popover placement='top' content={van_goghs_dream_content} trigger="click">
+                                                    <Button type="dashed" size={music_button_size} style={van_goghs_dream_style}>22</Button>
+                                                </Popover>
+                                            </div>
+                                        </Timeline.Item>
+                                        <Timeline.Item>
+                                            <div className="achievement">
+                                                2021.08.14 - Single:
+                                                <Popover placement='top' content={well_content} trigger="click">
+                                                    <Button type="dashed" size={music_button_size} style={well_style}>We'll</Button>
+                                                </Popover>
+                                            </div>
+                                        </Timeline.Item>
+                                    </Timeline>
                                 </div>
 
-                                <div className="achievement">
-                                    2021.04.11 - Single:
-                                    <Popover placement='top' content={van_goghs_dream_content} trigger="click">
-                                        <Button type="dashed" size={button_size} style={van_goghs_dream_style}>Playboy</Button>
-                                    </Popover>
-                                </div>
-
-                                <div className="achievement">
-                                    2021.05.01 - Single:
-                                    <Popover placement='top' content={original_song_content} trigger="click">
-                                        <Button type="dashed" size={button_size} style={original_song_style}>Original Song</Button>
-                                    </Popover>
-                                </div>
-
-                                <div className="achievement">
-                                    2021.07.01 - Single:
-                                    <Popover placement='top' content={van_goghs_dream_content} trigger="click">
-                                        <Button type="dashed" size={button_size} style={van_goghs_dream_style}>22</Button>
-                                    </Popover>
-                                </div>
-
-                                <div className="achievement">
-                                    2021.08.14 - Single:
-                                    <Popover placement='top' content={well_content} trigger="click">
-                                        <Button type="dashed" size={button_size} style={well_style}>We'll</Button>
-                                    </Popover>
-                                </div>
-                                
                             </div>
                         </div>
                     </Content>

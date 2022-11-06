@@ -83,7 +83,7 @@ function TopContent(props) {
     };
 
     return (
-        <div style={{position: 'fixed', width: '100%', top: '0px'}}>
+        <div style={{position: 'fixed', width: '100%', top: '0px', zIndex: '5'}}>
             {/* <div className='top_content'>Darren Liu's Blog</div> */}
 
             <Box sx={{ flexGrow: 1 }}>
