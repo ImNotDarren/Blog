@@ -1,0 +1,158 @@
+@import '~antd/dist/antd.css';
+
+.content {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    /* border: 1px solid black; */
+}
+
+.login_bg {
+    display: flex;
+    justify-content: center;
+    background-color: skyblue;
+}
+
+.error {
+    height: 100%;
+    width: 100%;
+}
+
+.login_card {
+    position: absolute;
+    top: 200px;
+    width: 400px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.login_bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.copyright {
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+
+.site-layout-content {
+    display: flex;
+    min-height: 550px;
+    padding: 24px;
+    background: #fff;
+}
+
+#components-layout-demo-top .logo {
+    float: left;
+    width: 120px;
+    height: 31px;
+    margin: 16px 24px 16px 0;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.left {
+    display: block;
+    width: 47%;
+}
+
+.right {
+    margin-left: 6%;
+    width: 45%
+}
+
+.name {
+    font-size: 30px;
+    color:rgb(78, 78, 78);
+    margin: 10px;
+    font-weight: bold;
+    
+}
+
+.email {
+    font-size: 18px;
+    color:rgb(133, 133, 133);
+    margin: 10px;
+}
+
+.occupation {
+    font-size: 20px;
+    color:rgb(106, 106, 106);
+    margin: 8px;
+    margin-top: 71.14px;
+}
+
+.achievement {
+    font-size: 20px;
+    color:rgb(106, 106, 106);
+    margin: 8px;
+}
+
+.education {
+    font-size: 20px;
+    color:rgb(106, 106, 106);
+    margin: 8px;
+}
+
+.modal_par {
+    display: flex;
+    font-size: 18px;
+    color:rgb(57, 57, 57);
+}
+
+.info {
+    font-size: 18px;
+    margin-left: 5px;
+    color:rgb(91, 91, 91);
+}
+
+.course {
+    font-size: 15px;
+    color:rgb(91, 91, 91);
+}
+
+.link_title {
+    font-size: 17px;
+    color:rgb(106, 106, 106);
+    margin: 8px;
+}
+
+.link_box_out {
+    display: flex;
+}
+
+.link_box {
+    display: grid;
+    width: 200px;
+}
+
+.link_btn {
+    margin: 8px;
+}
+
+.darren_avatar{
+    position: absolute;
+    margin-top: 30px;
+    left: 370px;
+}
+
+.intro_album_cover {
+    width: 100px
+}
+
+.intro_album_name {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+    color:rgb(106, 106, 106);
+}
+
+.intro_album_cover_div{
+    display: flex;
+    justify-content: center;
+}
+
+.color{
+    color:rgb(226, 69, 134)
+}
