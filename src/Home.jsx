@@ -18,7 +18,7 @@ function Home() {
             <TopContent />
             <div style={{position: 'fixed', top: '60px',height: '200', width: '100%', backgroundColor: 'white', color: 'white', zIndex: 4}}>123</div>
             <TopDock activeKey={path}/>
-            <div style={{height: '129px', width: '100%', backgroundColor: 'white'}}></div>
+            <div style={{height: '120px', width: '100%', backgroundColor: 'white'}}></div>
             <Outlet />
             <Copyright />
         </div>

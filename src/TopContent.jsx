@@ -87,7 +87,7 @@ function TopContent(props) {
             {/* <div className='top_content'>Darren Liu's Blog</div> */}
 
             <Box sx={{ flexGrow: 1 }}>
-                <AppBar position="static" sx={{height: '68px'}}>
+                <AppBar position="static" sx={{height: '62px'}}>
                     <Toolbar>
                         <IconButton
                             size="large"
@@ -100,7 +100,7 @@ function TopContent(props) {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                            <div style={{fontSize: '25px'}}>Darren's Blog</div>
+                            <div style={{fontSize: '18px'}}>Darren's Blog</div>
                         </Typography>
                         <Button color="inherit" onClick={login} style={{display: login_display}}>Login</Button>
                         <Button color="inherit" style={{display: user_display}} onClick={handleClick}>{props.username}</Button>
