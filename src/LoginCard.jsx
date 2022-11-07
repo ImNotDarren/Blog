@@ -13,11 +13,11 @@ function SignupBtn(){
 
 function LoginCard() {
     return (
-      <div>
+      <>
           <Card className="login_card" title="Login" extra={<SignupBtn />}>
               <LoginForm />
           </Card>
-      </div>
+      </>
     )
 }
 
