@@ -14,8 +14,6 @@ function Blogs() {
 
     const [blogs, setBlogs] = useState([{ bid: 1, title: '211', author: 1, publish_time: '', abst: '', content: ''}])
 
-    const didMount = useRef(false)
-
     useEffect(() => {
         fetch(url)
             .then(res => res.json())
