@@ -15,7 +15,7 @@ const defaultState = {
     uid,
     avatar,
     email,
-    server: 'http://localhost:8080'
+    server: 'http://Blogbackend-env.eba-jb9y6xms.us-east-1.elasticbeanstalk.com'
 }
 
 
