@@ -82,6 +82,20 @@ function TopContent(props) {
         navigate('/intro')
     };
 
+    const handleAuth = () => {
+        window.location.href = "https://www.imnotdddarren.com"
+    }
+
+    let blog_title = "Darren's blog"
+
+    console.log(props.connected)
+
+    if (!props.connected) {
+        blog_title = (
+            <Button onClick={handleAuth} color="inherit">You're not connected! Please click here to authorize this website until you see a 404 error</Button>
+        )
+    }
+
     return (
         <div style={{position: 'fixed', width: '100%', top: '0px', zIndex: '5'}}>
             {/* <div className='top_content'>Darren Liu's Blog</div> */}
@@ -100,7 +114,7 @@ function TopContent(props) {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                            <div style={{fontSize: '18px'}}>Darren's Blog</div>
+                            <div style={{fontSize: '18px', color: 'white'}}>{blog_title}</div>
                         </Typography>
                         <Button color="inherit" onClick={login} style={{display: login_display}}>Login</Button>
                         <Button color="inherit" style={{display: user_display}} onClick={handleClick}>{props.username}</Button>
