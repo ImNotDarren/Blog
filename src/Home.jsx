@@ -21,7 +21,7 @@ function Home() {
         fetch(url)
         .then((res) => {
             if (res.status == 200) {
-                setConnected(true)
+                setConnected(true);
             }
         })
     })
