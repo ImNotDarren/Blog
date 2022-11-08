@@ -206,8 +206,15 @@
 
 .darren_avatar{
     position: absolute;
-    margin-top: 30px;
-    left: 270px;
+    margin-top: 20px;
+    left: 290px;
+}
+
+@media screen and (max-width: 560px) {
+    .darren_avatar {
+        left: 250px;
+        margin-top: 17px;
+    }
 }
 
 .intro_album_cover {
