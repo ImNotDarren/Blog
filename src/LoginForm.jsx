@@ -21,8 +21,7 @@ function LoginForm() {
         fetch(url, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
-                "AllowedOrigin": "https://www.imnotdddarren.com"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(user)
         }).then(res=>res.json())
