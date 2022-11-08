@@ -12,9 +12,11 @@ const url = server + '/getBlogs'
 
 function Blogs() {
 
-    const [blogs, setBlogs] = useState([{ bid: 1, title: '211', author: 1, publish_time: '', abst: '', content: ''}])
+    const [blogs, setBlogs] = useState([{ bid: 1, title: '211', author: 1, publish_time: '', abst: '', content: '' }])
+    const [winWidth, setWinWidth] = useState(1000)
 
     useEffect(() => {
+
         fetch(url)
             .then(res => res.json())
             .then((result) => {
@@ -25,26 +27,33 @@ function Blogs() {
                     setBlogs(result)
                 }
             })
-    }, [blogs])
+
+        const handleResize = e => {
+            // console.log(e.target.innerWidth)
+            if (e.target.innerWidth <= 400){
+                setWinWidth(400)
+            }else{
+                setWinWidth(1000)
+            }
+        }
+
+        window.addEventListener('resize', handleResize)
+    }, [blogs, winWidth])
+
 
     return (
-        <Layout className="layout">
-            <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
-                <Content style={{ padding: '0, 50px' }}>
-                    <div className="site-layout-content">
-                        <div className="blog">
-                            {/* <div className="blog_card_title">Latest blog</div> */}
-                            <div className="blog_card">
-                                <BlogCard blogs={blogs} />
-                            </div>
-                        </div>
-
-
+        <>
+            <div className="site-layout-content">
+                <div className="blog">
+                    {/* <div className="blog_card_title">Latest blog</div> */}
+                    <div className="blog_card">
+                        <BlogCard blogs={blogs} winWidth={winWidth}/>
                     </div>
-                </Content>
-            </Content>
+                </div>
 
-        </Layout>
+
+            </div>
+        </>
     )
 }
 

@@ -21,8 +21,8 @@ function Intro() {
 
     useEffect(() => {
         const handler = e => setMatches(e.matches);
-        mediaMatch.addEventListener("change", handler)
-        return () => mediaMatch.removeEventListener("change", handler)
+        mediaMatch.addEventListener("resize", handler)
+        return () => mediaMatch.removeEventListener("resize", handler)
     })
 
     const button_size = "smal"

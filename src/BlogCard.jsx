@@ -24,7 +24,9 @@ import { Alert, AlertTitle, Dialog } from '@mui/material';
 
 function BlogCard(props) {
 
+
     const [openAlert, setOpenAlert] = useState(false)
+
 
     const menu_alert = (
         <Alert onClose={() => { }}>This is a success alert — check it out!</Alert>
@@ -70,7 +72,7 @@ function BlogCard(props) {
                     Still working on this section...
                 </Alert>
             </Dialog>
-            <Card sx={{ maxWidth: 345 }}>
+            <Card sx={{ maxWidth: '100%' }}>
                 <CardHeader
                     avatar={
                         <Avatar size={45} icon={<img src={darren_avatar} alt="" />} />
@@ -91,7 +93,7 @@ function BlogCard(props) {
         image="/static/images/cards/paella.jpg"
         alt="Paella dish"
       /> */}
-                <CardContent>
+                <CardContent >
                     <Typography variant="body2" color="text.secondary">
                         {props.blogs[0].abst}
                     </Typography>

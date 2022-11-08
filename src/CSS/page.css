@@ -249,3 +249,33 @@
     font-size: 20px;
     margin-bottom: 10px;
 }
+
+.blog {
+    width: 100%;
+}
+
+.blog_card {
+    width: 40%;
+}
+
+@media screen and (max-width: 560px) {
+
+    .blog {
+        display: grid;
+        justify-content: center;
+    }
+
+    .blog_card {
+        /* display: flex;
+        justify-content: center; */
+        width: 90%;
+        margin-left: 5%
+    }
+}
+
+@media screen and (max-width: 396px) {
+    .blog_card {
+        width: 100%;
+        margin-left: 0%;
+    }
+}

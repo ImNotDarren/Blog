@@ -28,8 +28,6 @@ function Home() {
 
     return (
         <div>
-            {/* <TopContent login_state={login}/> */}
-
             <TopContent connected={connected}/>
             <div style={{position: 'fixed', top: '60px',height: '200', width: '100%', backgroundColor: 'white', color: 'white', zIndex: 4}}>123</div>
             <TopDock activeKey={path}/>
