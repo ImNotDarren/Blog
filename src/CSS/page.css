@@ -46,6 +46,12 @@
     }
 }
 
+@media screen and (max-width: 432px) {
+    .site-layout-content {
+        padding: 17px;
+    }
+}
+
 #components-layout-demo-top .logo {
     float: left;
     width: 120px;
