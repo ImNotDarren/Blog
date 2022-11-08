@@ -18,7 +18,7 @@ function TopDock(props) {
         <div className='top_dock'>
             <Nav fill variant="tabs" activeKey={props.curr_page} onSelect={props.handleSelect} style={{backgroundColor: 'white'}}>
                 <Nav.Item>
-                    <Nav.Link eventKey={1} href="/intro" style={{fontSize: '14px'}}>Introduction</Nav.Link>
+                    <Nav.Link eventKey={1} href="/intro" style={{fontSize: '14px'}}>Intro</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                     <Nav.Link eventKey={2} href="/publications"  style={{fontSize: '14px'}} disabled>Publications</Nav.Link>
@@ -30,7 +30,7 @@ function TopDock(props) {
                     <Nav.Link eventKey={4} href="/music" style={{fontSize: '14px'}}>Music</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey={5} href="/arrange"  style={{fontSize: '14px'}} disabled={(props.login==0 || props.super_account==0)}>Arrangements</Nav.Link>
+                    <Nav.Link eventKey={5} href="/arrange"  style={{fontSize: '14px'}} disabled={(props.login==0 || props.super_account==0)}>Events</Nav.Link>
                 </Nav.Item>
             </Nav>
 
