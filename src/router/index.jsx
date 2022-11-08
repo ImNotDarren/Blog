@@ -12,6 +12,7 @@ const BaseRouter = () => (
     <BrowserRouter forceRefresh={false}>
         <Routes>
             <Route path="/" element={<Home />}>
+            <Route path="/" element={<Intro />}></Route>
                 <Route path="/intro" element={<Intro />}></Route>
                 <Route path="/blogs" element={<Blogs />}></Route>
                 <Route path="/music" element={<Music />}></Route>
