@@ -86,9 +86,7 @@ function TopContent(props) {
         window.location.href = "https://www.imnotdddarren.com"
     }
 
-    let blog_title = "Darren's blog"
-
-    console.log(props.connected)
+    let blog_title = "Darren's Blog"
 
     if (!props.connected) {
         blog_title = (

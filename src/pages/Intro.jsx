@@ -19,7 +19,7 @@ function Intro() {
     const [visibleMetis, setVisibleMetis] = useState(false)
 
 
-    const button_size = "large"
+    const button_size = "smal"
     const music_button_size = "middle"
     const link_size = "large"
 
@@ -34,7 +34,7 @@ function Intro() {
     const text_btn_style = {
         marginLeft: '8px',
         color: 'rgb(106, 106, 106)',
-        fontSize: '18px',
+        fontSize: '14px',
         fontWeight: '600'
 
     }

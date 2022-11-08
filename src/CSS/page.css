@@ -55,12 +55,12 @@
 }
 
 .right {
-    margin-left: 6%;
-    width: 45%
+    padding-left: 6%;
+    width: 50%
 }
 
 .name {
-    font-size: 30px;
+    font-size: 25px;
     color:rgb(78, 78, 78);
     margin: 10px;
     font-weight: bold;
@@ -68,13 +68,14 @@
 }
 
 .email {
-    font-size: 18px;
+    font-size: 13px;
     color:rgb(133, 133, 133);
     margin: 10px;
+    margin-bottom: 25px;
 }
 
 .occupation {
-    font-size: 20px;
+    font-size: 17px;
     color:rgb(106, 106, 106);
     margin: 8px;
     margin-top: 71.14px;
@@ -87,9 +88,10 @@
 }
 
 .education {
-    font-size: 20px;
+    font-size: 17px;
     color:rgb(106, 106, 106);
     margin: 8px;
+    margin-top: 12px;
 }
 
 .modal_par {
@@ -133,7 +135,7 @@
 .darren_avatar{
     position: absolute;
     margin-top: 30px;
-    left: 370px;
+    left: 340px;
 }
 
 .intro_album_cover {
