@@ -13,16 +13,6 @@ function TopDock(props) {
     if (user != null) {
         props.setUserInfo(user)
     }
-
-    let arrangements = 'Arrangements'
-
-    if (props.login == 0) {
-        arrangements += ' (Please Login)'
-    }else{
-        if (props.super_account == 0) {
-            arrangements += ' (Not Available)'
-        }
-    }
     
     return (
         <div className='top_dock'>
@@ -31,7 +21,7 @@ function TopDock(props) {
                     <Nav.Link eventKey={1} href="/intro" style={{fontSize: '14px'}}>Introduction</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey={2} href="/publications"  style={{fontSize: '14px'}} disabled>Publications (Not Available)</Nav.Link>
+                    <Nav.Link eventKey={2} href="/publications"  style={{fontSize: '14px'}} disabled>Publications</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                     <Nav.Link eventKey={3} href="/blogs" style={{fontSize: '14px'}}>Blogs</Nav.Link>
@@ -40,7 +30,7 @@ function TopDock(props) {
                     <Nav.Link eventKey={4} href="/music" style={{fontSize: '14px'}}>Music</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey={5} href="/arrange"  style={{fontSize: '14px'}} disabled={(props.login==0 || props.super_account==0)}>{arrangements}</Nav.Link>
+                    <Nav.Link eventKey={5} href="/arrange"  style={{fontSize: '14px'}} disabled={(props.login==0 || props.super_account==0)}>Arrangements</Nav.Link>
                 </Nav.Item>
             </Nav>
 

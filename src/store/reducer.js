@@ -15,7 +15,7 @@ const defaultState = {
     uid,
     avatar,
     email,
-    server: 'https://www.darren-liu.com'
+    server: 'https://www.imnotdddarren.com'
 }
 
 
