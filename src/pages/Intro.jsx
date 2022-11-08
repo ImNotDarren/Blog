@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import '../CSS/page.css'
 import 'antd/dist/antd.css';
 import { Layout, Button, Modal, Popover, Avatar, Divider, Timeline } from 'antd';
-import Radium, { StyleRoot } from 'radium';
 import { GithubOutlined, LinkedinOutlined, InstagramOutlined, PlayCircleOutlined } from '@ant-design/icons';
 import darren_avatar from '../assets/avatars/darren_avatar.jpg'
 import murderer from '../assets/album_covers/murderer.jpg'
@@ -17,7 +16,7 @@ function Intro() {
     const [visibleSCU, setVisibleSCU] = useState(false)
     const [visibleMetis, setVisibleMetis] = useState(false)
 
-    const mediaMatch = window.matchMedia('(max-width: 560px)');
+    const mediaMatch = window.matchMedia('(max-width: 432px)');
     const [matches, setMatches] = useState(mediaMatch.matches);
 
     useEffect(() => {
@@ -30,54 +29,73 @@ function Intro() {
     const music_button_size = "middle"
     const link_size = "middle"
 
-    const darren_style = {
-        marginLeft: '15px',
-        marginRight: '15px',
-        color: '#3069cb',
-        fontSize: '15px',
-        fontWeight: '600'
-    }
-
     const text_btn_style = {
-        marginLeft: '8px',
-        color: 'rgb(106, 106, 106)',
-        fontSize: '14px',
-        fontWeight: '600'
-
-    }
-
-    const murderer_style = {
-        marginLeft: '15px',
-        color: 'rgb(40, 40, 40)',
-        fontSize: '15px',
-        fontWeight: '600'
-    }
-
-    const van_goghs_dream_style = {
-        marginLeft: '15px',
-        color: 'rgb(226, 69, 134)',
-        fontSize: '15px',
-        fontWeight: '600'
-    }
-
-    const original_song_style = {
-        marginLeft: '15px',
-        color: 'rgb(211, 198, 60)',
-        fontSize: '15px',
-        fontWeight: '600'
-    }
-
-    const well_style = {
-        marginLeft: '15px',
-        color: 'rgb(255, 128, 43)',
-        fontSize: '15px',
-        fontWeight: '600'
+        container: isSmaller => ({
+            marginLeft: '8px',
+            color: 'rgb(106, 106, 106)',
+            fontSize: isSmaller ? '12px' : '14px',
+            fontWeight: isSmaller ? '500' : '600',
+        })
     }
 
     const link_btn_style = {
-        color: 'rgb(106, 106, 106)',
-        fontSize: '14px',
-        verticalAlign: 'middle'
+        container: isSmaller => ({
+            color: 'rgb(106, 106, 106)',
+            fontSize: isSmaller ? '12px' : '14px',
+            verticalAlign: 'middle'
+        })
+
+    }
+
+    const darren_style = {
+        container: isSmaller => ({
+            marginLeft: '15px',
+            marginRight: '15px',
+            color: '#3069cb',
+            fontSize: isSmaller ? '13px' : '15px',
+            fontWeight: '600'
+        })
+        
+    }
+
+    const murderer_style = {
+        container: isSmaller => ({
+            marginLeft: '15px',
+            color: 'rgb(40, 40, 40)',
+            fontSize: isSmaller ? '13px' : '15px',
+            fontWeight: '600'
+        })
+
+    }
+
+    const van_goghs_dream_style = {
+        container: isSmaller => ({
+            marginLeft: '15px',
+            color: 'rgb(226, 69, 134)',
+            fontSize: isSmaller ? '13px' : '15px',
+            fontWeight: '600'
+        })
+
+    }
+
+    const original_song_style = {
+        container: isSmaller => ({
+            marginLeft: '15px',
+            color: 'rgb(211, 198, 60)',
+            fontSize: isSmaller ? '13px' : '15px',
+            fontWeight: '600'
+        })
+
+    }
+
+    const well_style = {
+        container: isSmaller => ({
+            marginLeft: '15px',
+            color: 'rgb(255, 128, 43)',
+            fontSize: isSmaller ? '13px' : '15px',
+            fontWeight: '600'
+        })
+
     }
 
     const avatar_style = {
@@ -85,19 +103,19 @@ function Intro() {
     }
 
     const darren_content = (
-        <a href="">
+        < a href = "" >
             <div className="intro_album_cover_div">
                 <img className="intro_album_cover" src={darren} alt="" />
             </div>
             <div className='intro_album_name'>DARREN</div>
-        </a>
+        </a >
     )
 
     const pending_ach = (
         <div className="achievement">
             Brand new album
             <Popover placement='top' content={darren_content} trigger="click">
-                <Button type="dashed" size={music_button_size} style={darren_style}>DARREN</Button>
+                <Button type="dashed" size={music_button_size} style={darren_style.container(matches)}>DARREN</Button>
             </Popover>
             coming in 2024
         </div>
@@ -203,7 +221,7 @@ function Intro() {
         window.location.href = 'https://y.qq.com/n/ryqq/singer/000VPxvF2gjHr4'
     }
 
-    
+
 
 
     return (
@@ -218,7 +236,7 @@ function Intro() {
                     <div className="email">darrenliu0701@gmail.com</div>
                     <div className="education">
                         Current student at
-                        <Button type="dashed" size={button_size} onClick={showBU} style={text_btn_style}>Binghamton University</Button>
+                        <Button type="dashed" size={button_size} onClick={showBU} style={text_btn_style.container(matches)}>Binghamton University</Button>
                     </div>
 
                     <Modal
@@ -243,7 +261,7 @@ function Intro() {
 
                     <div className="education">
                         Currently taking bootcamp at
-                        <Button type="dashed" size={button_size} onClick={showMetis} style={text_btn_style}>Metis</Button>
+                        <Button type="dashed" size={button_size} onClick={showMetis} style={text_btn_style.container(matches)}>Metis</Button>
                     </div>
 
                     <Modal
@@ -270,7 +288,7 @@ function Intro() {
 
                     <div className="education">
                         Studied at
-                        <Button type="dashed" size={button_size} onClick={showSCU} style={text_btn_style}>Sichuan University</Button>
+                        <Button type="dashed" size={button_size} onClick={showSCU} style={text_btn_style.container(matches)}>Sichuan University</Button>
                     </div>
 
                     <Modal
@@ -301,7 +319,7 @@ function Intro() {
                     <div className="occupation">
                         Singer, Songwriter, Producer at
                         <Popover placement='top' content="No website so far" trigger="click">
-                            <Button type="dashed" size={button_size} style={text_btn_style}>Silence Music</Button>
+                            <Button type="dashed" size={button_size} style={text_btn_style.container(matches)}>Silence Music</Button>
                         </Popover>
                     </div>
 
@@ -312,26 +330,26 @@ function Intro() {
                     <div className="link_box_out">
                         <div className="link_box">
                             <div className="link_btn">
-                                <Button type="secondary" onClick={goGithub} size={link_size} block icon={<GithubOutlined />} style={link_btn_style}>Github</Button>
+                                <Button type="secondary" onClick={goGithub} size={link_size} block icon={<GithubOutlined />} style={link_btn_style.container(matches)}>Github</Button>
                             </div>
 
                             <div className="link_btn">
-                                <Button type="secondary" onClick={goIns} size={link_size} block icon={<InstagramOutlined />} style={link_btn_style}>Instagram</Button>
+                                <Button type="secondary" onClick={goIns} size={link_size} block icon={<InstagramOutlined />} style={link_btn_style.container(matches)}>Instagram</Button>
                             </div>
                             <div className="link_btn">
-                                <Button type="secondary" onClick={goSpotify} size={link_size} block icon={<PlayCircleOutlined />} style={link_btn_style}>Spotify</Button>
+                                <Button type="secondary" onClick={goSpotify} size={link_size} block icon={<PlayCircleOutlined />} style={link_btn_style.container(matches)}>Spotify</Button>
                             </div>
                         </div>
 
                         <div className="link_box">
                             <div className="link_btn">
-                                <Button type="secondary" onClick={goLinkedin} size={link_size} block icon={<LinkedinOutlined />} style={link_btn_style}>LinkedIn</Button>
+                                <Button type="secondary" onClick={goLinkedin} size={link_size} block icon={<LinkedinOutlined />} style={link_btn_style.container(matches)}>LinkedIn</Button>
                             </div>
                             <div className="link_btn">
-                                <Button type="secondary" onClick={goAM} size={link_size} block icon={<PlayCircleOutlined />} style={link_btn_style}>Apple Music</Button>
+                                <Button type="secondary" onClick={goAM} size={link_size} block icon={<PlayCircleOutlined />} style={link_btn_style.container(matches)}>Apple Music</Button>
                             </div>
                             <div className="link_btn">
-                                <Button type="secondary" onClick={goQQMusic} size={link_size} block icon={<PlayCircleOutlined />} style={link_btn_style}>QQMusic</Button>
+                                <Button type="secondary" onClick={goQQMusic} size={link_size} block icon={<PlayCircleOutlined />} style={link_btn_style.container(matches)}>QQMusic</Button>
                             </div>
                         </div>
                     </div>
@@ -350,7 +368,7 @@ function Intro() {
                                 <div className="achievement">
                                     2020.04.26 - First album:
                                     <Popover placement='top' content={murderer_content} trigger="click">
-                                        <Button type="dashed" size={music_button_size} style={murderer_style}>Murderer</Button>
+                                        <Button type="dashed" size={music_button_size} style={murderer_style.container(matches)}>Murderer</Button>
                                     </Popover>
                                 </div>
                             </Timeline.Item>
@@ -358,7 +376,7 @@ function Intro() {
                                 <div className="achievement">
                                     2021.04.11 - Single:
                                     <Popover placement='top' content={van_goghs_dream_content} trigger="click">
-                                        <Button type="dashed" size={music_button_size} style={van_goghs_dream_style}>Playboy</Button>
+                                        <Button type="dashed" size={music_button_size} style={van_goghs_dream_style.container(matches)}>Playboy</Button>
                                     </Popover>
                                 </div>
                             </Timeline.Item>
@@ -366,7 +384,7 @@ function Intro() {
                                 <div className="achievement">
                                     2021.05.01 - Single:
                                     <Popover placement='top' content={original_song_content} trigger="click">
-                                        <Button type="dashed" size={music_button_size} style={original_song_style}>Original Song</Button>
+                                        <Button type="dashed" size={music_button_size} style={original_song_style.container(matches)}>Original Song</Button>
                                     </Popover>
                                 </div>
                             </Timeline.Item>
@@ -374,7 +392,7 @@ function Intro() {
                                 <div className="achievement">
                                     2021.07.01 - Single:
                                     <Popover placement='top' content={van_goghs_dream_content} trigger="click">
-                                        <Button type="dashed" size={music_button_size} style={van_goghs_dream_style}>22</Button>
+                                        <Button type="dashed" size={music_button_size} style={van_goghs_dream_style.container(matches)}>22</Button>
                                     </Popover>
                                 </div>
                             </Timeline.Item>
@@ -382,7 +400,7 @@ function Intro() {
                                 <div className="achievement">
                                     2021.08.14 - Single:
                                     <Popover placement='top' content={well_content} trigger="click">
-                                        <Button type="dashed" size={music_button_size} style={well_style}>We'll</Button>
+                                        <Button type="dashed" size={music_button_size} style={well_style.container(matches)}>We'll</Button>
                                     </Popover>
                                 </div>
                             </Timeline.Item>

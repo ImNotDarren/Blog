@@ -76,13 +76,18 @@
     }
 }
 
+@media screen and (max-width: 355px) {
+    .right {
+        margin-top: 0px;
+    }
+}
+
 
 .name {
     font-size: 25px;
     color:rgb(78, 78, 78);
     margin: 10px;
     font-weight: bold;
-    
 }
 
 .email {
@@ -115,6 +120,20 @@
 @media screen and (max-width: 560px) {
     .name {
         font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 432px) {
+    .occupation {
+        font-size: 15px;
+    }
+
+    .education {
+        font-size: 15px;
+    }
+
+    .achievement {
+        font-size: 13px;
     }
 }
 
@@ -151,10 +170,33 @@
     }
 }
 
+@media screen and (max-width: 430px) {
+    .link_box_out {
+        height: 90px;
+    }
+}
+
 .link_box {
     display: grid;
     width: 200px;
     height: 100px;
+}
+
+@media screen and (max-width: 355px) {
+    .link_box_out {
+        display: grid;
+        height: auto;
+    }
+
+    .link_box {
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 452px) {
+    .link_box {
+        width: 100%;
+    }
 }
 
 .link_btn {

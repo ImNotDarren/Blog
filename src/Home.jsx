@@ -35,7 +35,10 @@ function Home() {
             <TopDock activeKey={path}/>
             <div style={{height: '120px', width: '100%', backgroundColor: 'white'}}></div>
             <Outlet />
-            <Copyright />
+            <div className="copyright">
+                <Copyright />
+            </div>
+            
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './CSS/main.css'
 import { Nav } from 'react-bootstrap'
@@ -8,29 +8,44 @@ import { useLocation } from 'react-router-dom'
 
 function TopDock(props) {
 
+    const mediaMatch = window.matchMedia('(max-width: 396px)');
+    const [matches, setMatches] = useState(mediaMatch.matches);
+
+    useEffect(() => {
+        const handler = e => setMatches(e.matches);
+        mediaMatch.addEventListener("change", handler)
+        return () => mediaMatch.removeEventListener("change", handler)
+    })
+
     let location = useLocation()
     let user = location.state ? location.state.user : null
     if (user != null) {
         props.setUserInfo(user)
+    }
+
+    const tabStyle = {
+        container: isSmaller => ({
+            fontSize: isSmaller ? '12px' : '14px'
+        })
     }
     
     return (
         <div className='top_dock'>
             <Nav fill variant="tabs" activeKey={props.curr_page} onSelect={props.handleSelect} style={{backgroundColor: 'white'}}>
                 <Nav.Item>
-                    <Nav.Link eventKey={1} href="/intro" style={{fontSize: '14px'}}>Intro</Nav.Link>
+                    <Nav.Link eventKey={1} href="/intro" style={tabStyle.container(matches)}>Intro</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey={2} href="/publications"  style={{fontSize: '14px'}} disabled>Publications</Nav.Link>
+                    <Nav.Link eventKey={2} href="/publications"  style={tabStyle.container(matches)} disabled>Publications</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey={3} href="/blogs" style={{fontSize: '14px'}}>Blogs</Nav.Link>
+                    <Nav.Link eventKey={3} href="/blogs" style={tabStyle.container(matches)}>Blogs</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey={4} href="/music" style={{fontSize: '14px'}}>Music</Nav.Link>
+                    <Nav.Link eventKey={4} href="/music" style={tabStyle.container(matches)}>Music</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey={5} href="/arrange"  style={{fontSize: '14px'}} disabled={(props.login==0 || props.super_account==0)}>Events</Nav.Link>
+                    <Nav.Link eventKey={5} href="/arrange"  style={tabStyle.container(matches)} disabled={(props.login==0 || props.super_account==0)}>Events</Nav.Link>
                 </Nav.Item>
             </Nav>
 

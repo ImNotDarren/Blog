@@ -10,6 +10,7 @@ function Copyright() {
         <Footer
             style={{
                 textAlign: 'center',
+                width: '100%'
             }}
         >
             <div>©2020 Created by Darren Liu</div>
