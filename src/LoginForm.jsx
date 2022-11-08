@@ -20,7 +20,10 @@ function LoginForm() {
         const user = {username, password}
         fetch(url, {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
+            headers: {
+                "Content-Type": "application/json",
+                "AllowedOrigin": "https://www.imnotdddarren.com"
+            },
             body: JSON.stringify(user)
         }).then(res=>res.json())
         .then((result)=>{
