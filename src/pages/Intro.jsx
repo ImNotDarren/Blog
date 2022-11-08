@@ -21,7 +21,7 @@ function Intro() {
 
     const button_size = "smal"
     const music_button_size = "middle"
-    const link_size = "large"
+    const link_size = "middle"
 
     const darren_style = {
         marginLeft: '15px',
@@ -68,9 +68,8 @@ function Intro() {
     }
 
     const link_btn_style = {
-        marginLeft: '8px',
         color: 'rgb(106, 106, 106)',
-        fontSize: '18px',
+        fontSize: '14px',
         verticalAlign: 'middle'
     }
 
@@ -293,6 +292,13 @@ function Intro() {
                                     </div>
                                 </Modal>
 
+                                <div className="occupation">
+                                    Singer, Songwriter, Producer at
+                                    <Popover placement='top' content="No website so far" trigger="click">
+                                        <Button type="dashed" size={button_size} style={text_btn_style}>Silence Music</Button>
+                                    </Popover>
+                                </div>
+
                                 <Divider orientation="left" plain>
                                     <div className="link_title">My Pages</div>
                                 </Divider>
@@ -327,12 +333,6 @@ function Intro() {
 
                             </div>
                             <div className='right'>
-                                <div className="occupation">
-                                    Singer, Songwriter, Producer at
-                                    <Popover placement='top' content="No website so far" trigger="click">
-                                        <Button type="dashed" size={button_size} style={text_btn_style}>Silence Music</Button>
-                                    </Popover>
-                                </div>
 
                                 <Divider orientation="left" plain>
                                     <div className="link_title">My Songs</div>

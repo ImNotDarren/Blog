@@ -13,7 +13,7 @@ function Copyright() {
             }}
         >
             <div>©2020 Created by Darren Liu</div>
-            <a href="https://github.com/ImNotDarren/Blog" className='source_code'>Click here for the source code of this blog</a>
+            <a href="https://github.com/ImNotDarren/Blog" className='source_code'>Click here for source code</a>
         </Footer>
     )
 }

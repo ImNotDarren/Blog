@@ -36,9 +36,14 @@
 
 .site-layout-content {
     display: flex;
-    min-height: 550px;
     padding: 24px;
     background: #fff;
+}
+
+@media screen and (max-width: 850px) {
+    .site-layout-content{
+        display: grid;
+    }
 }
 
 #components-layout-demo-top .logo {
@@ -55,9 +60,22 @@
 }
 
 .right {
-    padding-left: 6%;
-    width: 50%
+    padding-left: 3%;
+    width: 50%;
 }
+
+@media screen and (max-width: 932px) {
+    .right {
+        padding-left: 0%;
+        width: 100%;
+        margin-top: 60px;
+    }
+
+    .left {
+        width: 100%;
+    }
+}
+
 
 .name {
     font-size: 25px;
@@ -78,7 +96,7 @@
     font-size: 17px;
     color:rgb(106, 106, 106);
     margin: 8px;
-    margin-top: 71.14px;
+    margin-top: 12px;
 }
 
 .achievement {
@@ -121,10 +139,16 @@
     display: flex;
 }
 
+@media screen and (max-width: 850px) {
+    .link_box_out {
+        height: 100px;
+    }
+}
+
 .link_box {
     display: grid;
     width: 200px;
-    height: 200px;
+    height: 100px;
 }
 
 .link_btn {
