@@ -79,7 +79,7 @@ function Blogs() {
 
         const author = uid
         const new_blog = { title, author, abst: abstract, content }
-        console.log(new_blog)
+        // console.log(new_blog)
         fetch(server + '/addBlog', {
             method: "POST",
             headers: {
