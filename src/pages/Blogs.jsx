@@ -14,7 +14,7 @@ const url = server + '/getBlogs'
 function Blogs() {
 
     const [blogs, setBlogs] = useState([{ bid: 1, title: '211', author: 1, publish_time: '', abst: '', content: '' }])
-    const [winWidth, setWinWidth] = useState(1000)
+    const [winWidth, setWinWidth] = useState(document.querySelector('body').offsetWidth)
     const [isAddOpen, setIsAddOpen] = useState(false)
     const [loading, setLoading] = useState(false)
 
@@ -35,7 +35,7 @@ function Blogs() {
             console.log(e.target.innerWidth)
             console.log('here')
             if (e.target.innerWidth <= 560) {
-                setWinWidth(560)
+                setWinWidth(e.target.innerWidth)
             } else {
                 setWinWidth(1000)
             }
@@ -49,7 +49,7 @@ function Blogs() {
     }, [blogs, winWidth])
 
     const fabStyle = {
-        display: winWidth == 560 ? 'flex' : 'none',
+        display: winWidth <= 560 ? 'flex' : 'none',
         position: 'fixed',
         bottom: 65,
         right: 16,
