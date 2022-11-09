@@ -13,15 +13,15 @@ function Home() {
 
     const location = useLocation()
 
-    const [connected, setConnected] = useState(false)
+    const [connected, setConnected] = useState(true)
 
     const path = location.pathname
 
     useEffect(() => {
         fetch(url)
             .then((res) => {
-                if (res.status == 200) {
-                    setConnected(true);
+                if (res.status != 200) {
+                    setConnected(false);
                 }
             })
     })
