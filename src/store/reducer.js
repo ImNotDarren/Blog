@@ -16,6 +16,7 @@ const defaultState = {
     avatar,
     email,
     server: 'https://www.imnotdddarren.com'
+    // server: 'http://localhost:8080'
 }
 
 
