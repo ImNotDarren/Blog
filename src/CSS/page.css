@@ -280,7 +280,7 @@
 @media screen and (max-width: 560px) {
 
     .blog {
-        display: grid;
+        display:contents;
         justify-content: center;
     }
 
@@ -313,3 +313,7 @@
 .blog_btns {
     display: flex;
 }
+
+.demo-loadmore-list {
+    min-height: 350px;
+  }

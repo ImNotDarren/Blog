@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import 'antd/dist/antd.css';
 import '../CSS/page.css'
-import { Button, Modal, Input, Form, message } from 'antd';
+import { Button, Modal, Input, Form, message, List, Avatar, Skeleton } from 'antd';
 import BlogCard from '../BlogCard';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import Zoom from '@mui/material/Zoom';
 import { useTheme } from '@mui/material/styles';
 import store from '../store'
+import darren_avatar from '../assets/avatars/darren_avatar.jpg'
+import { FlashOnRounded } from '@mui/icons-material';
 
 const { TextArea, Search } = Input;
 
@@ -29,6 +31,9 @@ function Blogs() {
     const [abstract, setAbstract] = useState('')
     const [content, setContent] = useState('')
 
+    const [initLoading, setInitLoading] = useState(true);
+    const [blogLoading, setBlogLoading] = useState(true);
+
     const uid = store.getState().uid
 
     const addBtnColor = 'primary'
@@ -46,6 +51,8 @@ function Blogs() {
                         return new Date(b.publish_time) - new Date(a.publish_time)
                     })
                     setBlogs(result)
+                    setInitLoading(false)
+                    setBlogLoading(false)
                 }
             })
 
@@ -82,8 +89,14 @@ function Blogs() {
     }
 
     const searchStyle = {
+        display: (blogs.length == 1 ? 'none' : 'block'),
         width: '100%',
         marginRight: (winWidth <= 560) ? '0px' : '5px'
+    }
+
+    const listStyle = {
+        display: (blogs.length == 1 ? 'none' : 'block'),
+        marginTop: '15px'
     }
 
     const submitDisable = uid == 1 ? false : true
@@ -150,8 +163,23 @@ function Blogs() {
         } else {
             // TODO: relocate to write blog page
         }
-        
+
     }
+
+    // const loadMore =
+    //     !initLoading && !loading ? (
+    //         <div
+    //             style={{
+    //                 textAlign: 'center',
+    //                 marginTop: 12,
+    //                 height: 32,
+    //                 lineHeight: '32px',
+    //             }}
+    //         >
+    //             <Button onClick={onLoadMore}>loading more</Button>
+    //         </div>
+    //     ) : null;
+
 
 
     return (
@@ -165,9 +193,32 @@ function Blogs() {
 
                     <div className="blog_right">
                         <div className="blog_btns">
-                            <Search placeholder="input search text" onSearch={onSearch} size={btnSize} style={searchStyle} />
+                            <Search placeholder="Search for blogs" onSearch={onSearch} size={btnSize} style={searchStyle} />
                             <Button type="primary" size={btnSize} onClick={writeBlog} block style={writeBlogBtnStyle}>Write a blog</Button>
                         </div>
+
+                        <List
+                            className="demo-loadmore-list"
+                            loading={initLoading}
+                            itemLayout="horizontal"
+                            dataSource={blogs.slice(1)}
+                            renderItem={item => (
+                                <List.Item
+                                    actions={[<a key="list-loadmore-edit">{uid == 1 ? 'edit' : 'like'}</a>, <a key="list-loadmore-more">more</a>]}
+                                >
+                                    <Skeleton avatar title={false} loading={false}  active>
+                                        <List.Item.Meta
+                                            avatar={<Avatar src={darren_avatar} />}
+                                            title={item.title}
+                                            description={item.abst.slice(0, 56) + ' ...'}
+                                            style={{ textAlign: 'left' }}
+                                        />
+                                    </Skeleton>
+                                </List.Item>
+                            )}
+
+                            style={listStyle}
+                        />
                     </div>
                 </div>
 
