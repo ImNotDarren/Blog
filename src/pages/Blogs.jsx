@@ -18,7 +18,7 @@ const url = server + '/getBlogs'
 function Blogs() {
 
 
-    const [blogs, setBlogs] = useState([{ bid: 1, title: '211', author: 1, publish_time: '', abst: '', content: '' }])
+    const [blogs, setBlogs] = useState([{ bid: 1, title: 'Loading...', author: 1, publish_time: 'Loading...', abst: 'Loading...', content: 'Loading...' }])
     const [winWidth, setWinWidth] = useState(document.querySelector('body').offsetWidth)
     const [isAddOpen, setIsAddOpen] = useState(false)
     const [loading, setLoading] = useState(false)
