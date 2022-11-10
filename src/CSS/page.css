@@ -97,16 +97,10 @@
 }
 
 .email {
-    display: flex;
     font-size: 13px;
     color:rgb(133, 133, 133);
     margin: 10px;
-    margin-bottom: 20px;
-    vertical-align: middle;
-}
-
-.resume {
-    margin-left: 10px;
+    
 }
 
 .occupation {
@@ -257,7 +251,15 @@
 }
 
 .blog {
+    display: flex;
     width: 100%;
+}
+
+.blog_right {
+    display: block;
+    text-align: center;
+    width: 65%;
+    margin-left: 5%;
 }
 
 .blog_card {
@@ -267,6 +269,11 @@
 @media screen and (max-width: 1000px) {
     .blog_card {
         width: 40%;
+    }
+
+    .blog_right {
+        width: 57%;
+        margin-left: 3%;
     }
 }
 
@@ -282,6 +289,12 @@
         justify-content: center; */
         width: 90%;
         margin-left: 5%
+    }
+
+    .blog_right {
+        width: 100%;
+        margin-left: 0%;
+        margin-top: 20px;
     }
 }
 

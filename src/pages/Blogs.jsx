@@ -71,6 +71,10 @@ function Blogs() {
         sizeMedium: false
     }
 
+    const writeBlogBtnStyle = {
+        display: (winWidth <= 560) ? 'none' : 'block'
+    }
+
     const submitDisable = uid == 1 ? false : true
 
     const openAdd = () => {
@@ -134,7 +138,15 @@ function Blogs() {
                     <div className="blog_card">
                         <BlogCard blogs={blogs} winWidth={winWidth} />
                     </div>
+
+                    <div className="blog_right">
+                        <Button type="secondary" size='large' block style={writeBlogBtnStyle}>Write a blog</Button>
+                    </div>
                 </div>
+
+
+
+
 
                 <Zoom in={addIn} appear={true} timeout={transitionDuration}>
                     <Fab color={addBtnColor} onClick={openAdd} aria-label="add" sx={fabStyle}>
@@ -142,8 +154,6 @@ function Blogs() {
                     </Fab>
 
                 </Zoom>
-
-
 
                 <Modal
                     title={uid == 1 ? "Publish Blog" : "Only available to Darren ;)"}
