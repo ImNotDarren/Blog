@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import 'antd/dist/antd.css';
 import '../CSS/page.css'
-import { Button, Modal, Input, Form } from 'antd';
+import { Button, Modal, Input, Form, message } from 'antd';
 import BlogCard from '../BlogCard';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
@@ -9,7 +9,7 @@ import Zoom from '@mui/material/Zoom';
 import { useTheme } from '@mui/material/styles';
 import store from '../store'
 
-const { TextArea } = Input;
+const { TextArea, Search } = Input;
 
 
 const server = store.getState().server
@@ -23,6 +23,7 @@ function Blogs() {
     const [isAddOpen, setIsAddOpen] = useState(false)
     const [loading, setLoading] = useState(false)
     const [addIn, setAddIn] = useState(true)
+    const [btnSize, setBtnSize] = useState(winWidth <= 700 ? 'medium' : 'large')
 
     const [title, setTitle] = useState('')
     const [abstract, setAbstract] = useState('')
@@ -50,9 +51,13 @@ function Blogs() {
 
         const handleResize = e => {
             if (e.target.innerWidth <= 560) {
-                setWinWidth(e.target.innerWidth)
+                setWinWidth(560)
+            } else if (e.target.innerWidth <= 700) {
+                setWinWidth(700)
+                setBtnSize('medium')
             } else {
                 setWinWidth(1000)
+                setBtnSize('large')
             }
         }
         window.addEventListener('resize', handleResize)
@@ -72,7 +77,13 @@ function Blogs() {
     }
 
     const writeBlogBtnStyle = {
-        display: (winWidth <= 560) ? 'none' : 'block'
+        display: (winWidth <= 560) ? 'none' : 'block',
+        marginTop: (winWidth <= 560) ? '20px' : '0px',
+    }
+
+    const searchStyle = {
+        width: '100%',
+        marginRight: (winWidth <= 560) ? '0px' : '5px'
     }
 
     const submitDisable = uid == 1 ? false : true
@@ -129,6 +140,19 @@ function Blogs() {
         exit: theme.transitions.duration.leavingScreen,
     };
 
+    const onSearch = () => {
+        // handle search blogs
+    }
+
+    const writeBlog = () => {
+        if (uid != 1) {
+            message.error('Writing blogs is only available to Darren for now')
+        } else {
+            // TODO: relocate to write blog page
+        }
+        
+    }
+
 
     return (
         <>
@@ -140,7 +164,10 @@ function Blogs() {
                     </div>
 
                     <div className="blog_right">
-                        <Button type="secondary" size='large' block style={writeBlogBtnStyle}>Write a blog</Button>
+                        <div className="blog_btns">
+                            <Search placeholder="input search text" onSearch={onSearch} size={btnSize} style={searchStyle} />
+                            <Button type="primary" size={btnSize} onClick={writeBlog} block style={writeBlogBtnStyle}>Write a blog</Button>
+                        </div>
                     </div>
                 </div>
 
@@ -152,7 +179,6 @@ function Blogs() {
                     <Fab color={addBtnColor} onClick={openAdd} aria-label="add" sx={fabStyle}>
                         <AddIcon />
                     </Fab>
-
                 </Zoom>
 
                 <Modal

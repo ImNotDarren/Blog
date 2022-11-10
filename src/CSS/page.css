@@ -292,8 +292,8 @@
     }
 
     .blog_right {
-        width: 100%;
-        margin-left: 0%;
+        width: 90%;
+        margin-left: 5%;
         margin-top: 20px;
     }
 }
@@ -303,4 +303,13 @@
         width: 100%;
         margin-left: 0%;
     }
+
+    .blog_right {
+        margin-left: 0%;
+        width: 100%;
+    }
+}
+
+.blog_btns {
+    display: flex;
 }
