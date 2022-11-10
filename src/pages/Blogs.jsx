@@ -30,7 +30,7 @@ function Blogs() {
 
     const uid = store.getState().uid
 
-    const addBtnColor = store.getState().uid == 1 ? 'primary' : 'disabled'
+    const addBtnColor = 'primary'
 
     useEffect(() => {
 
@@ -67,6 +67,8 @@ function Blogs() {
         right: 16,
         sizeMedium: false
     }
+
+    const submitDisable = uid == 1 ? false : true
 
     const openAdd = () => {
         setIsAddOpen(true)
@@ -141,17 +143,17 @@ function Blogs() {
 
 
                 <Modal
-                    title="Publish Blog"
+                    title={uid == 1 ? "Publish Blog" : "Only available to Darren ;)"}
                     open={isAddOpen}
                     onOk={handleOk}
                     onCancel={closeAdd}
                     footer={[
                         <Button key="cancel" loading={loading} onClick={closeAdd}>Cancel</Button>,
-                        <Button key="sbumit" type="primary" loading={loading} onClick={handleOk}>Submit</Button>
+                        <Button key="sbumit" type="primary" loading={loading} onClick={handleOk} disabled={submitDisable}>Submit</Button>
                     ]}
                     sx={{ zIndex: 5 }}
                 >
-                    <Form size="middle">
+                    <Form size="middle" disabled={submitDisable}>
                         <Form.Item label="Title">
                             <Input key="title" placeholder="Input your title" onChange={titleChange} />
                         </Form.Item>
