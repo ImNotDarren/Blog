@@ -13,26 +13,16 @@ function Home() {
 
     const location = useLocation()
 
-    const [connected, setConnected] = useState(true)
-
     const path = location.pathname
-
-    useEffect(() => {
-        fetch(url)
-            .then((res) => {
-                if (res.status != 200) {
-                    setConnected(false);
-                }
-            })
-    })
 
     return (
         <div>
-            <TopContent connected={connected} />
+            <TopContent />
             <div style={{ position: 'fixed', top: '60px', height: '200', width: '100%', backgroundColor: 'white', color: 'white', zIndex: 4 }}>123</div>
             <TopDock activeKey={path} />
             <div style={{ height: '120px', width: '100%', backgroundColor: 'white' }}></div>
             <Outlet />
+            <div className="footer_up">123</div>
             <Copyright />
 
         </div>

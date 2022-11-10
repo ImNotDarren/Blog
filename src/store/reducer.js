@@ -57,6 +57,7 @@ export default (state = defaultState, action) => {
             newState.username = sessionStorage.getItem('username')
             newState.avatar = sessionStorage.getItem('avatar')
             newState.email = sessionStorage.getItem('email')
+            
 
             break
 

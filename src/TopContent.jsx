@@ -83,13 +83,6 @@ function TopContent(props) {
 
     let blog_title = "Darren's Blog"
 
-    if (!props.connected) {
-        blog_title = (
-            <Button onClick={handleAuth} color="inherit">You're not connected! Please click here to authorize this website until you see a 404 error</Button>
-        )
-    }
-
-
     const logout = () => {
         setAnchorEl(null)
         props.handleLogout()

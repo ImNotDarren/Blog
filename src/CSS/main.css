@@ -53,10 +53,19 @@
     z-index: 5;
 }
 
+.footer_up {
+    color: white;
+    height: 70px;
+}
+
 @media screen and (max-width: 1000px) {
     .footer {
         height: 50px;
         font-size: 10px;
         padding: 11px;
+    }
+
+    .footer_up {
+        height: 50px;
     }
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import 'antd/dist/antd.css';
 import '../CSS/page.css'
-import { Button, Modal, Input, Form, message, List, Avatar, Skeleton } from 'antd';
+import { Button, Modal, Input, Form, message, List, Avatar, Skeleton, Divider } from 'antd';
 import BlogCard from '../BlogCard';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
@@ -18,13 +18,15 @@ const url = server + '/getBlogs'
 
 function Blogs() {
 
-
-    const [blogs, setBlogs] = useState([{ bid: 1, title: 'Loading...', author: 1, publish_time: 'Loading...', abst: 'Loading...', content: 'Loading...' }])
+    const loadingBlog = [{ bid: 1, title: 'Loading...', author: 1, publish_time: 'Loading...', abst: 'Loading...', content: 'Loading...' }]
+    const [savedBlogs, setSavedBlogs] = useState([])
+    const [blogs, setBlogs] = useState(loadingBlog)
     const [winWidth, setWinWidth] = useState(document.querySelector('body').offsetWidth)
     const [isAddOpen, setIsAddOpen] = useState(false)
     const [loading, setLoading] = useState(false)
     const [addIn, setAddIn] = useState(true)
     const [btnSize, setBtnSize] = useState(winWidth <= 700 ? 'medium' : 'large')
+    const [currBlogs, setCurrBlogs] = useState(loadingBlog)
 
     const [title, setTitle] = useState('')
     const [abstract, setAbstract] = useState('')
@@ -38,7 +40,6 @@ function Blogs() {
     const addBtnColor = 'primary'
 
     useEffect(() => {
-
         fetch(url)
             .then(res => res.json())
             .then((result) => {
@@ -50,10 +51,21 @@ function Blogs() {
                         return new Date(b.publish_time) - new Date(a.publish_time)
                     })
                     setBlogs(result)
+                    if (result.length <= 6) {
+                        setCurrBlogs(result)
+                    } else {
+                        setCurrBlogs(result.slice(0, 6))
+                        setSavedBlogs(result.slice(6))
+                    }
                     setInitLoading(false)
                     setBlogLoading(false)
                 }
             })
+    }, [])
+
+
+
+    useEffect(() => {
 
         const handleResize = e => {
             if (e.target.innerWidth <= 560) {
@@ -74,7 +86,7 @@ function Blogs() {
             window.removeEventListener('resize', handleResize)
         }
 
-    }, [blogs, winWidth])
+    }, [winWidth])
 
     const fabStyle = {
         display: (winWidth <= 560) ? 'flex' : 'none',
@@ -167,20 +179,40 @@ function Blogs() {
 
     }
 
+    const onLoadMore = () => {
 
-    // const loadMore =
-    //     !initLoading && !loading ? (
-    //         <div
-    //             style={{
-    //                 textAlign: 'center',
-    //                 marginTop: 12,
-    //                 height: 32,
-    //                 lineHeight: '32px',
-    //             }}
-    //         >
-    //             <Button onClick={onLoadMore}>loading more</Button>
-    //         </div>
-    //     ) : null;
+        let newCurrBlogs = null
+
+        if (savedBlogs.length == 0) {
+            
+        } else if (savedBlogs.length <= 5) {
+            setCurrBlogs(currBlogs.concat(savedBlogs))
+            setSavedBlogs([])
+        } else {
+            setCurrBlogs(currBlogs.concat(savedBlogs.slice(0, 5)))
+            setSavedBlogs(savedBlogs.slice(5))
+        }
+        
+    }
+
+    const loadMore =
+        !loading ? (
+            <div
+                style={{
+                    textAlign: 'center',
+                    marginTop: 12,
+                    height: 32,
+                    lineHeight: '32px',
+                }}
+            >
+                <Divider orientation="center" plain style={{display: savedBlogs.length == 0 ? 'none' : 'block'}}>
+                    <Button type="link" onClick={onLoadMore} style={{ color: 'rgb(120, 120, 120)' }}>loading more</Button>
+                </Divider>
+
+            </div>
+        ) : null;
+
+
 
 
 
@@ -203,7 +235,8 @@ function Blogs() {
                             className="demo-loadmore-list"
                             loading={initLoading}
                             itemLayout="horizontal"
-                            dataSource={blogs.slice(1)}
+                            dataSource={currBlogs.slice(1)}
+                            loadMore={loadMore}
                             renderItem={item => (
                                 <List.Item
                                     actions={[<a key="list-loadmore-edit">{uid == 1 ? 'edit' : 'like'}</a>, <a key="list-loadmore-more">more</a>]}
@@ -230,7 +263,7 @@ function Blogs() {
 
 
 
-
+                {/* --- for mobile devices only --- */}
                 <Zoom in={addIn} appear={true} timeout={transitionDuration}>
                     <Fab color={addBtnColor} onClick={openAdd} aria-label="add" sx={fabStyle}>
                         <AddIcon />
