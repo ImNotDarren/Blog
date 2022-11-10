@@ -4,13 +4,27 @@ import { Form, Input, Button, Popover } from 'antd';
 import { UserOutlined, KeyOutlined } from '@ant-design/icons';
 import store from './store'
 import { useNavigate } from 'react-router-dom';
+import { connect } from 'react-redux'
+import get_prev_page from './GetCurrPage';
 
 
-function LoginForm() {
-
-    const server = store.getState().server
+function LoginForm(props) {
     
-    const url = server + '/login'
+    const url = props.server + '/login'
+
+    let prev_page = get_prev_page(props.curr_page)
+
+    // if (props.curr_page == 1) {
+    //     prev_page = '/intro'
+    // }else if (props.curr_page == 2) {
+    //     prev_page = '/publications'
+    // }else if (props.curr_page == 3) {
+    //     prev_page = '/blogs'
+    // }else if (props.curr_page == 4) {
+    //     prev_page = '/music'
+    // }else if (props.curr_page == 5) {
+    //     prev_page = '/arrange'
+    // }
 
     const navigate = useNavigate()
 
@@ -30,9 +44,10 @@ function LoginForm() {
                 alert('Wrong username or password!')
             }else{
                 //页面跳转
-                navigate('/intro', {
+                navigate(prev_page, {
                     state: {user: result}
                 })
+                window.location.reload()
             }
         })
     }
@@ -85,4 +100,12 @@ function LoginForm() {
     )
 }
 
-export default LoginForm
+const mapStateToProps = (state) => {
+    return {
+        server: state.server,
+        curr_page: state.curr_page
+    }
+}
+
+
+export default connect(mapStateToProps)(LoginForm)

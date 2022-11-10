@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import '../CSS/page.css'
 import 'antd/dist/antd.css';
 import { Layout, Button, Modal, Popover, Avatar, Divider, Timeline } from 'antd';
-import { GithubOutlined, LinkedinOutlined, InstagramOutlined, PlayCircleOutlined } from '@ant-design/icons';
+import { GithubOutlined, LinkedinOutlined, InstagramOutlined, PlayCircleOutlined, DownloadOutlined } from '@ant-design/icons';
 import darren_avatar from '../assets/avatars/darren_avatar.jpg'
 import murderer from '../assets/album_covers/murderer.jpg'
 import van_goghs_dream from '../assets/album_covers/van_goghs_dream.jpg'
@@ -55,7 +55,7 @@ function Intro() {
             fontSize: isSmaller ? '13px' : '15px',
             fontWeight: '600'
         })
-        
+
     }
 
     const murderer_style = {
@@ -103,7 +103,7 @@ function Intro() {
     }
 
     const darren_content = (
-        < a href = "" >
+        < a href="" >
             <div className="intro_album_cover_div">
                 <img className="intro_album_cover" src={darren} alt="" />
             </div>
@@ -234,6 +234,7 @@ function Intro() {
                 <div className='left'>
                     <div className='name'>Darren (Sizuo) Liu</div>
                     <div className="email">darrenliu0701@gmail.com</div>
+
                     <div className="education">
                         Current student at
                         <Button type="dashed" size={button_size} onClick={showBU} style={text_btn_style.container(matches)}>Binghamton University</Button>

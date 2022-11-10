@@ -97,10 +97,16 @@
 }
 
 .email {
+    display: flex;
     font-size: 13px;
     color:rgb(133, 133, 133);
     margin: 10px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
+    vertical-align: middle;
+}
+
+.resume {
+    margin-left: 10px;
 }
 
 .occupation {

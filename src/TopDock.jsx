@@ -42,7 +42,7 @@ function TopDock(props) {
                     <Nav.Link eventKey={3} href="/blogs" style={tabStyle.container(matches)}>Blogs</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey={4} href="/music" style={tabStyle.container(matches)}>Music</Nav.Link>
+                    <Nav.Link eventKey={4} href="/music" style={tabStyle.container(matches)} disabled>Music</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                     <Nav.Link eventKey={5} href="/arrange"  style={tabStyle.container(matches)} disabled={(props.login==0 || props.super_account==0)}>Events</Nav.Link>

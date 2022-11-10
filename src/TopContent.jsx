@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './CSS/main.css'
 import { useNavigate } from 'react-router-dom'
+import get_prev_page from './GetCurrPage'
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -76,12 +77,6 @@ function TopContent(props) {
         setOpenAlert(false)
     }
 
-    const handleLogout = () => {
-        setAnchorEl(null)
-        props.handleLogout()
-        navigate('/intro')
-    };
-
     const handleAuth = () => {
         window.location.href = "https://www.imnotdddarren.com"
     }
@@ -92,6 +87,15 @@ function TopContent(props) {
         blog_title = (
             <Button onClick={handleAuth} color="inherit">You're not connected! Please click here to authorize this website until you see a 404 error</Button>
         )
+    }
+
+
+    const logout = () => {
+        setAnchorEl(null)
+        props.handleLogout()
+        navigate(get_prev_page(props.curr_page))
+        window.location.reload()
+        
     }
 
     return (
@@ -116,18 +120,6 @@ function TopContent(props) {
                         </Typography>
                         <Button color="inherit" onClick={login} style={{display: login_display}}>Login</Button>
                         <Button color="inherit" style={{display: user_display}} onClick={handleClick}>{props.username}</Button>
-                        {/* <Menu
-                            id="basic=menu"
-                            anchorEl={anchorEl}
-                            open={open}
-                            onClose={handleClose}
-                            MenuListProps={{
-                                'aria-labelledby': 'basic-button',
-                            }}
-                        >
-                            <MenuItem onClick={handleProfile}>Profile</MenuItem>
-                            <MenuItem onClick={handleLogout}>Logout</MenuItem>
-                        </Menu> */}
                         <Menu
                             anchorEl={anchorEl}
                             id="account-menu"
@@ -173,7 +165,7 @@ function TopContent(props) {
                                 </ListItemIcon>
                                 Settings
                             </MenuItem>
-                            <MenuItem onClick={handleLogout}>
+                            <MenuItem onClick={logout}>
                                 <ListItemIcon>
                                     <Logout fontSize="small" />
                                 </ListItemIcon>
@@ -203,7 +195,8 @@ const mapStateToProps = (state) => {
     return {
         username: state.username,
         login: state.login,
-        super_account: state.super_account
+        super_account: state.super_account,
+        curr_page: state.curr_page
     }
 }
 

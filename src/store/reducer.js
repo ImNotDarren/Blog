@@ -6,7 +6,6 @@ let uid = sessionStorage.getItem('uid') ? sessionStorage.getItem('uid') : -1
 let avatar = sessionStorage.getItem('avatar') ? sessionStorage.getItem('avatar') : null
 let email = sessionStorage.getItem('email') ? sessionStorage.getItem('email') : null
 
-
 const defaultState = {
     curr_page,
     login,
@@ -15,15 +14,15 @@ const defaultState = {
     uid,
     avatar,
     email,
-    server: 'https://www.imnotdddarren.com'
+    server: 'https://www.imnotdddarren.com',
     // server: 'http://localhost:8080'
 }
 
 
-export default (state=defaultState, action) => {
+export default (state = defaultState, action) => {
     let newState = JSON.parse(JSON.stringify(state))
 
-    switch(action.type){
+    switch (action.type) {
         case "switchTab":
             sessionStorage.setItem('curr_page', action.value)
             newState.curr_page = sessionStorage.getItem('curr_page')
@@ -52,14 +51,13 @@ export default (state=defaultState, action) => {
             sessionStorage.setItem('email', null)
             sessionStorage.setItem('avatar', null)
             sessionStorage.setItem('uid', -1)
-            sessionStorage.setItem('curr_page', 1)
             newState.user_info = sessionStorage.getItem('user_info')
             newState.login = sessionStorage.getItem('login')
             newState.super_account = sessionStorage.getItem('super_account')
             newState.username = sessionStorage.getItem('username')
             newState.avatar = sessionStorage.getItem('avatar')
             newState.email = sessionStorage.getItem('email')
-            newState.curr_page = sessionStorage.getItem('curr_page')
+
             break
 
         default:

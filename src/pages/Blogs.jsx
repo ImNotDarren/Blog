@@ -5,6 +5,8 @@ import { Button, Modal, Input, Form } from 'antd';
 import BlogCard from '../BlogCard';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
+import Zoom from '@mui/material/Zoom';
+import { useTheme } from '@mui/material/styles';
 import store from '../store'
 
 const { TextArea } = Input;
@@ -14,18 +16,21 @@ const server = store.getState().server
 const url = server + '/getBlogs'
 
 function Blogs() {
-    
+
 
     const [blogs, setBlogs] = useState([{ bid: 1, title: '211', author: 1, publish_time: '', abst: '', content: '' }])
     const [winWidth, setWinWidth] = useState(document.querySelector('body').offsetWidth)
     const [isAddOpen, setIsAddOpen] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [addIn, setAddIn] = useState(true)
 
     const [title, setTitle] = useState('')
     const [abstract, setAbstract] = useState('')
     const [content, setContent] = useState('')
 
     const uid = store.getState().uid
+
+    const addBtnColor = store.getState().uid == 1 ? 'primary' : 'disabled'
 
     useEffect(() => {
 
@@ -56,7 +61,7 @@ function Blogs() {
     }, [blogs, winWidth])
 
     const fabStyle = {
-        display: (winWidth <= 560) && (uid == 1) ? 'flex' : 'none',
+        display: (winWidth <= 560) ? 'flex' : 'none',
         position: 'fixed',
         bottom: 65,
         right: 16,
@@ -65,15 +70,17 @@ function Blogs() {
 
     const openAdd = () => {
         setIsAddOpen(true)
+        setAddIn(false)
     }
 
     const closeAdd = () => {
+        setAddIn(true)
         setIsAddOpen(false)
     }
 
     const handleOk = () => {
 
-        if (title != '' && abstract ) {
+        if (title != '' && abstract) {
 
         }
 
@@ -87,9 +94,10 @@ function Blogs() {
             },
             body: JSON.stringify(new_blog)
         }).then(
-            setIsAddOpen(false)
+            setIsAddOpen(false),
+            setAddIn(true)
         )
-        
+
     }
 
     const titleChange = (e) => {
@@ -105,6 +113,13 @@ function Blogs() {
         setContent(e.target.value)
     }
 
+    const theme = useTheme();
+
+    const transitionDuration = {
+        enter: theme.transitions.duration.enteringScreen,
+        exit: theme.transitions.duration.leavingScreen,
+    };
+
 
     return (
         <>
@@ -116,9 +131,14 @@ function Blogs() {
                     </div>
                 </div>
 
-                <Fab color="primary" onClick={openAdd} aria-label="add" sx={fabStyle}>
-                    <AddIcon />
-                </Fab>
+                <Zoom in={addIn} appear={true} timeout={transitionDuration}>
+                    <Fab color={addBtnColor} onClick={openAdd} aria-label="add" sx={fabStyle}>
+                        <AddIcon />
+                    </Fab>
+
+                </Zoom>
+
+
 
                 <Modal
                     title="Publish Blog"
@@ -129,7 +149,7 @@ function Blogs() {
                         <Button key="cancel" loading={loading} onClick={closeAdd}>Cancel</Button>,
                         <Button key="sbumit" type="primary" loading={loading} onClick={handleOk}>Submit</Button>
                     ]}
-                    sx={{zIndex: 5}}
+                    sx={{ zIndex: 5 }}
                 >
                     <Form size="middle">
                         <Form.Item label="Title">
