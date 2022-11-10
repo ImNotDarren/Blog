@@ -62,6 +62,8 @@ function Blogs() {
             } else if (e.target.innerWidth <= 700) {
                 setWinWidth(700)
                 setBtnSize('medium')
+            } else if (e.target.innerWidth < 1000) {
+                setWinWidth(999)
             } else {
                 setWinWidth(1000)
                 setBtnSize('large')
@@ -210,7 +212,7 @@ function Blogs() {
                                         <List.Item.Meta
                                             avatar={<Avatar src={darren_avatar} />}
                                             title={item.title}
-                                            description={item.abst.slice(0, 56) + ' ...'}
+                                            description={item.abst.slice(0, winWidth < 1000 ? 56 : 100) + ' ...'}
                                             style={{ textAlign: 'left' }}
                                         />
                                     </Skeleton>
