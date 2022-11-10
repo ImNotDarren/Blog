@@ -41,6 +41,9 @@ function Blogs() {
                     // deal with no blog problem
                 } else {
                     // sort by time
+                    result.sort((a, b) => {
+                        return new Date(b.publish_time) - new Date(a.publish_time)
+                    })
                     setBlogs(result)
                 }
             })
