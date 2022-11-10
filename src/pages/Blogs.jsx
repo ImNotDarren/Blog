@@ -9,7 +9,6 @@ import Zoom from '@mui/material/Zoom';
 import { useTheme } from '@mui/material/styles';
 import store from '../store'
 import darren_avatar from '../assets/avatars/darren_avatar.jpg'
-import { FlashOnRounded } from '@mui/icons-material';
 
 const { TextArea, Search } = Input;
 
@@ -93,7 +92,7 @@ function Blogs() {
     const searchStyle = {
         display: (blogs.length == 1 ? 'none' : 'block'),
         width: '100%',
-        marginRight: (winWidth <= 560) ? '0px' : '5px'
+        marginRight: (winWidth <= 560) ? '0px' : '10px'
     }
 
     const listStyle = {
@@ -168,6 +167,7 @@ function Blogs() {
 
     }
 
+
     // const loadMore =
     //     !initLoading && !loading ? (
     //         <div
@@ -208,7 +208,7 @@ function Blogs() {
                                 <List.Item
                                     actions={[<a key="list-loadmore-edit">{uid == 1 ? 'edit' : 'like'}</a>, <a key="list-loadmore-more">more</a>]}
                                 >
-                                    <Skeleton avatar title={false} loading={false}  active>
+                                    <Skeleton avatar title={false} loading={false} active>
                                         <List.Item.Meta
                                             avatar={<Avatar src={darren_avatar} />}
                                             title={item.title}
@@ -221,8 +221,11 @@ function Blogs() {
 
                             style={listStyle}
                         />
+
                     </div>
                 </div>
+
+
 
 
 

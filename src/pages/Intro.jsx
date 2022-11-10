@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import '../CSS/page.css'
 import 'antd/dist/antd.css';
-import { Layout, Button, Modal, Popover, Avatar, Divider, Timeline } from 'antd';
+import { Layout, Button, Modal, Popover, Avatar, Divider, Timeline, message } from 'antd';
 import { GithubOutlined, LinkedinOutlined, InstagramOutlined, PlayCircleOutlined, DownloadOutlined } from '@ant-design/icons';
 import darren_avatar from '../assets/avatars/darren_avatar.jpg'
 import murderer from '../assets/album_covers/murderer.jpg'
@@ -9,8 +9,9 @@ import van_goghs_dream from '../assets/album_covers/van_goghs_dream.jpg'
 import original_song from '../assets/album_covers/original_song.jpg'
 import well from '../assets/album_covers/well.jpg'
 import darren from '../assets/album_covers/darren.jpg'
+import { connect } from 'react-redux';
 
-function Intro() {
+function Intro(props) {
 
     const [visibleBU, setVisibleBU] = useState(false)
     const [visibleSCU, setVisibleSCU] = useState(false)
@@ -197,6 +198,12 @@ function Intro() {
         setVisibleMetis(false)
     }
 
+    const handleHYH = () => {
+        if (props.uid == 2){
+            message.info('点你爹干嘛韩鸡你')
+        }
+    }
+
     const goGithub = () => {
         window.location.href = 'https://github.com/ImNotDarren'
     }
@@ -227,12 +234,12 @@ function Intro() {
     return (
         <div>
             <div className="darren_avatar">
-                <Avatar size={80} icon={<img src={darren_avatar} alt="" />} />
+                <Avatar size={80} icon={<img src={darren_avatar} alt="" onClick={handleHYH}/>} />
             </div>
 
             <div className="site-layout-content">
                 <div className='left'>
-                    <div className='name'>Darren (Sizuo) Liu</div>
+                    <div className='name' onClick={handleHYH}>Darren (Sizuo) Liu</div>
                     <div className="email">darrenliu0701@gmail.com</div>
 
                     <div className="education">
@@ -414,4 +421,10 @@ function Intro() {
     )
 }
 
-export default Intro
+const mapStateToProps = (state) => {
+    return {
+        uid: state.uid
+    }
+}
+
+export default connect(mapStateToProps)(Intro)
