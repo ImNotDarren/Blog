@@ -239,7 +239,7 @@ function Blogs() {
                             loadMore={loadMore}
                             renderItem={item => (
                                 <List.Item
-                                    actions={[<a key="list-loadmore-edit">{uid == 1 ? 'edit' : 'like'}</a>, <a key="list-loadmore-more">more</a>]}
+                                    actions={[<a key="list-loadmore-edit">{(uid == 1 ? 'edit' : 'like') + (item.likes == 0 ? '' : ' (' + item.likes + ')')}</a>, <a key="list-loadmore-more">more</a>]}
                                 >
                                     <Skeleton avatar title={false} loading={false} active>
                                         <List.Item.Meta
