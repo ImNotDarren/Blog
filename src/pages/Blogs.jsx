@@ -353,10 +353,10 @@ function Blogs() {
                             renderItem={item => (
                                 <List.Item
                                     actions={[
-                                            <div key="list-loadmore-edit" id={item.bid} onClick={handleLike} style={{ verticalAlign: 'middle', fontSize: 'large',color: (likes.indexOf(item.bid).toString() == '-1' || uid == '1') ? '' : 'rgb(255, 103, 103)' }}>
+                                            <a key="list-loadmore-edit" id={item.bid} onClick={handleLike} style={{ verticalAlign: 'middle', fontSize: 'large',color: (likes.indexOf(item.bid).toString() == '-1' || uid == '1') ? '' : 'rgb(255, 103, 103)' }}>
                                                 <HeartFilled style={{ verticalAlign: 'middle' }} />
                                                 &nbsp;{item.likes}
-                                            </div>]}
+                                            </a>]}
                                 >
                                     <Skeleton avatar title={false} loading={false} active>
                                         <List.Item.Meta
