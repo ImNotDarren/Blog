@@ -249,6 +249,10 @@ function Blogs() {
         }
     }
 
+    const handleMore = (e) => {
+        console.log('more')
+    }
+
     const titleChange = (e) => {
         // console.log(e.target.value)
         setTitle(e.target.value)
@@ -348,12 +352,11 @@ function Blogs() {
                             loadMore={loadMore}
                             renderItem={item => (
                                 <List.Item
-                                    actions={[<a key="list-loadmore-edit" id={item.bid} onClick={handleLike} style={{ verticalAlign: 'middle', color: (likes.indexOf(item.bid).toString() == '-1' || uid == '1') ? '' : 'rgb(255, 103, 103)' }}>
-                                        <HeartFilled style={{ verticalAlign: 'middle' }} />
-                                        {/* {(uid == '1' ? 'edit' : 'like' + (likes.indexOf(item.bid).toString() == '-1' ? '' +
-                                            (item.likes == '0' ? '' : '(' + item.likes + ')') : 'd'))} */}
-                                        &nbsp;{item.likes}
-                                    </a>, <a key="list-loadmore-more">more</a>]}
+                                    actions={[
+                                            <div key="list-loadmore-edit" id={item.bid} onClick={handleLike} style={{ verticalAlign: 'middle', fontSize: 'large',color: (likes.indexOf(item.bid).toString() == '-1' || uid == '1') ? '' : 'rgb(255, 103, 103)' }}>
+                                                <HeartFilled style={{ verticalAlign: 'middle' }} />
+                                                &nbsp;{item.likes}
+                                            </div>]}
                                 >
                                     <Skeleton avatar title={false} loading={false} active>
                                         <List.Item.Meta
@@ -361,6 +364,7 @@ function Blogs() {
                                             title={item.title}
                                             description={item.abst.slice(0, winWidth < 1000 ? 56 : 100) + ' ...'}
                                             style={{ textAlign: 'left' }}
+                                            onClick={handleMore}
                                         />
                                     </Skeleton>
                                 </List.Item>
