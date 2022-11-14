@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import 'antd/dist/antd.css';
-import { Avatar, Dropdown, Menu, Space } from 'antd'
+import { Avatar, Dropdown, Menu, Space, message } from 'antd'
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -19,6 +19,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import darren_avatar from './assets/avatars/darren_avatar.jpg'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { Alert, AlertTitle, Dialog } from '@mui/material';
+import store from './store'
 
 
 
@@ -26,11 +27,10 @@ function BlogCard(props) {
 
 
     const [openAlert, setOpenAlert] = useState(false)
+    const [liked, setLiked] = useState(props.liked)
 
-
-    const menu_alert = (
-        <Alert onClose={() => { }}>This is a success alert — check it out!</Alert>
-    )
+    const uid = store.getState().uid
+    const server = store.getState().server
 
     const handleMenu = () => {
         setOpenAlert(true)
@@ -41,6 +41,37 @@ function BlogCard(props) {
 
     const manuallyClose = () => {
         setOpenAlert(false)
+    }
+
+    const handleLike = () => {
+
+        if (uid != 1) {
+            if (uid == -1) {
+                message.error('Please login first!')
+            } else {
+                if (liked == false) {
+                    setLiked(true)
+                    fetch(server + '/likeBlog', {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ "bid": props.blogs[0].bid, "uid": uid })
+                    })
+                } else {
+                    setLiked(false)
+                    fetch(server + '/unlikeBlog', {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ "bid": props.blogs[0].bid, "uid": uid })
+                    })
+                }
+            }
+        }
+
+
     }
 
     const menuItems = [
@@ -78,7 +109,7 @@ function BlogCard(props) {
                         <Avatar size={45} icon={<img src={darren_avatar} alt="" />} />
                     }
                     action={
-                        <Dropdown overlay={menu}>
+                        <Dropdown overlay={menu} disabled={uid == 1 ? false : true}>
                             <IconButton aria-label="settings">
                                 <MoreVertIcon />
                             </IconButton>
@@ -99,7 +130,7 @@ function BlogCard(props) {
                     </Typography>
                 </CardContent>
                 <CardActions disableSpacing>
-                    <IconButton aria-label="add to favorites">
+                    <IconButton aria-label="add to favorites" onClick={handleLike} style={{ color: liked ? 'rgb(255, 103, 103)' : '' }}>
                         <FavoriteIcon />
                     </IconButton>
                     <IconButton aria-label="share">
