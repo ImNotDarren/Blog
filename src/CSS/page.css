@@ -317,16 +317,3 @@
 .demo-loadmore-list {
     min-height: 350px;
   }
-
-
-.comment {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-}
-
-@media screen and (max-width: 560px) {
-    .comment {
-        display: none
-    }
-}

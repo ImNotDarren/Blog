@@ -7,7 +7,9 @@ import BlogCard from '../BlogCard';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit'
+import IconButton from '@mui/material/IconButton';
 import Zoom from '@mui/material/Zoom';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useTheme } from '@mui/material/styles';
 import store from '../store'
 import darren_avatar from '../assets/avatars/darren_avatar.jpg'
@@ -44,6 +46,8 @@ function Blogs() {
 
     const [initLoading, setInitLoading] = useState(true);
     const [blogLoading, setBlogLoading] = useState(true);
+
+    const [likeLoading, setLikeLoading] = useState(false)
 
     const uid = store.getState().uid
 
@@ -203,50 +207,60 @@ function Blogs() {
     }
 
     const handleLike = (e) => {
-        let bid = parseInt(e.target.id)
-        let likes_copy = JSON.parse(JSON.stringify(likes))
-        let currBlogs_copy = JSON.parse(JSON.stringify(currBlogs))
-        if (uid == -1) {
-            message.error('Please login first!')
+        if (likeLoading == true) {
+            message.error('Clicking too fast!')
         } else {
-            if (likes.length == 0 || likes.indexOf(bid) == -1) {
-                setLikes(likes_copy.concat(bid))
-                for (let i = 0; i < currBlogs.length; i++) {
-                    if (currBlogs[i].bid == e.target.id) {
-                        currBlogs_copy[i].likes++
-                        setCurrBlogs(currBlogs_copy)
-                        break
-                    }
-                }
-                // add likes
-                fetch(server + '/likeBlog', {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ "bid": e.target.id, "uid": uid })
-                })
+            setLikeLoading(true)
+            let bid = parseInt(e.currentTarget.id)
+            let likes_copy = JSON.parse(JSON.stringify(likes))
+            let currBlogs_copy = JSON.parse(JSON.stringify(currBlogs))
+            if (uid == -1) {
+                message.error('Please login first!')
             } else {
-                const bindex = likes.indexOf(bid)
-                likes_copy.splice(bindex, 1)
-                setLikes(likes_copy)
-                for (let i = 0; i < currBlogs.length; i++) {
-                    if (currBlogs[i].bid == e.target.id) {
-                        currBlogs_copy[i].likes--
-                        setCurrBlogs(currBlogs_copy)
-                        break
+                if (likes.length == 0 || likes.indexOf(bid) == -1) {
+                    setLikes(likes_copy.concat(bid))
+                    for (let i = 0; i < currBlogs.length; i++) {
+                        if (currBlogs[i].bid == e.currentTarget.id) {
+                            currBlogs_copy[i].likes++
+                            setCurrBlogs(currBlogs_copy)
+                            break
+                        }
                     }
+                    // add likes
+                    fetch(server + '/likeBlog', {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ "bid": e.currentTarget.id, "uid": uid })
+                    }).then(() => {
+                        setLikeLoading(false)
+                    })
+                } else {
+                    const bindex = likes.indexOf(bid)
+                    likes_copy.splice(bindex, 1)
+                    setLikes(likes_copy)
+                    for (let i = 0; i < currBlogs.length; i++) {
+                        if (currBlogs[i].bid == e.currentTarget.id) {
+                            currBlogs_copy[i].likes--
+                            setCurrBlogs(currBlogs_copy)
+                            break
+                        }
+                    }
+                    // remove likes
+                    fetch(server + '/unlikeBlog', {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ "bid": e.currentTarget.id, "uid": uid })
+                    }).then(() => {
+                        setLikeLoading(false)
+                    })
                 }
-                // remove likes
-                fetch(server + '/unlikeBlog', {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ "bid": e.target.id, "uid": uid })
-                })
             }
         }
+
     }
 
     const handleMore = (e) => {
@@ -283,7 +297,7 @@ function Blogs() {
 
     const writeBlog = () => {
         if (uid != 1) {
-            message.error('Writing blogs is only available to Darren for now')
+            openAdd()
         } else {
             // TODO: relocate to write blog page
         }
@@ -332,16 +346,13 @@ function Blogs() {
                     {/* <div className="blog_card_title">Latest blog</div> */}
                     <div className="blog_card">
                         <BlogCard blogs={blogs} winWidth={winWidth} liked={likes.indexOf(blogs[0].bid) == -1 ? false : true} />
-                        <div className="comment">
-                            <Button type="secondary" block onClick={openAdd}>{leaveCommentText}</Button>
-                        </div>
 
                     </div>
 
                     <div className="blog_right">
                         <div className="blog_btns">
                             <Search placeholder="Search for blogs" onSearch={onSearch} size={btnSize} style={searchStyle} />
-                            <Button type="primary" size={btnSize} onClick={writeBlog} block style={writeBlogBtnStyle}>Write a blog</Button>
+                            <Button type="primary" size={btnSize} onClick={writeBlog} block style={writeBlogBtnStyle}>{uid == 1 ? "Write a blog" : "Leave a comment"}</Button>
                         </div>
 
                         <List
@@ -353,10 +364,10 @@ function Blogs() {
                             renderItem={item => (
                                 <List.Item
                                     actions={[
-                                            <a key="list-loadmore-edit" id={item.bid} onClick={handleLike} style={{ verticalAlign: 'middle', fontSize: 'large',color: (likes.indexOf(item.bid).toString() == '-1' || uid == '1') ? '' : 'rgb(255, 103, 103)' }}>
-                                                <HeartFilled style={{ verticalAlign: 'middle' }} />
-                                                &nbsp;{item.likes}
-                                            </a>]}
+                                        <IconButton aria-label="favorites" id={item.bid} onClick={handleLike} style={{ fontSize: 'large', color: (likes.indexOf(item.bid).toString() == '-1' || uid == '1') ? '' : 'rgb(255, 103, 103)' }}>
+                                            <FavoriteIcon id={item.bid}/>
+                                            &nbsp;{item.likes}
+                                        </IconButton>]}
                                 >
                                     <Skeleton avatar title={false} loading={false} active>
                                         <List.Item.Meta
@@ -375,9 +386,6 @@ function Blogs() {
 
                     </div>
                 </div>
-
-
-
 
 
 
