@@ -216,6 +216,7 @@ function Blogs() {
             let currBlogs_copy = JSON.parse(JSON.stringify(currBlogs))
             if (uid == -1) {
                 message.error('Please login first!')
+                setLikeLoading(false)
             } else {
                 if (likes.length == 0 || likes.indexOf(bid) == -1) {
                     setLikes(likes_copy.concat(bid))
