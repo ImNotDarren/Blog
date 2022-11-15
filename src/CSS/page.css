@@ -316,4 +316,24 @@
 
 .demo-loadmore-list {
     min-height: 350px;
-  }
+}
+
+.comments {
+    margin-top: 15px;
+    padding: 10px;
+    border:1px solid rgb(216, 216, 216);
+    border-radius: 5%;
+    height: auto;
+}
+
+.comment_title {
+    display: flex;
+    justify-content: center;
+    color:rgb(116, 116, 116);
+}
+
+@media screen and (max-width: 560px) {
+    .comments {
+        display: none;
+    }
+}
