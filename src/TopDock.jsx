@@ -8,7 +8,7 @@ import { useLocation } from 'react-router-dom'
 
 function TopDock(props) {
 
-    const mediaMatch = window.matchMedia('(max-width: 396px)');
+    const mediaMatch = window.matchMedia('(max-width: 475px)');
     const [matches, setMatches] = useState(mediaMatch.matches);
 
     useEffect(() => {
@@ -45,7 +45,7 @@ function TopDock(props) {
                     <Nav.Link eventKey={4} href="/music" style={tabStyle.container(matches)} disabled>Music</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey={5} href="/arrange"  style={tabStyle.container(matches)} disabled={(props.login==0 || props.super_account==0)}>Events</Nav.Link>
+                    <Nav.Link eventKey={5} href={props.uid == 1 ? "/event" : "/comments"}  style={tabStyle.container(matches)} >{props.uid == 1 ? 'Events' : 'Comments'}</Nav.Link>
                 </Nav.Item>
             </Nav>
 
@@ -57,7 +57,8 @@ const mapStateToProps = (state) => {
     return {
         curr_page: state.curr_page,
         login: state.login,
-        super_account: state.super_account
+        super_account: state.super_account,
+        uid: state.uid
     }
 }
 

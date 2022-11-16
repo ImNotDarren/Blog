@@ -10,7 +10,7 @@ function get_prev_page(curr_page) {
     } else if (curr_page == 4) {
         return '/music'
     } else {
-        return '/arrange'
+        return '/event'
     }
 }
 

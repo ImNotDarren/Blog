@@ -40,9 +40,6 @@ function Blogs() {
     const [likeBtn, setLikeBtn] = useState('like')
     const [leaveCommentText, setLeaveCommentText] = useState('Leave a comment for this website')
     const [commentSuccess, setCommentSuccess] = useState(false)
-    const [comments, setComments] = useState([{ cid: -1, uid: -1, comment: 'Loading...', datetime: 'Loading...', username: 'Loading...' }])
-    const [currComments, setCurrComments] = useState(comments)
-    const [savedComments, setSavedComments] = useState([])
 
     const [title, setTitle] = useState('')
     const [abstract, setAbstract] = useState('')
@@ -94,22 +91,6 @@ function Blogs() {
                 setLikes(result)
             })
 
-        fetch(server + '/getComments')
-            .then(res => res.json())
-            .then((result) => {
-                result.sort((a, b) => {
-                    return new Date(b.datetime) - new Date(a.datetime)
-                })
-                setComments(result)
-                if (result.length <= 5) {
-                    setCurrComments(result)
-                } else {
-                    setCurrComments(result.slice(0, 5))
-                    setSavedComments(result.slice(5))
-                }
-            })
-
-
     }, [])
 
 
@@ -138,11 +119,6 @@ function Blogs() {
         }
 
     }, [winWidth])
-
-    const showCommentsBtn = {
-        display: (winWidth <= 560) ? 'block' : 'none',
-        marginBottom: '10px',
-    }
 
     const fabStyle = {
         display: (winWidth <= 560) ? 'flex' : 'none',
@@ -345,8 +321,6 @@ function Blogs() {
 
     const onLoadMore = () => {
 
-        let newCurrBlogs = null
-
         if (savedBlogs.length == 0) {
 
         } else if (savedBlogs.length <= 5) {
@@ -355,20 +329,6 @@ function Blogs() {
         } else {
             setCurrBlogs(currBlogs.concat(savedBlogs.slice(0, 5)))
             setSavedBlogs(savedBlogs.slice(5))
-        }
-
-    }
-
-    const onLoadMoreComments = () => {
-
-        if (savedComments.length == 0) {
-
-        } else if (savedComments.length <= 5) {
-            setCurrComments(currComments.concat(savedComments))
-            setSavedComments([])
-        } else {
-            setCurrComments(currComments.concat(savedComments.slice(0, 5)))
-            setSavedComments(savedComments.slice(5))
         }
 
     }
@@ -390,23 +350,6 @@ function Blogs() {
             </div>
         ) : null;
 
-    const loadMoreComments =
-        !loading ? (
-            <div
-                style={{
-                    textAlign: 'center',
-                    marginTop: 12,
-                    height: 32,
-                    lineHeight: '32px',
-                }}
-            >
-                <Divider orientation="center" plain style={{ display: savedComments.length == 0 ? 'none' : 'block' }}>
-                    <Button type="link" onClick={onLoadMoreComments} style={{ color: 'rgb(120, 120, 120)' }}>loading more</Button>
-                </Divider>
-
-            </div>
-        ) : null;
-
 
 
     return (
@@ -415,37 +358,7 @@ function Blogs() {
                 <div className="blog">
                     {/* <div className="blog_card_title">Latest blog</div> */}
                     <div className="blog_card">
-                        <Button style={showCommentsBtn} block>Show Comments</Button>
                         <BlogCard blogs={blogs} winWidth={winWidth} liked={likes.indexOf(blogs[0].bid) == -1 ? false : true} />
-                        <div className="comments">
-                            <div className="comment_title">
-                                Comments
-                            </div>
-                            <List
-                                className="demo-loadmore-list"
-                                loading={initLoading}
-                                itemLayout="horizontal"
-                                dataSource={currComments}
-                                loadMore={loadMoreComments}
-                                renderItem={item => (
-                                    <List.Item>
-                                        <Skeleton avatar title={false} loading={false} active>
-                                            <List.Item.Meta
-                                                avatar={
-                                                    <Avatar style={{ backgroundColor: '#7265e6', verticalAlign: 'middle', fontSize: '17px' }} size="large">
-                                                        {item.username.slice(0, 1).toUpperCase()}
-                                                    </Avatar>}
-                                                title={item.username}
-                                                description={item.comment}
-                                                style={{ textAlign: 'left' }}
-                                            />
-                                        </Skeleton>
-                                    </List.Item>
-                                )}
-
-                                style={listStyle}
-                            />
-                        </div>
                     </div>
 
 

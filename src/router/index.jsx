@@ -4,8 +4,9 @@ import Intro from '../pages/Intro'
 import Error from '../pages/Error'
 import Blogs from '../pages/Blogs'
 import Music from '../pages/Music'
-import Arrange from '../pages/Arrange'
+import Event from '../pages/Event'
 import Login from '../pages/Login'
+import Comments from '../pages/Comments'
 
 
 const BaseRouter = () => (
@@ -16,7 +17,8 @@ const BaseRouter = () => (
                 <Route path="/intro" element={<Intro />}></Route>
                 <Route path="/blogs" element={<Blogs />}></Route>
                 <Route path="/music" element={<Music />}></Route>
-                <Route path="/arrange" element={<Arrange />}></Route>
+                <Route path="/event" element={<Event />}></Route>
+                <Route path="/comments" element={<Comments />}></Route>
             </Route>
             <Route path="/login" element={<Login />}></Route>
             <Route path="/*" element={<Error />}></Route>
