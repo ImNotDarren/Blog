@@ -115,6 +115,8 @@ function Comments(props) {
                         message.success('Comment sent successfully!')
                     }
                 })
+            } else {
+                setInputDisplay(false)
             }
         } else {
             // show input
@@ -124,11 +126,6 @@ function Comments(props) {
 
     const listenComment = (e) => {
         setComment(e.target.value)
-        if (e.target.value == '') {
-            setTimeout(() => {
-                setInputDisplay(false)
-            }, 8000)
-        }
     }
 
     return (
@@ -159,7 +156,7 @@ function Comments(props) {
                 </div>
                 <div className="write_comment">
                     <TextArea rows={5} value={comment} onChange={listenComment} allowClear style={{ marginTop: '30px', marginBottom: '10px', display: inputDisplay ? '' : 'none' }} />
-                    <Button type="primary" block onClick={handleComment}>Leave a comment</Button>
+                    <Button type="primary" onClick={handleComment} block>Leave a comment</Button>
                 </div>
             </div>
 
