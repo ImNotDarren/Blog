@@ -358,7 +358,7 @@ function Blogs() {
                 <div className="blog">
                     {/* <div className="blog_card_title">Latest blog</div> */}
                     <div className="blog_card">
-                        <BlogCard blogs={blogs} winWidth={winWidth} liked={likes.indexOf(blogs[0].bid) == -1 ? false : true} />
+                        <BlogCard blogs={blogs} winWidth={winWidth} liked={likes.indexOf(blogs[0].bid) == -1 ? false : true}/>
                     </div>
 
 

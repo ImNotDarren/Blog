@@ -1,9 +1,13 @@
 import React, { createElement, useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import 'antd/dist/antd.css';
-import { Avatar, Comment, Tooltip, message, Button, Input } from 'antd';
+import { Avatar, Comment, Tooltip, message, Button, Input, Modal, Form } from 'antd';
 import { DislikeFilled, DislikeOutlined, LikeFilled, LikeOutlined } from '@ant-design/icons';
 import { Snackbar, Alert } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit'
+import Zoom from '@mui/material/Zoom';
+import { useTheme } from '@mui/material/styles';
+import Fab from '@mui/material/Fab';
 
 const { TextArea } = Input
 
@@ -11,10 +15,18 @@ function Comments(props) {
 
     const [winWidth, setWinWidth] = useState(document.querySelector('body').offsetWidth)
     const [commentSuccess, setCommentSuccess] = useState(false)
+    const [addIn, setAddIn] = useState(true)
+    const [loading, setLoading] = useState(false)
 
     const [comments, setComments] = useState([])
     const [comment, setComment] = useState('')
     const [inputDisplay, setInputDisplay] = useState(false)
+
+    const [isCommentOpen, setIsCommentOpen] = useState(false)
+
+    const [likes, setLikes] = useState(0);
+    const [dislikes, setDislikes] = useState(0);
+    const [action, setAction] = useState(null);
 
     useEffect(() => {
 
@@ -45,9 +57,56 @@ function Comments(props) {
             })
     }, [])
 
-    const [likes, setLikes] = useState(0);
-    const [dislikes, setDislikes] = useState(0);
-    const [action, setAction] = useState(null);
+    const openAdd = () => {
+        setIsCommentOpen(true)
+        setAddIn(false)
+
+    }
+
+    const fabStyle = {
+        display: (winWidth <= 560) ? 'flex' : 'none',
+        position: 'fixed',
+        bottom: 65,
+        right: 16,
+        sizeMedium: false
+    }
+
+    const handleCommentOK = () => {
+
+        if (comment != '') {
+            let uid = props.uid
+            const new_comment = { uid, comment }
+            fetch(props.server + '/addComment', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(new_comment)
+            }).then(() => {
+                setIsCommentOpen(false)
+                setAddIn(true)
+                if (winWidth > 560) {
+                    setCommentSuccess(true)
+                    setTimeout(() => {
+                        setCommentSuccess(false)
+                    }, 2000)
+                } else {
+                    message.success('Comment sent successfully!')
+                }
+
+            })
+        }
+
+    }
+
+    const closeComment = () => {
+        setAddIn(true)
+        setIsCommentOpen(false)
+    }
+
+    const commentChange = (e) => {
+        setComment(e.target.value)
+    }
 
     const like = () => {
         // setLikes(1);
@@ -67,6 +126,13 @@ function Comments(props) {
         console.log(e.currentTarget)
         message.error('Not Available Now')
     }
+
+    const theme = useTheme();
+
+    const transitionDuration = {
+        enter: theme.transitions.duration.enteringScreen,
+        exit: theme.transitions.duration.leavingScreen,
+    };
 
     const actions = [
         <Tooltip key="comment-basic-like" title="Like">
@@ -103,18 +169,18 @@ function Comments(props) {
                     },
                     body: JSON.stringify(new_comment)
                 })
-                .then(() => {
-                    setComment('')
-                    setInputDisplay(false)
-                    if (winWidth > 560) {
-                        setCommentSuccess(true)
-                        setTimeout(() => {
-                            setCommentSuccess(false)
-                        }, 2000)
-                    }else{
-                        message.success('Comment sent successfully!')
-                    }
-                })
+                    .then(() => {
+                        setComment('')
+                        setInputDisplay(false)
+                        if (winWidth > 560) {
+                            setCommentSuccess(true)
+                            setTimeout(() => {
+                                setCommentSuccess(false)
+                            }, 2000)
+                        } else {
+                            message.success('Comment sent successfully!')
+                        }
+                    })
             } else {
                 setInputDisplay(false)
             }
@@ -127,6 +193,8 @@ function Comments(props) {
     const listenComment = (e) => {
         setComment(e.target.value)
     }
+
+    
 
     return (
         <>
@@ -160,12 +228,37 @@ function Comments(props) {
                 </div>
             </div>
 
+            <Zoom in={addIn} appear={true} timeout={transitionDuration}>
+                    <Fab color='secondary' onClick={openAdd} aria-label="add" sx={fabStyle}>
+                        <EditIcon />
+                    </Fab>
+            </Zoom>
+
 
             <Snackbar open={commentSuccess} autoHideDuration={2000} onClose={handleSuccessClose}>
-                    <Alert onClose={handleSuccessClose} severity="success" sx={{ position: 'fixed', width: '300px', bottom: '80px' }}>
-                        Comment sent successfully!
-                    </Alert>
-                </Snackbar>
+                <Alert onClose={handleSuccessClose} severity="success" sx={{ position: 'fixed', width: '300px', bottom: '80px' }}>
+                    Comment sent successfully!
+                </Alert>
+            </Snackbar>
+
+            <Modal
+                    title="Leave a comment for this website!"
+                    open={isCommentOpen}
+                    onOk={handleCommentOK}
+                    onCancel={closeComment}
+                    footer={[
+                        <Button key="cancel" loading={loading} onClick={closeComment}>Cancel</Button>,
+                        <Button key="sbumit" type="primary" loading={loading} onClick={handleCommentOK}>Submit</Button>
+                    ]}
+                    sx={{ zIndex: 5 }}
+                >
+                    <Form size="middle">
+                        <Form.Item label="Comment">
+                            <TextArea rows={4} placeholder="Place your comment..." onChange={commentChange} />
+                        </Form.Item>
+                    </Form>
+
+                </Modal>
         </>
 
 

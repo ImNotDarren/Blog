@@ -68,13 +68,13 @@
 .right {
     padding-left: 3%;
     width: 50%;
+    margin-top: 60px;
 }
 
 @media screen and (max-width: 932px) {
     .right {
         padding-left: 0%;
         width: 100%;
-        margin-top: 60px;
     }
 
     .left {
@@ -158,6 +158,10 @@
 .course {
     font-size: 15px;
     color:rgb(91, 91, 91);
+}
+
+.skill_tags {
+    margin-top: 10px;
 }
 
 .link_title {
@@ -356,7 +360,6 @@
     }
 
     .write_comment {
-        width: 100%;
-        margin-top: 40px;
+        display: none;
     }
 }

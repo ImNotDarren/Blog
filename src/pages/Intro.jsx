@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import '../CSS/page.css'
 import 'antd/dist/antd.css';
-import { Layout, Button, Modal, Popover, Avatar, Divider, Timeline, message } from 'antd';
+import { Tag, Button, Modal, Popover, Avatar, Divider, Timeline, message } from 'antd';
 import { GithubOutlined, LinkedinOutlined, InstagramOutlined, PlayCircleOutlined, DownloadOutlined } from '@ant-design/icons';
 import darren_avatar from '../assets/avatars/darren_avatar.jpg'
 import murderer from '../assets/album_covers/murderer.jpg'
@@ -199,7 +199,7 @@ function Intro(props) {
     }
 
     const handleHYH = () => {
-        if (props.uid == 2){
+        if (props.uid == 2) {
             message.info('点你爹干嘛韩鸡你')
         }
     }
@@ -234,7 +234,7 @@ function Intro(props) {
     return (
         <div>
             <div className="darren_avatar">
-                <Avatar size={80} icon={<img src={darren_avatar} alt="" onClick={handleHYH}/>} />
+                <Avatar size={80} icon={<img src={darren_avatar} alt="" onClick={handleHYH} />} />
             </div>
 
             <div className="site-layout-content">
@@ -330,6 +330,44 @@ function Intro(props) {
                             <Button type="dashed" size={button_size} style={text_btn_style.container(matches)}>Silence Music</Button>
                         </Popover>
                     </div>
+
+                    <Divider orientation="left" plain>
+                        <div className="link_title">My Skills</div>
+                    </Divider>
+
+                    <div className="">
+                        <Tag className="skill_tags" color="cyan">Python</Tag>
+                        <Tag className="skill_tags" color="cyan">C</Tag>
+                        <Tag className="skill_tags" color="cyan">C++</Tag>
+                        <Tag className="skill_tags" color="cyan">Java</Tag>
+                        <Tag className="skill_tags" color="cyan">JavaScript</Tag>
+                        <Tag className="skill_tags" color="cyan">HTML</Tag>
+                        <Tag className="skill_tags" color="cyan">CSS</Tag>
+                    </div>
+
+                    <div className="">
+                        <Tag className="skill_tags" color="volcano">React.JS</Tag>
+                        <Tag className="skill_tags" color="volcano">Node.JS</Tag>
+                        <Tag className="skill_tags" color="volcano">Spring Boot</Tag>
+                        <Tag className="skill_tags" color="volcano">Database skills (MySQL, Oracle, MongoDB)</Tag>
+                        <Tag className="skill_tags" color="volcano">AWS</Tag>
+                    </div>
+
+                    <div className="">
+                        <Tag className="skill_tags" color="magenta">Regression</Tag>
+                        <Tag className="skill_tags" color="magenta">Classification</Tag>
+                        <Tag className="skill_tags" color="magenta">NLP</Tag>
+                        <Tag className="skill_tags" color="magenta">Unsupervised Learning</Tag>
+                        <Tag className="skill_tags" color="magenta">Deep Learning</Tag>
+                        <Tag className="skill_tags" color="magenta">Reinforcement Learning</Tag>
+                    </div>
+
+                    <div className="">
+                        <Tag className="skill_tags" color="green">Exploratory Data Analysis</Tag>
+                        <Tag className="skill_tags" color="green">Tableau</Tag>
+                    </div>
+
+
 
                     <Divider orientation="left" plain>
                         <div className="link_title">My Pages</div>
