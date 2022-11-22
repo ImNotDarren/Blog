@@ -5,6 +5,7 @@ let username = sessionStorage.getItem('username') ? sessionStorage.getItem('user
 let uid = sessionStorage.getItem('uid') ? sessionStorage.getItem('uid') : -1
 let avatar = sessionStorage.getItem('avatar') ? sessionStorage.getItem('avatar') : null
 let email = sessionStorage.getItem('email') ? sessionStorage.getItem('email') : null
+let language = sessionStorage.getItem('language') ? sessionStorage.getItem('language') : 'en'
 
 const defaultState = {
     curr_page,
@@ -14,6 +15,7 @@ const defaultState = {
     uid,
     avatar,
     email,
+    language,
     server: 'https://www.imnotdddarren.com',
     // server: 'http://localhost:8080'
 }
@@ -57,6 +59,12 @@ export default (state = defaultState, action) => {
             newState.username = sessionStorage.getItem('username')
             newState.avatar = sessionStorage.getItem('avatar')
             newState.email = sessionStorage.getItem('email')
+
+            break
+
+        case "language":
+            sessionStorage.setItem('language', newState.language == 'en' ? 'zh' : 'en')
+            newState.language = sessionStorage.getItem('language')
 
             break
 

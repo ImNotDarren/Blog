@@ -33,6 +33,7 @@ function Intro(props) {
     const text_btn_style = {
         container: isSmaller => ({
             marginLeft: '8px',
+            marginRight: props.language == 'en' ? '0px' : '8px',
             color: 'rgb(106, 106, 106)',
             fontSize: isSmaller ? '12px' : '14px',
             fontWeight: isSmaller ? '500' : '600',
@@ -114,11 +115,11 @@ function Intro(props) {
 
     const pending_ach = (
         <div className="achievement">
-            Brand new album
+            {props.language == 'en' ? 'Brand new album' : '全新专辑'}
             <Popover placement='top' content={darren_content} trigger="click">
                 <Button type="dashed" size={music_button_size} style={darren_style.container(matches)}>DARREN</Button>
             </Popover>
-            coming in 2024
+            {props.language == 'en' ? 'coming in 2024' : '2024年强势来袭'}
         </div>
     )
 
@@ -234,17 +235,17 @@ function Intro(props) {
     return (
         <div>
             <div className="darren_avatar">
-                <Avatar size={80} icon={<img src={darren_avatar} alt="" onClick={handleHYH} />} />
+                <Avatar size={props.language == 'en' ? 80 : 90} icon={<img src={darren_avatar} alt="" onClick={handleHYH} />} />
             </div>
 
             <div className="site-layout-content">
                 <div className='left'>
-                    <div className='name' onClick={handleHYH}>Darren (Sizuo) Liu</div>
+                    <div className='name' onClick={handleHYH}>{props.language == 'en' ? 'Darren (Sizuo) Liu' : '刘思佐'}</div>
                     <div className="email">darrenliu0701@gmail.com</div>
 
                     <div className="education">
-                        Current student at
-                        <Button type="dashed" size={button_size} onClick={showBU} style={text_btn_style.container(matches)}>Binghamton University</Button>
+                        {props.language == 'en' ? 'Current student at' : '现就读于'}
+                        <Button type="dashed" size={button_size} onClick={showBU} style={text_btn_style.container(matches)}>{props.language == 'en' ? 'Binghamton University' : '宾汉姆顿大学'}</Button>
                     </div>
 
                     <Modal
@@ -268,8 +269,9 @@ function Intro(props) {
                     </Modal>
 
                     <div className="education">
-                        Currently taking bootcamp at
+                        {props.language == 'en' ? 'Currently taking bootcamp at' : '现于'}
                         <Button type="dashed" size={button_size} onClick={showMetis} style={text_btn_style.container(matches)}>Metis</Button>
+                        {props.language == 'en' ? '' : '学习'}
                     </div>
 
                     <Modal
@@ -295,8 +297,8 @@ function Intro(props) {
                     </Modal>
 
                     <div className="education">
-                        Studied at
-                        <Button type="dashed" size={button_size} onClick={showSCU} style={text_btn_style.container(matches)}>Sichuan University</Button>
+                        {props.language == 'en' ? 'Studied at' : '曾就读于'}
+                        <Button type="dashed" size={button_size} onClick={showSCU} style={text_btn_style.container(matches)}>{props.language == 'en' ? 'Sichuan University' : '四川大学'}</Button>
                     </div>
 
                     <Modal
@@ -325,14 +327,15 @@ function Intro(props) {
                     </Modal>
 
                     <div className="occupation">
-                        Singer, Songwriter, Producer at
+                        {props.language == 'en' ? 'Singer, Songwriter, Producer at' : '于'}
                         <Popover placement='top' content="No website so far" trigger="click">
-                            <Button type="dashed" size={button_size} style={text_btn_style.container(matches)}>Silence Music</Button>
+                            <Button type="dashed" size={button_size} style={text_btn_style.container(matches)}>{props.language == 'en' ? 'Silence Music' : '无声音乐'}</Button>
                         </Popover>
+                        {props.language == 'en' ? '' : '担任词曲作者、制作人、歌手'}
                     </div>
 
                     <Divider orientation="left" plain>
-                        <div className="link_title">My Skills</div>
+                        <div className="link_title">{props.language == 'en' ? 'My Skills' : '技能'}</div>
                     </Divider>
 
                     <div className="">
@@ -349,38 +352,34 @@ function Intro(props) {
                         <Tag className="skill_tags" color="volcano">React.JS</Tag>
                         <Tag className="skill_tags" color="volcano">Node.JS</Tag>
                         <Tag className="skill_tags" color="volcano">Spring Boot</Tag>
-                        <Tag className="skill_tags" color="volcano">Database skills (MySQL, Oracle, MongoDB)</Tag>
+                        <Tag className="skill_tags" color="volcano">{props.language == 'en' ? 'Database skills' : '数据库管理'} (MySQL, Oracle, MongoDB)</Tag>
                         <Tag className="skill_tags" color="volcano">AWS</Tag>
                     </div>
 
                     <div className="">
-                        <Tag className="skill_tags" color="magenta">Regression</Tag>
-                        <Tag className="skill_tags" color="magenta">Classification</Tag>
-                        <Tag className="skill_tags" color="magenta">NLP</Tag>
-                        <Tag className="skill_tags" color="magenta">Unsupervised Learning</Tag>
-                        <Tag className="skill_tags" color="magenta">Deep Learning</Tag>
-                        <Tag className="skill_tags" color="magenta">Reinforcement Learning</Tag>
+                        <Tag className="skill_tags" color="magenta">{props.language == 'en' ? 'Regression' : '线性回归'}</Tag>
+                        <Tag className="skill_tags" color="magenta">{props.language == 'en' ? 'Classification' : '机器学习分类算法'}</Tag>
+                        <Tag className="skill_tags" color="magenta">{props.language == 'en' ? 'NLP' : '自然语言处理'}</Tag>
+                        <Tag className="skill_tags" color="magenta">{props.language == 'en' ? 'Unsupervised Learning' : '无监督学习'}</Tag>
+                        <Tag className="skill_tags" color="magenta">{props.language == 'en' ? 'Deep Learning' : '深度学习'}</Tag>
+                        <Tag className="skill_tags" color="magenta">{props.language == 'en' ? 'Reinforcement Learning' : '强化学习'}</Tag>
                     </div>
 
                     <div className="">
-                        <Tag className="skill_tags" color="green">Exploratory Data Analysis</Tag>
+                        <Tag className="skill_tags" color="green">{props.language == 'en' ? 'Exploratory Data Analysis' : '探索性数据分析'}</Tag>
                         <Tag className="skill_tags" color="green">Tableau</Tag>
                     </div>
 
 
 
                     <Divider orientation="left" plain>
-                        <div className="link_title">My Pages</div>
+                        <div className="link_title">{props.language == 'en' ? 'My Pages' : '个人主页'}</div>
                     </Divider>
 
                     <div className="link_box_out">
                         <div className="link_box">
                             <div className="link_btn">
                                 <Button type="secondary" onClick={goGithub} size={link_size} block icon={<GithubOutlined />} style={link_btn_style.container(matches)}>Github</Button>
-                            </div>
-
-                            <div className="link_btn">
-                                <Button type="secondary" onClick={goIns} size={link_size} block icon={<InstagramOutlined />} style={link_btn_style.container(matches)}>Instagram</Button>
                             </div>
                             <div className="link_btn">
                                 <Button type="secondary" onClick={goSpotify} size={link_size} block icon={<PlayCircleOutlined />} style={link_btn_style.container(matches)}>Spotify</Button>
@@ -394,9 +393,6 @@ function Intro(props) {
                             <div className="link_btn">
                                 <Button type="secondary" onClick={goAM} size={link_size} block icon={<PlayCircleOutlined />} style={link_btn_style.container(matches)}>Apple Music</Button>
                             </div>
-                            <div className="link_btn">
-                                <Button type="secondary" onClick={goQQMusic} size={link_size} block icon={<PlayCircleOutlined />} style={link_btn_style.container(matches)}>QQMusic</Button>
-                            </div>
                         </div>
                     </div>
 
@@ -405,22 +401,22 @@ function Intro(props) {
                 <div className='right'>
 
                     <Divider orientation="left" plain>
-                        <div className="link_title">My Songs</div>
+                        <div className="link_title">{props.language == 'en' ? 'My Songs' : '我的音乐'}</div>
                     </Divider>
 
                     <div style={{ margin: '10px' }}>
                         <Timeline pending={pending_ach}>
                             <Timeline.Item>
                                 <div className="achievement">
-                                    2020.04.26 - First album:
+                                    2020.04.26 - {props.language == 'en' ? 'First album' : '首张个人专辑'}:
                                     <Popover placement='top' content={murderer_content} trigger="click">
-                                        <Button type="dashed" size={music_button_size} style={murderer_style.container(matches)}>Murderer</Button>
+                                        <Button type="dashed" size={music_button_size} style={murderer_style.container(matches)}>{props.language == 'en' ? 'Murderer' : '凶手'}</Button>
                                     </Popover>
                                 </div>
                             </Timeline.Item>
                             <Timeline.Item>
                                 <div className="achievement">
-                                    2021.04.11 - Single:
+                                    2021.04.11 - {props.language == 'en' ? 'Single' : '单曲'}:
                                     <Popover placement='top' content={van_goghs_dream_content} trigger="click">
                                         <Button type="dashed" size={music_button_size} style={van_goghs_dream_style.container(matches)}>Playboy</Button>
                                     </Popover>
@@ -428,15 +424,15 @@ function Intro(props) {
                             </Timeline.Item>
                             <Timeline.Item>
                                 <div className="achievement">
-                                    2021.05.01 - Single:
+                                    2021.05.01 - {props.language == 'en' ? 'Single' : '单曲'}:
                                     <Popover placement='top' content={original_song_content} trigger="click">
-                                        <Button type="dashed" size={music_button_size} style={original_song_style.container(matches)}>Original Song</Button>
+                                        <Button type="dashed" size={music_button_size} style={original_song_style.container(matches)}>{props.language == 'en' ? 'Original Song' : '原创歌曲'}</Button>
                                     </Popover>
                                 </div>
                             </Timeline.Item>
                             <Timeline.Item>
                                 <div className="achievement">
-                                    2021.07.01 - Single:
+                                    2021.07.01 - {props.language == 'en' ? 'Single' : '单曲'}:
                                     <Popover placement='top' content={van_goghs_dream_content} trigger="click">
                                         <Button type="dashed" size={music_button_size} style={van_goghs_dream_style.container(matches)}>22</Button>
                                     </Popover>
@@ -444,9 +440,9 @@ function Intro(props) {
                             </Timeline.Item>
                             <Timeline.Item>
                                 <div className="achievement">
-                                    2021.08.14 - Single:
+                                    2021.08.14 - {props.language == 'en' ? 'Single' : '单曲'}:
                                     <Popover placement='top' content={well_content} trigger="click">
-                                        <Button type="dashed" size={music_button_size} style={well_style.container(matches)}>We'll</Button>
+                                        <Button type="dashed" size={music_button_size} style={well_style.container(matches)}>{props.language == 'en' ? 'We\'ll' : '未见'}</Button>
                                     </Popover>
                                 </div>
                             </Timeline.Item>
@@ -461,7 +457,8 @@ function Intro(props) {
 
 const mapStateToProps = (state) => {
     return {
-        uid: state.uid
+        uid: state.uid,
+        language: state.language
     }
 }
 

@@ -61,7 +61,6 @@
 }
 
 .left {
-    display: block;
     width: 47%;
 }
 
@@ -173,6 +172,7 @@
 
 .link_box_out {
     display: flex;
+    height: auto;
 }
 
 @media screen and (max-width: 850px) {

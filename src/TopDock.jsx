@@ -33,19 +33,19 @@ function TopDock(props) {
         <div className='top_dock'>
             <Nav fill variant="tabs" activeKey={props.curr_page} onSelect={props.handleSelect} style={{backgroundColor: 'white'}}>
                 <Nav.Item>
-                    <Nav.Link eventKey={1} href="/intro" style={tabStyle.container(matches)}>Intro</Nav.Link>
+                    <Nav.Link eventKey={1} href="/intro" style={tabStyle.container(matches)}>{props.language == 'en' ? 'Intro' : '简介'}</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey={2} href="/publications"  style={tabStyle.container(matches)} disabled>Publications</Nav.Link>
+                    <Nav.Link eventKey={2} href="/publications"  style={tabStyle.container(matches)} disabled>{props.language == 'en' ? 'Publications' : '文献'}</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey={3} href="/blogs" style={tabStyle.container(matches)}>Blogs</Nav.Link>
+                    <Nav.Link eventKey={3} href="/blogs" style={tabStyle.container(matches)}>{props.language == 'en' ? 'Blogs' : '博客'}</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey={4} href="/music" style={tabStyle.container(matches)} disabled>Music</Nav.Link>
+                    <Nav.Link eventKey={4} href="/music" style={tabStyle.container(matches)} disabled>{props.language == 'en' ? 'Music' : '音乐'}</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey={5} href={props.uid == 1 ? "/event" : "/comments"}  style={tabStyle.container(matches)} >{props.uid == 1 ? 'Events' : 'Comments'}</Nav.Link>
+                    <Nav.Link eventKey={5} href={props.uid == 1 ? "/event" : "/comments"}  style={tabStyle.container(matches)} >{props.uid == 1 ? (props.language == 'en' ? 'Events' : '事件') : (props.language == 'en' ? 'Comments' : '评论')}</Nav.Link>
                 </Nav.Item>
             </Nav>
 
@@ -58,7 +58,8 @@ const mapStateToProps = (state) => {
         curr_page: state.curr_page,
         login: state.login,
         super_account: state.super_account,
-        uid: state.uid
+        uid: state.uid,
+        language: state.language
     }
 }
 

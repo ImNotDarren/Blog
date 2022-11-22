@@ -18,6 +18,7 @@ import Divider from '@mui/material/Divider';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 
+
 import { connect } from 'react-redux';
 import { Alert, AlertTitle, Dialog } from '@mui/material';
 
@@ -26,7 +27,7 @@ function TopContent(props) {
     const [openAlert, setOpenAlert] = useState(false)
 
     const navigate = useNavigate()
-    
+
     const login = () => {
         navigate('/login')
     }
@@ -56,7 +57,7 @@ function TopContent(props) {
         setTimeout(() => {
             setOpenAlert(false)
         }, 2200)
-        
+
     }
 
     const handleSettings = () => {
@@ -65,7 +66,7 @@ function TopContent(props) {
         setTimeout(() => {
             setOpenAlert(false)
         }, 2200)
-        
+
     }
 
     const handleClose = () => {
@@ -88,15 +89,20 @@ function TopContent(props) {
         props.handleLogout()
         navigate(get_prev_page(props.curr_page))
         window.location.reload()
-        
+
     }
 
+    const language = () => {
+        props.handleLanguage()
+    }
+
+
     return (
-        <div style={{position: 'fixed', width: '100%', top: '0px', zIndex: '5'}}>
+        <div style={{ position: 'fixed', width: '100%', top: '0px', zIndex: '5' }}>
             {/* <div className='top_content'>Darren Liu's Blog</div> */}
 
             <Box sx={{ flexGrow: 1 }}>
-                <AppBar position="static" sx={{height: '62px'}}>
+                <AppBar position="static" sx={{ height: '62px' }}>
                     <Toolbar>
                         <IconButton
                             size="large"
@@ -104,15 +110,18 @@ function TopContent(props) {
                             color="inherit"
                             aria-label="menu"
                             sx={{ mr: 2 }}
-                            style={{display: menu_display}}
+                            style={{ display: menu_display }}
                         >
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                            <div style={{fontSize: '18px', color: 'white'}}>{blog_title}</div>
+                            <div style={{ fontSize: '18px', color: 'white' }}>{blog_title}</div>
                         </Typography>
-                        <Button color="inherit" onClick={login} style={{display: login_display}}>Login</Button>
-                        <Button color="inherit" style={{display: user_display}} onClick={handleClick}>{props.username}</Button>
+
+                        <Button variant="outlined" onClick={language} style={{backgroundColor: 'white', marginRight: '20px'}}>{props.language == 'en' ? 'En' : '中'}</Button>
+
+                        <Button color="inherit" onClick={login} style={{ display: login_display }}>{props.language == 'en' ? 'Login' : '登陆'}</Button>
+                        <Button color="inherit" style={{ display: user_display }} onClick={handleClick}>{props.username}</Button>
                         <Menu
                             anchorEl={anchorEl}
                             id="account-menu"
@@ -120,30 +129,30 @@ function TopContent(props) {
                             onClose={handleClose}
                             onClick={handleClose}
                             PaperProps={{
-                            elevation: 0,
-                            sx: {
-                                overflow: 'visible',
-                                filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                                mt: 1.5,
-                                '& .MuiAvatar-root': {
-                                width: 32,
-                                height: 32,
-                                ml: -0.5,
-                                mr: 1,
+                                elevation: 0,
+                                sx: {
+                                    overflow: 'visible',
+                                    filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                                    mt: 1.5,
+                                    '& .MuiAvatar-root': {
+                                        width: 32,
+                                        height: 32,
+                                        ml: -0.5,
+                                        mr: 1,
+                                    },
+                                    '&:before': {
+                                        content: '""',
+                                        display: 'block',
+                                        position: 'absolute',
+                                        top: 0,
+                                        right: 14,
+                                        width: 10,
+                                        height: 10,
+                                        bgcolor: 'background.paper',
+                                        transform: 'translateY(-50%) rotate(45deg)',
+                                        zIndex: 0,
+                                    },
                                 },
-                                '&:before': {
-                                content: '""',
-                                display: 'block',
-                                position: 'absolute',
-                                top: 0,
-                                right: 14,
-                                width: 10,
-                                height: 10,
-                                bgcolor: 'background.paper',
-                                transform: 'translateY(-50%) rotate(45deg)',
-                                zIndex: 0,
-                                },
-                            },
                             }}
                             transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
@@ -189,15 +198,23 @@ const mapStateToProps = (state) => {
         username: state.username,
         login: state.login,
         super_account: state.super_account,
-        curr_page: state.curr_page
+        curr_page: state.curr_page,
+        language: state.language
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleLogout(){
+        handleLogout() {
             const action = {
                 type: "logOut"
+            }
+            dispatch(action)
+        },
+
+        handleLanguage() {
+            const action = {
+                type: "language"
             }
             dispatch(action)
         }
