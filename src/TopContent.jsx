@@ -98,7 +98,7 @@ function TopContent(props) {
 
 
     return (
-        <div style={{ position: 'fixed', width: '100%', top: '0px', zIndex: '5' }}>
+        <div style={{ position: 'fixed', width: '100%', top: '0px', zIndex: '5' }} onClick={()=>window.scrollTo(0, 0)}>
             {/* <div className='top_content'>Darren Liu's Blog</div> */}
 
             <Box sx={{ flexGrow: 1 }}>

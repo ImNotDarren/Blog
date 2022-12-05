@@ -7,6 +7,7 @@ import Music from '../pages/Music'
 import Event from '../pages/Event'
 import Login from '../pages/Login'
 import Comments from '../pages/Comments'
+import BlogPage from '../pages/BlogPage'
 
 
 const BaseRouter = () => (
@@ -19,6 +20,7 @@ const BaseRouter = () => (
                 <Route path="/music" element={<Music />}></Route>
                 <Route path="/event" element={<Event />}></Route>
                 <Route path="/comments" element={<Comments />}></Route>
+                <Route path="/blogpage" element={<BlogPage />}></Route>
             </Route>
             <Route path="/login" element={<Login />}></Route>
             <Route path="/*" element={<Error />}></Route>

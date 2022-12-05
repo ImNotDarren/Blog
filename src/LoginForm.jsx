@@ -14,18 +14,6 @@ function LoginForm(props) {
 
     let prev_page = get_prev_page(props.curr_page)
 
-    // if (props.curr_page == 1) {
-    //     prev_page = '/intro'
-    // }else if (props.curr_page == 2) {
-    //     prev_page = '/publications'
-    // }else if (props.curr_page == 3) {
-    //     prev_page = '/blogs'
-    // }else if (props.curr_page == 4) {
-    //     prev_page = '/music'
-    // }else if (props.curr_page == 5) {
-    //     prev_page = '/arrange'
-    // }
-
     const navigate = useNavigate()
 
     const handleSubmit = (e) => {

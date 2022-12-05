@@ -14,6 +14,7 @@ import { useTheme } from '@mui/material/styles';
 import { Snackbar, Alert } from '@mui/material';
 import store from '../store'
 import darren_avatar from '../assets/avatars/darren_avatar.jpg'
+import { useNavigate } from 'react-router-dom';
 
 const { TextArea, Search } = Input;
 
@@ -54,6 +55,8 @@ function Blogs() {
     const uid = store.getState().uid
 
     const addBtnColor = uid == 1 ? 'primary' : 'secondary'
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         fetch(url1)
@@ -277,7 +280,9 @@ function Blogs() {
     }
 
     const handleMore = (e) => {
-        console.log('more')
+        navigate('/blogpage', {
+            state: {bid: e.currentTarget.id}
+        })
     }
 
 
@@ -384,9 +389,10 @@ function Blogs() {
                                 >
                                     <Skeleton avatar title={false} loading={false} active>
                                         <List.Item.Meta
+                                            id={item.bid}
                                             avatar={<Avatar src={darren_avatar} />}
                                             title={item.title}
-                                            description={item.abst.slice(0, winWidth < 1000 ? 56 : 100) + ' ...'}
+                                            description={item.abst}
                                             style={{ textAlign: 'left' }}
                                             onClick={handleMore}
                                         />

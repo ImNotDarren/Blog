@@ -128,7 +128,7 @@ function Intro(props) {
             <div className="intro_album_cover_div">
                 <img className="intro_album_cover" src={murderer} alt="" />
             </div>
-            <div className='intro_album_name'>Murderer</div>
+            <div className='intro_album_name'>{props.language == 'en' ? 'Murderer' : '凶手'}</div>
         </a>
     )
 
@@ -146,7 +146,7 @@ function Intro(props) {
             <div className="intro_album_cover_div">
                 <img className="intro_album_cover" src={original_song} alt="" />
             </div>
-            <div className='intro_album_name'>Original Song</div>
+            <div className='intro_album_name'>{props.language == 'en' ? 'Original Song' : '原创歌曲'}</div>
         </a>
     )
 
@@ -155,7 +155,7 @@ function Intro(props) {
             <div className="intro_album_cover_div">
                 <img className="intro_album_cover" src={well} alt="" />
             </div>
-            <div className='intro_album_name'>We'll</div>
+            <div className='intro_album_name'>{props.language == 'en' ? 'We\'ll' : '未见'}</div>
         </a>
     )
 
