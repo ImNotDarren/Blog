@@ -20,10 +20,13 @@ import darren_avatar from './assets/avatars/darren_avatar.jpg'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { Alert, AlertTitle, Dialog } from '@mui/material';
 import store from './store'
+import { useNavigate } from 'react-router-dom';
 
 
 
 function BlogCard(props) {
+
+    const navigate = useNavigate()
 
 
     const [openAlert, setOpenAlert] = useState(false)
@@ -72,6 +75,12 @@ function BlogCard(props) {
         }
 
 
+    }
+
+    const handleMore = (e) => {
+        navigate('/blogpage', {
+            state: {bid: e.currentTarget.id}
+        })
     }
 
     const menuItems = [
@@ -125,7 +134,7 @@ function BlogCard(props) {
         alt="Paella dish"
       /> */}
                 <CardContent >
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography variant="body2" color="text.secondary" id={props.blogs[0].bid} onClick={handleMore}>
                         {props.blogs[0].abst}
                     </Typography>
                 </CardContent>
@@ -136,7 +145,7 @@ function BlogCard(props) {
                     <IconButton aria-label="share">
                         <ShareIcon />
                     </IconButton>
-                    <IconButton aria-label="show more" style={{ marginRight: '10px' }}>
+                    <IconButton aria-label="show more" id={props.blogs[0].bid} onClick={handleMore} style={{ marginRight: '10px' }}>
                         <MoreHorizIcon />
                     </IconButton>
 
