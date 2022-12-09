@@ -15,6 +15,7 @@ import { Snackbar, Alert } from '@mui/material';
 import store from '../store'
 import darren_avatar from '../assets/avatars/darren_avatar.jpg'
 import { useNavigate } from 'react-router-dom';
+import { FlareSharp } from '@mui/icons-material';
 
 const { TextArea, Search } = Input;
 
@@ -137,7 +138,7 @@ function Blogs() {
     }
 
     const searchStyle = {
-        display: (blogs.length == 1 ? 'none' : 'block'),
+        display: 'block',
         width: '100%',
         marginRight: (winWidth <= 560) ? '0px' : '10px'
     }
@@ -369,7 +370,7 @@ function Blogs() {
 
                     <div className="blog_right">
                         <div className="blog_btns">
-                            <Search placeholder="Search for blogs" onSearch={onSearch} size={btnSize} style={searchStyle} />
+                            <Search placeholder="Search for blogs" onSearch={onSearch} size={btnSize} style={searchStyle} disabled={blogs.length > 5 ? false : true} />
                             <Button type="primary" size={btnSize} onClick={writeBlog} block style={writeBlogBtnStyle}>{uid == 1 ? "Write a blog" : "Leave a comment"}</Button>
                         </div>
 

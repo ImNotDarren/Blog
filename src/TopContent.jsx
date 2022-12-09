@@ -98,7 +98,7 @@ function TopContent(props) {
 
 
     return (
-        <div style={{ position: 'fixed', width: '100%', top: '0px', zIndex: '5' }} onClick={()=>window.scrollTo(0, 0)}>
+        <div style={{ position: 'fixed', width: '100%', top: '0px', zIndex: '5' }}>
             {/* <div className='top_content'>Darren Liu's Blog</div> */}
 
             <Box sx={{ flexGrow: 1 }}>
@@ -115,8 +115,10 @@ function TopContent(props) {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                            <div style={{ fontSize: '18px', color: 'white' }}>{blog_title}</div>
+                            <div style={{ fontSize: '18px', color: 'white', width: '110px' }}>{blog_title}</div>
                         </Typography>
+
+                        <Button onClick={()=>window.scrollTo(0, 0)} sx={{ width: '100%' }}></Button>
 
                         <Button variant="outlined" onClick={language} style={{backgroundColor: 'white', marginRight: '20px'}}>{props.language == 'en' ? 'En' : '中'}</Button>
 

@@ -290,8 +290,8 @@ function Intro(props) {
                             <div>Business</div>
                             <div>Classification</div>
                             <div>Unsupervised Learning / NLP</div>
+                            <div>Deep Learning</div>
                             <div style={{ color: 'lightgray' }}>------------ ongoing ------------</div>
-                            <div style={{ color: 'lightgray' }}>Deep Learning</div>
                             <div style={{ color: 'lightgray' }}>Introduction to Data Engineering</div>
                         </div>
                     </Modal>
