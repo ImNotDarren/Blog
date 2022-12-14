@@ -22,7 +22,7 @@ function Home() {
             <TopDock activeKey={path} />
             <div style={{ height: '120px', width: '100%', backgroundColor: 'white' }}></div>
             <Outlet />
-            <div className="footer_up">123</div>
+            <div className="footer_up"></div>
             <Copyright />
 
         </div>
