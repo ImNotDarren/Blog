@@ -27,11 +27,12 @@ function BlogPage(props) {
             .then(res => res.json())
             .then((result) => {
                 setBlog(result)
-                import('/src/assets/mds/' + result.content)
+                import(`../assets/mds/${result.content}`)
                     .then((res) => {
                         fetch(res.default)
                             .then(res => res.text())
                             .then(res => setContent(res))
+                            .catch(err => console.log(err))
                     })
                     .catch(err => console.log(err))
             })

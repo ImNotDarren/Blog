@@ -21,6 +21,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { Alert, AlertTitle, Dialog } from '@mui/material';
 import store from './store'
 import { useNavigate } from 'react-router-dom';
+import { ConsoleSqlOutlined } from '@ant-design/icons';
 
 
 
@@ -31,6 +32,7 @@ function BlogCard(props) {
 
     const [openAlert, setOpenAlert] = useState(false)
     const [liked, setLiked] = useState(props.liked)
+    console.log(liked)
 
     const uid = store.getState().uid
     const server = store.getState().server

@@ -94,7 +94,6 @@ function Blogs() {
             .then((result) => {
                 setLikes(result)
             })
-
     }, [])
 
 
