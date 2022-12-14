@@ -102,7 +102,7 @@ function TopContent(props) {
             {/* <div className='top_content'>Darren Liu's Blog</div> */}
 
             <Box sx={{ flexGrow: 1 }}>
-                <AppBar position="static" sx={{ height: '62px' }}>
+                <AppBar position="static" sx={{ height: '62px', background: 'linear-gradient(to right, rgb(0, 85, 255), rgb(0, 153, 255))' }}>
                     <Toolbar>
                         <IconButton
                             size="large"
@@ -115,7 +115,7 @@ function TopContent(props) {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                            <div style={{ fontSize: '18px', color: 'white', width: '110px' }}>{blog_title}</div>
+                            <div style={{ fontSize: '18px', color: 'white', width: '120px' }}>{blog_title}</div>
                         </Typography>
 
                         <Button onClick={()=>window.scrollTo(0, 0)} sx={{ width: '100%' }}></Button>
