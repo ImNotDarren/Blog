@@ -27,7 +27,7 @@ function BlogPage(props) {
             .then(res => res.json())
             .then((result) => {
                 setBlog(result)
-                import('../assets/mds/' + result.content)
+                import('/src/assets/mds/' + result.content)
                     .then((res) => {
                         fetch(res.default)
                             .then(res => res.text())
