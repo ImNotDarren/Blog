@@ -36,7 +36,7 @@ function TopDock(props) {
                     <Nav.Link eventKey={1} href="/intro" style={tabStyle.container(matches)}>{props.language == 'en' ? 'Intro' : '简介'}</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey={2} href="/publications"  style={tabStyle.container(matches)}>{props.language == 'en' ? 'Publications' : '文献'}</Nav.Link>
+                    <Nav.Link eventKey={2} href="/publications"  style={tabStyle.container(matches)}>{props.language == 'en' ? 'Publications' : '已发布'}</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                     <Nav.Link eventKey={3} href="/blogs" style={tabStyle.container(matches)}>{props.language == 'en' ? 'Blogs' : '博客'}</Nav.Link>
