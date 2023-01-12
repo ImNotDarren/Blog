@@ -8,6 +8,7 @@ import Event from '../pages/Event'
 import Login from '../pages/Login'
 import Comments from '../pages/Comments'
 import BlogPage from '../pages/BlogPage'
+import Pub from '../pages/Pub'
 
 
 const BaseRouter = () => (
@@ -17,6 +18,7 @@ const BaseRouter = () => (
             <Route path="/" element={<Intro />}></Route>
                 <Route path="/intro" element={<Intro />}></Route>
                 <Route path="/blogs" element={<Blogs />}></Route>
+                <Route path="/publications" element={<Pub />}></Route>
                 <Route path="/music" element={<Music />}></Route>
                 <Route path="/event" element={<Event />}></Route>
                 <Route path="/comments" element={<Comments />}></Route>
