@@ -27,19 +27,12 @@ function BlogPage(props) {
             .then(res => res.json())
             .then((result) => {
                 setBlog(result)
-                import(`../assets/mds/${result.content}`)
-                    .then((res) => {
-                        fetch(res.default)
-                            .then(res => res.text())
-                            .then(res => setContent(res))
-                            .catch(err => console.log(err))
+                fetch('https://darren-blog-bucket.s3.us-east-1.amazonaws.com/' + result.content)
+                    .then(res => res.text())
+                    .then((result) => {
+                        setContent(result)
                     })
-                    .catch(err => console.log(err))
             })
-
-
-
-
 
     }, [])
 
