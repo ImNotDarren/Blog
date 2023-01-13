@@ -409,8 +409,16 @@
     height: 100px;
     font-size: 30px;
     padding-top: 35px;
-    color:rgb(0, 136, 255)
+    color:rgb(0, 136, 255);
+    transition: 0.3s;
 
+}
+
+.drop-zone:hover {
+    color: rgb(106, 185, 254);
+    font-size: 40px;
+    padding-top: 30px;
+    background-color: #f0f6fb;
 }
 
 .uploaded_file {

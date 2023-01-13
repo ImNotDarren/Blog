@@ -26,33 +26,43 @@ function AFib() {
     }
 
     const handleUpload = () => {
-        if (acceptedFiles.length === 0) {
+        if (fileList.length === 0) {
             console.log('no file')
         } else {
-            for (let i=0; i< acceptedFiles.length; i++) {
-                const file = acceptedFiles[i]
+            for (let i = 0; i < fileList.length; i++) {
+                const file = fileList[i]
                 uploadFile(file, config)
-                .then(data => {
-                    message.success('Successfully uploaded!')
-                })
-                .catch(err => console.log.error(err))
+                    .then(data => {
+                        setFileList([])
+                        message.success('Successfully uploaded!')
+                    })
+                    .catch(err => console.log.error(err))
             }
         }
     }
 
     const FileGetter = event => {
-        
         const files = []
-        // Retrieves the files loaded by the drag event or the select event
-        const fileList = event.dataTransfer ? event.dataTransfer.files : event.target.files
-        for (var i = 0; i < fileList.length; i++) {
-            const file = fileList.item(i)
-            files.push(file)
+        if (event.length > 0) {
+            for (let i = 0; i < event.length; i++) {
+                event[i].getFile().then(file => {
+                    files.push(file)
+                })
+            }
+        } else {
+            // Retrieves the files loaded by the drag event or the select event
+            const fileList = event.dataTransfer ? event.dataTransfer.files : event.target.files
+            for (var i = 0; i < fileList.length; i++) {
+                const file = fileList.item(i)
+                files.push(file)
+            }
         }
+
         setFileList(files)
         // files returned from this fuction will be acceptedFiles
         return files
     }
+
 
     return (
         <>
@@ -61,17 +71,17 @@ function AFib() {
                 <div className="test">Drag and drop your files to the box below ⬇️</div>
 
                 <div {...getRootProps({ className: 'drop-zone' })}>
-                    <input {...getInputProps()}/>
+                    <input {...getInputProps()} />
                     <PlusCircleOutlined />
                 </div>
 
                 {
-                    acceptedFiles.map(file => (
+                    fileList.map(file => (
                         <div className='uploaded_file' key={file.name}>{file.name}</div>
                     ))
                 }
 
-                <Button variant='outlined' onClick={handleUpload} hidden={acceptedFiles.length === 0 ? true : false} style={{marginTop: '10px'}}>Upload</Button>
+                <Button variant='outlined' onClick={handleUpload} hidden={fileList.length === 0 ? true : false} style={{ marginTop: '10px' }}>Upload</Button>
 
             </div>
         </>

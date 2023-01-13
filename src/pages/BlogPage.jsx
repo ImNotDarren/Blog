@@ -9,11 +9,14 @@ import 'github-markdown-css/github-markdown-light.css'
 
 function BlogPage(props) {
 
+
     const location = useLocation()
     const { state } = location
 
     const [blog, setBlog] = useState({ bid: 1, title: 'Loading...', author: 1, publish_time: 'Loading...', abst: 'Loading...', content: 'Loading...' })
     const [content, setContent] = useState('loading...')
+
+    const aws_s3_url = 'https://darren-blog-bucket.s3.us-east-1.amazonaws.com/'
 
 
     useEffect(() => {
@@ -27,7 +30,7 @@ function BlogPage(props) {
             .then(res => res.json())
             .then((result) => {
                 setBlog(result)
-                fetch('https://darren-blog-bucket.s3.us-east-1.amazonaws.com/' + result.content)
+                fetch(aws_s3_url + result.content)
                     .then(res => res.text())
                     .then((result) => {
                         setContent(result)
