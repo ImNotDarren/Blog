@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import '../CSS/page.css'
 import 'antd/dist/antd.css';
 import { Tag, Button, Modal, Popover, Avatar, Divider, Timeline, message } from 'antd';
-import { GithubOutlined, LinkedinOutlined, InstagramOutlined, PlayCircleOutlined, DownloadOutlined } from '@ant-design/icons';
+import { GithubOutlined, LinkedinOutlined, PlayCircleOutlined } from '@ant-design/icons';
 import darren_avatar from '../assets/avatars/darren_avatar.jpg'
 import murderer from '../assets/album_covers/murderer.jpg'
 import van_goghs_dream from '../assets/album_covers/van_goghs_dream.jpg'
@@ -33,7 +33,7 @@ function Intro(props) {
     const text_btn_style = {
         container: isSmaller => ({
             marginLeft: '8px',
-            marginRight: props.language == 'en' ? '0px' : '8px',
+            marginRight: props.language === 'en' ? '0px' : '8px',
             color: 'rgb(106, 106, 106)',
             fontSize: isSmaller ? '12px' : '14px',
             fontWeight: isSmaller ? '500' : '600',
@@ -115,11 +115,11 @@ function Intro(props) {
 
     const pending_ach = (
         <div className="achievement">
-            {props.language == 'en' ? 'Brand new album' : '全新专辑'}
+            {props.language === 'en' ? 'Brand new album' : '全新专辑'}
             <Popover placement='top' content={darren_content} trigger="click">
                 <Button type="dashed" size={music_button_size} style={darren_style.container(matches)}>DARREN</Button>
             </Popover>
-            {props.language == 'en' ? 'coming in 2024' : '2024年强势来袭'}
+            {props.language === 'en' ? 'coming in 2024' : '2024年强势来袭'}
         </div>
     )
 
@@ -146,7 +146,7 @@ function Intro(props) {
             <div className="intro_album_cover_div">
                 <img className="intro_album_cover" src={original_song} alt="" />
             </div>
-            <div className='intro_album_name'>{props.language == 'en' ? 'Original Song' : '原创歌曲'}</div>
+            <div className='intro_album_name'>{props.language === 'en' ? 'Original Song' : '原创歌曲'}</div>
         </a>
     )
 
@@ -155,7 +155,7 @@ function Intro(props) {
             <div className="intro_album_cover_div">
                 <img className="intro_album_cover" src={well} alt="" />
             </div>
-            <div className='intro_album_name'>{props.language == 'en' ? 'We\'ll' : '未见'}</div>
+            <div className='intro_album_name'>{props.language === 'en' ? 'We\'ll' : '未见'}</div>
         </a>
     )
 
@@ -200,7 +200,7 @@ function Intro(props) {
     }
 
     const handleHYH = () => {
-        if (props.uid == 2) {
+        if (props.uid === 2) {
             message.info('点你爹干嘛韩鸡你')
         }
     }
@@ -213,20 +213,12 @@ function Intro(props) {
         window.location.href = 'https://www.linkedin.com/in/sizuo-liu-66890a222/'
     }
 
-    const goIns = () => {
-        window.location.href = 'https://www.instagram.com/imnotdddarren/'
-    }
-
     const goAM = () => {
         window.location.href = 'https://music.apple.com/us/artist/darren-liu/1581649003'
     }
 
     const goSpotify = () => {
         window.location.href = 'https://open.spotify.com/artist/74G3wFnVBXmz4bhQZfZ3fN?si=-Xqy6F0aTKSVWSGj53WNlw'
-    }
-
-    const goQQMusic = () => {
-        window.location.href = 'https://y.qq.com/n/ryqq/singer/000VPxvF2gjHr4'
     }
 
 
@@ -240,12 +232,12 @@ function Intro(props) {
 
             <div className="site-layout-content">
                 <div className='left'>
-                    <div className='name' onClick={handleHYH}>{props.language == 'en' ? 'Darren (Sizuo) Liu' : '刘思佐'}</div>
+                    <div className='name' onClick={handleHYH}>{props.language === 'en' ? 'Darren (Sizuo) Liu' : '刘思佐'}</div>
                     <div className="email">darrenliu0701@gmail.com</div>
 
                     <div className="education">
-                        {props.language == 'en' ? 'Current student at' : '现就读于'}
-                        <Button type="dashed" size={button_size} onClick={showBU} style={text_btn_style.container(matches)}>{props.language == 'en' ? 'Binghamton University' : '宾汉姆顿大学'}</Button>
+                        {props.language === 'en' ? 'Current student at' : '现就读于'}
+                        <Button type="dashed" size={button_size} onClick={showBU} style={text_btn_style.container(matches)}>{props.language === 'en' ? 'Binghamton University' : '宾汉姆顿大学'}</Button>
                     </div>
 
                     <Modal
@@ -329,7 +321,7 @@ function Intro(props) {
                     <div className="occupation">
                         {props.language == 'en' ? 'Singer, Songwriter, Producer at' : '于'}
                         <Popover placement='top' content="No website so far" trigger="click">
-                            <Button type="dashed" size={button_size} style={text_btn_style.container(matches)}>{props.language == 'en' ? 'Silence Music' : '无声音乐'}</Button>
+                            <Button type="dashed" size={button_size} style={text_btn_style.container(matches)}>{props.language === 'en' ? 'Silence Music' : '无声音乐'}</Button>
                         </Popover>
                         {props.language == 'en' ? '' : '担任词曲作者、制作人、歌手'}
                     </div>
@@ -352,17 +344,17 @@ function Intro(props) {
                         <Tag className="skill_tags" color="volcano">React.JS</Tag>
                         <Tag className="skill_tags" color="volcano">Node.JS</Tag>
                         <Tag className="skill_tags" color="volcano">Spring Boot</Tag>
-                        <Tag className="skill_tags" color="volcano">{props.language == 'en' ? 'Database skills' : '数据库管理'} (MySQL, Oracle, MongoDB)</Tag>
+                        <Tag className="skill_tags" color="volcano">{props.language === 'en' ? 'Database skills' : '数据库管理'} (MySQL, Oracle, MongoDB)</Tag>
                         <Tag className="skill_tags" color="volcano">AWS</Tag>
                     </div>
 
                     <div className="">
-                        <Tag className="skill_tags" color="magenta">{props.language == 'en' ? 'Regression' : '线性回归'}</Tag>
-                        <Tag className="skill_tags" color="magenta">{props.language == 'en' ? 'Classification' : '机器学习分类算法'}</Tag>
-                        <Tag className="skill_tags" color="magenta">{props.language == 'en' ? 'NLP' : '自然语言处理'}</Tag>
-                        <Tag className="skill_tags" color="magenta">{props.language == 'en' ? 'Unsupervised Learning' : '无监督学习'}</Tag>
-                        <Tag className="skill_tags" color="magenta">{props.language == 'en' ? 'Deep Learning' : '深度学习'}</Tag>
-                        <Tag className="skill_tags" color="magenta">{props.language == 'en' ? 'Reinforcement Learning' : '强化学习'}</Tag>
+                        <Tag className="skill_tags" color="magenta">{props.language === 'en' ? 'Regression' : '线性回归'}</Tag>
+                        <Tag className="skill_tags" color="magenta">{props.language === 'en' ? 'Classification' : '机器学习分类算法'}</Tag>
+                        <Tag className="skill_tags" color="magenta">{props.language === 'en' ? 'NLP' : '自然语言处理'}</Tag>
+                        <Tag className="skill_tags" color="magenta">{props.language === 'en' ? 'Unsupervised Learning' : '无监督学习'}</Tag>
+                        <Tag className="skill_tags" color="magenta">{props.language === 'en' ? 'Deep Learning' : '深度学习'}</Tag>
+                        <Tag className="skill_tags" color="magenta">{props.language === 'en' ? 'Reinforcement Learning' : '强化学习'}</Tag>
                     </div>
 
                     <div className="">
@@ -401,22 +393,22 @@ function Intro(props) {
                 <div className='right'>
 
                     <Divider orientation="left" plain>
-                        <div className="link_title">{props.language == 'en' ? 'My Songs' : '我的音乐'}</div>
+                        <div className="link_title">{props.language === 'en' ? 'My Songs' : '我的音乐'}</div>
                     </Divider>
 
                     <div style={{ margin: '10px' }}>
                         <Timeline pending={pending_ach}>
                             <Timeline.Item>
                                 <div className="achievement">
-                                    2020.04.26 - {props.language == 'en' ? 'First album' : '首张个人专辑'}:
+                                    2020.04.26 - {props.language === 'en' ? 'First album' : '首张个人专辑'}:
                                     <Popover placement='top' content={murderer_content} trigger="click">
-                                        <Button type="dashed" size={music_button_size} style={murderer_style.container(matches)}>{props.language == 'en' ? 'Murderer' : '凶手'}</Button>
+                                        <Button type="dashed" size={music_button_size} style={murderer_style.container(matches)}>{props.language === 'en' ? 'Murderer' : '凶手'}</Button>
                                     </Popover>
                                 </div>
                             </Timeline.Item>
                             <Timeline.Item>
                                 <div className="achievement">
-                                    2021.04.11 - {props.language == 'en' ? 'Single' : '单曲'}:
+                                    2021.04.11 - {props.language === 'en' ? 'Single' : '单曲'}:
                                     <Popover placement='top' content={van_goghs_dream_content} trigger="click">
                                         <Button type="dashed" size={music_button_size} style={van_goghs_dream_style.container(matches)}>Playboy</Button>
                                     </Popover>
@@ -424,15 +416,15 @@ function Intro(props) {
                             </Timeline.Item>
                             <Timeline.Item>
                                 <div className="achievement">
-                                    2021.05.01 - {props.language == 'en' ? 'Single' : '单曲'}:
+                                    2021.05.01 - {props.language === 'en' ? 'Single' : '单曲'}:
                                     <Popover placement='top' content={original_song_content} trigger="click">
-                                        <Button type="dashed" size={music_button_size} style={original_song_style.container(matches)}>{props.language == 'en' ? 'Original Song' : '原创歌曲'}</Button>
+                                        <Button type="dashed" size={music_button_size} style={original_song_style.container(matches)}>{props.language === 'en' ? 'Original Song' : '原创歌曲'}</Button>
                                     </Popover>
                                 </div>
                             </Timeline.Item>
                             <Timeline.Item>
                                 <div className="achievement">
-                                    2021.07.01 - {props.language == 'en' ? 'Single' : '单曲'}:
+                                    2021.07.01 - {props.language === 'en' ? 'Single' : '单曲'}:
                                     <Popover placement='top' content={van_goghs_dream_content} trigger="click">
                                         <Button type="dashed" size={music_button_size} style={van_goghs_dream_style.container(matches)}>22</Button>
                                     </Popover>
@@ -440,9 +432,9 @@ function Intro(props) {
                             </Timeline.Item>
                             <Timeline.Item>
                                 <div className="achievement">
-                                    2021.08.14 - {props.language == 'en' ? 'Single' : '单曲'}:
+                                    2021.08.14 - {props.language === 'en' ? 'Single' : '单曲'}:
                                     <Popover placement='top' content={well_content} trigger="click">
-                                        <Button type="dashed" size={music_button_size} style={well_style.container(matches)}>{props.language == 'en' ? 'We\'ll' : '未见'}</Button>
+                                        <Button type="dashed" size={music_button_size} style={well_style.container(matches)}>{props.language === 'en' ? 'We\'ll' : '未见'}</Button>
                                     </Popover>
                                 </div>
                             </Timeline.Item>

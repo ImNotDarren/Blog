@@ -11,7 +11,7 @@ function Event(props) {
   const navigate = useNavigate()
 
   useEffect(() => {
-      if (props.uid != 1) {
+      if (props.uid !== 1) {
           navigate('/error')
       }
   })

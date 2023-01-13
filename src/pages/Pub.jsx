@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import 'antd/dist/antd.css';
-import { Layout, Card, Divider } from 'antd';
+import { Card, Divider } from 'antd';
 import { connect } from 'react-redux';
 
 function Pub(props) {
@@ -39,15 +39,15 @@ function Pub(props) {
     return (
         <div className='pub_content'>
             <Divider orientation="left" plain>
-                <div className="pub_link_title">{props.language == 'en' ? 'Machine Learning Models' : '机器学习模型'}</div>
+                <div className="pub_link_title">{props.language === 'en' ? 'Machine Learning Models' : '机器学习模型'}</div>
             </Divider>
             <div className="ml_models">
-                <Card title='AFib' style={card_style} extra={<a href='/publications/afib'>{props.language == 'en' ? 'More' : '详情'}</a>}>
-                    <p>{props.language == 'en' ? 'This is an AF detection model.' : '这是一个AF检测模型'}</p>
+                <Card title='AFib' style={card_style} extra={<a href='/publications/afib'>{props.language === 'en' ? 'More' : '详情'}</a>}>
+                    <p>{props.language === 'en' ? 'This is an AF detection model.' : '这是一个AF检测模型'}</p>
                 </Card>
 
-                <Card title='CPP' style={card_style} extra={<a href='/publications/cpp'>{props.language == 'en' ? 'More' : '详情'}</a>}>
-                    <p>{props.language == 'en' ? 'This is a used vehicle price detection model.' : '这是一个二手车价格预测模型'}</p>
+                <Card title='CPP' style={card_style} extra={<a href='/publications/cpp'>{props.language === 'en' ? 'More' : '详情'}</a>}>
+                    <p>{props.language === 'en' ? 'This is a used vehicle price detection model.' : '这是一个二手车价格预测模型'}</p>
                 </Card>
             </div>
 

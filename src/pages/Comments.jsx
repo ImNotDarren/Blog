@@ -73,7 +73,7 @@ function Comments(props) {
 
     const handleCommentOK = () => {
 
-        if (comment != '') {
+        if (comment !== '') {
             let uid = props.uid
             const new_comment = { uid, comment }
             fetch(props.server + '/addComment', {
@@ -159,7 +159,7 @@ function Comments(props) {
     const handleComment = () => {
         if (inputDisplay) {
             // submit comment
-            if (comment != '') {
+            if (comment !== '') {
                 let uid = props.uid
                 const new_comment = { uid, comment }
                 fetch(props.server + '/addComment', {

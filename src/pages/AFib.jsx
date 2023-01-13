@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
-import { PlusCircleOutlined } from '@ant-design/icons';
+import { PlusCircleOutlined } from '@ant-design/icons'
+import { message } from 'antd'
 
 import Button from '@mui/material/Button';
 
-import S3 from 'react-aws-s3'
+import { uploadFile } from 'react-s3'
 
 window.Buffer = window.Buffer || require("buffer").Buffer;
 
@@ -20,20 +21,21 @@ function AFib() {
         bucketName: process.env.REACT_APP_BUCKET_NAME,
         region: process.env.REACT_APP_REGION,
         accessKeyId: process.env.REACT_APP_ACCESS_ID,
-        secretAccessKey: process.env.REACT_APP_ACCESS_KEY
+        secretAccessKey: process.env.REACT_APP_ACCESS_KEY,
+        s3Url: process.env.REACT_APP_S3_URL
     }
 
-
     const handleUpload = () => {
-        const ReactS3Client = new S3(config)
         if (acceptedFiles.length === 0) {
             console.log('no file')
         } else {
             for (let i=0; i< acceptedFiles.length; i++) {
                 const file = acceptedFiles[i]
-                ReactS3Client.uploadFile(file, file.name)
-                .then(data => console.log(data.location))
-                .catch(err => console.error(err))
+                uploadFile(file, config)
+                .then(data => {
+                    message.success('Successfully uploaded!')
+                })
+                .catch(err => console.log.error(err))
             }
         }
     }
@@ -45,10 +47,6 @@ function AFib() {
         const fileList = event.dataTransfer ? event.dataTransfer.files : event.target.files
         for (var i = 0; i < fileList.length; i++) {
             const file = fileList.item(i)
-            // console.log(event.dataTransfer.files.item(0))
-            // ReactS3Client.uploadFile(file, file.name)
-            // .then(data => console.log(data.location))
-            // .catch(err => console.error(err))
             files.push(file)
         }
         setFileList(files)
@@ -61,11 +59,6 @@ function AFib() {
             <div className='pub_content'>
                 <div className="test">This is a test page.</div>
                 <div className="test">Drag and drop your files to the box below ⬇️</div>
-
-                {/* <Button variant="outlined" component="label">
-                    Upload
-                    <input hidden multiple type="file" onChange={handleUpload} />
-                </Button> */}
 
                 <div {...getRootProps({ className: 'drop-zone' })}>
                     <input {...getInputProps()}/>
