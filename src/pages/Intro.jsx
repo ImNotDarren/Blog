@@ -236,31 +236,6 @@ function Intro(props) {
                     <div className="email">darrenliu0701@gmail.com</div>
 
                     <div className="education">
-                        {props.language === 'en' ? 'Current student at' : '现就读于'}
-                        <Button type="dashed" size={button_size} onClick={showBU} style={text_btn_style.container(matches)}>{props.language === 'en' ? 'Binghamton University' : '宾汉姆顿大学'}</Button>
-                    </div>
-
-                    <Modal
-                        title="Binghamton University"
-                        open={visibleBU}
-                        onOk={handleBUOk}
-                        onCancel={handleBUCancel}
-                    >
-                        <div className='modal_par'>Major: <div className='info'>Computer Science</div></div>
-                        <div className='modal_par'>Duration: <div className='info'>Aug. 2020 ~ Dec. 2022</div></div>
-                        <div className='modal_par'>Degree: <div className='info'>Master's Degree</div></div>
-                        <div className='modal_par'>Courses:</div>
-                        <div className='course'>
-                            <div>Programming for the Web (Node.JS)</div>
-                            <div>Software Engineering</div>
-                            <div>Object Oriented Programming (C++)</div>
-                            <div>Database Systems (SQL, MySQL)</div>
-                            <div>Intelligent Mobile Robotics (ROS + Reinforcement Learning)</div>
-                            <div>...</div>
-                        </div>
-                    </Modal>
-
-                    <div className="education">
                         {props.language == 'en' ? 'Currently taking bootcamp at' : '现于'}
                         <Button type="dashed" size={button_size} onClick={showMetis} style={text_btn_style.container(matches)}>Metis</Button>
                         {props.language == 'en' ? '' : '学习'}
@@ -285,6 +260,31 @@ function Intro(props) {
                             <div>Deep Learning</div>
                             <div style={{ color: 'lightgray' }}>------------ ongoing ------------</div>
                             <div style={{ color: 'lightgray' }}>Introduction to Data Engineering</div>
+                        </div>
+                    </Modal>
+
+                    <div className="education">
+                        {props.language === 'en' ? 'Studied at' : '曾就读于'}
+                        <Button type="dashed" size={button_size} onClick={showBU} style={text_btn_style.container(matches)}>{props.language === 'en' ? 'Binghamton University' : '宾汉姆顿大学'}</Button>
+                    </div>
+
+                    <Modal
+                        title="Binghamton University"
+                        open={visibleBU}
+                        onOk={handleBUOk}
+                        onCancel={handleBUCancel}
+                    >
+                        <div className='modal_par'>Major: <div className='info'>Computer Science</div></div>
+                        <div className='modal_par'>Duration: <div className='info'>Aug. 2020 ~ Dec. 2022</div></div>
+                        <div className='modal_par'>Degree: <div className='info'>Master's Degree</div></div>
+                        <div className='modal_par'>Courses:</div>
+                        <div className='course'>
+                            <div>Programming for the Web (Node.JS)</div>
+                            <div>Software Engineering</div>
+                            <div>Object Oriented Programming (C++)</div>
+                            <div>Database Systems (SQL, MySQL)</div>
+                            <div>Intelligent Mobile Robotics (ROS + Reinforcement Learning)</div>
+                            <div>...</div>
                         </div>
                     </Modal>
 

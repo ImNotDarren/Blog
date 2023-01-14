@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { PlusCircleOutlined } from '@ant-design/icons'
 import { message } from 'antd'
+import { connect } from 'react-redux';
 
 import Button from '@mui/material/Button';
 
@@ -9,7 +10,7 @@ import { uploadFile } from 'react-s3'
 
 window.Buffer = window.Buffer || require("buffer").Buffer;
 
-function AFib() {
+function AFib(props) {
 
     const [fileList, setFileList] = useState([])
 
@@ -122,8 +123,8 @@ function AFib() {
                     ))
                 }
                 <div className="upload_buttons">
-                    <Button variant='outlined' onClick={handleUpload} hidden={fileList.length === 0 ? true : false} style={upload_style}>Upload</Button>
-                    <Button variant='outlined' onClick={handleClear} color='error' hidden={fileList.length === 0 ? true : false} style={clear_style}>CLEAR</Button>
+                    <Button variant='outlined' onClick={handleUpload} hidden={fileList.length === 0 ? true : false} style={upload_style}>{props.language === 'en' ? 'UPLOAD' : '上传'}</Button>
+                    <Button variant='outlined' onClick={handleClear} color='error' hidden={fileList.length === 0 ? true : false} style={clear_style}>{props.language === 'en' ? 'CLEAR' : '清除'}</Button>
                 </div>
 
 
@@ -132,4 +133,11 @@ function AFib() {
     )
 }
 
-export default AFib
+const mapStateToProps = (state) => {
+    return {
+        uid: state.uid,
+        language: state.language
+    }
+}
+
+export default connect(mapStateToProps)(AFib)
