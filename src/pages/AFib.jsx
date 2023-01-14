@@ -13,6 +13,29 @@ function AFib() {
 
     const [fileList, setFileList] = useState([])
 
+    const [winWidth, setWinWidth] = useState(document.querySelector('body').offsetWidth)
+
+    useEffect(() => {
+
+        const handleResize = e => {
+            if (e.target.innerWidth <= 560) {
+                setWinWidth(560)
+            } else if (e.target.innerWidth <= 700) {
+                setWinWidth(700)
+            } else if (e.target.innerWidth < 1000) {
+                setWinWidth(999)
+            } else {
+                setWinWidth(1000)
+            }
+        }
+        window.addEventListener('resize', handleResize)
+
+        return () => {
+            window.removeEventListener('resize', handleResize)
+        }
+
+    }, [winWidth])
+
     const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
         getFilesFromEvent: event => FileGetter(event)
     })
@@ -36,9 +59,16 @@ function AFib() {
                         setFileList([])
                         message.success('Successfully uploaded!')
                     })
-                    .catch(err => console.log.error(err))
+                    .catch(err => {
+                        console.error(err)
+                        message.error('Unsupported file!')
+                    })
             }
         }
+    }
+
+    const handleClear = () => {
+        setFileList([])
     }
 
     const FileGetter = event => {
@@ -63,6 +93,17 @@ function AFib() {
         return files
     }
 
+    const upload_style = {
+        marginTop: '10px',
+        width: winWidth <= 700 ? '100%' : '100px'
+    }
+
+    const clear_style = {
+        marginTop: '10px',
+        marginLeft: '10px',
+        width: winWidth <= 700 ? '100%' : '100px'
+    }
+
 
     return (
         <>
@@ -80,8 +121,11 @@ function AFib() {
                         <div className='uploaded_file' key={file.name}>{file.name}</div>
                     ))
                 }
+                <div className="upload_buttons">
+                    <Button variant='outlined' onClick={handleUpload} hidden={fileList.length === 0 ? true : false} style={upload_style}>Upload</Button>
+                    <Button variant='outlined' onClick={handleClear} color='error' hidden={fileList.length === 0 ? true : false} style={clear_style}>CLEAR</Button>
+                </div>
 
-                <Button variant='outlined' onClick={handleUpload} hidden={fileList.length === 0 ? true : false} style={{ marginTop: '10px' }}>Upload</Button>
 
             </div>
         </>

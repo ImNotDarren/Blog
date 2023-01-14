@@ -418,7 +418,7 @@
     color: rgb(106, 185, 254);
     font-size: 40px;
     padding-top: 30px;
-    background-color: #f0f6fb;
+    background-color: #f4f9fd;
 }
 
 .uploaded_file {
@@ -433,6 +433,10 @@
     .uploaded_file {
         width: 300px;
     }
+}
+
+.upload_buttons {
+    display: flex;
 }
 
 .color{
