@@ -414,6 +414,19 @@
 
 }
 
+.drop-zone-close {
+    margin-top: 0px;
+    display: flex;
+    justify-content: center;
+    border: 0px dashed rgb(0, 136, 255);
+    border-radius: px;
+    height: 0px;
+    font-size: 0px;
+    padding-top: px;
+    color:rgb(0, 136, 255);
+    transition: 0.3s;
+}
+
 .drop-zone:hover {
     color: rgb(106, 185, 254);
     font-size: 40px;
@@ -437,6 +450,18 @@
 
 .upload_buttons {
     display: flex;
+}
+
+.write_blog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black;
+    opacity: 50%;
+    z-index: 3;
+    transition: 0.3s;
 }
 
 .color{

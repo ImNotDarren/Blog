@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import 'antd/dist/antd.css';
 import '../CSS/page.css'
 import { Button, Modal, Input, Form, message, List, Avatar, Skeleton, Divider } from 'antd';
-import { HeartFilled } from '@ant-design/icons';
+import { PlusCircleOutlined } from '@ant-design/icons';
 import BlogCard from '../BlogCard';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
@@ -15,7 +15,9 @@ import { Snackbar, Alert } from '@mui/material';
 import store from '../store'
 import darren_avatar from '../assets/avatars/darren_avatar.jpg'
 import { useNavigate } from 'react-router-dom';
-import { FlareSharp } from '@mui/icons-material';
+import { uploadFile } from 'react-s3'
+import { connect } from 'react-redux';
+import { useDropzone } from 'react-dropzone'
 
 const { TextArea, Search } = Input;
 
@@ -24,9 +26,15 @@ const server = store.getState().server
 const url1 = server + '/getBlogs'
 const url2 = server + '/getAllLikes'
 
-function Blogs() {
+function Blogs(props) {
 
-
+    const config = {
+        bucketName: process.env.REACT_APP_BUCKET_NAME,
+        region: process.env.REACT_APP_REGION,
+        accessKeyId: process.env.REACT_APP_ACCESS_ID,
+        secretAccessKey: process.env.REACT_APP_ACCESS_KEY,
+        s3Url: process.env.REACT_APP_S3_URL
+    }
 
     const loadingBlog = [{ bid: 1, title: 'Loading...', author: 1, publish_time: 'Loading...', abst: 'Loading...', content: 'Loading...' }]
     const [savedBlogs, setSavedBlogs] = useState([])
@@ -52,6 +60,68 @@ function Blogs() {
     const [blogLoading, setBlogLoading] = useState(true);
 
     const [likeLoading, setLikeLoading] = useState(false)
+
+    const [fileList, setFileList] = useState([])
+
+    const handleUpload = () => {
+        if (fileList.length === 0) {
+            console.log('no file')
+        } else {
+            for (let i = 0; i < fileList.length; i++) {
+                const file = fileList[i]
+                uploadFile(file, config)
+                    .then(data => {
+                        setFileList([])
+                        message.success('Successfully uploaded!')
+                    })
+                    .catch(err => {
+                        console.error(err)
+                        message.error('Unsupported file!')
+                    })
+            }
+        }
+    }
+
+    const handleClear = () => {
+        setFileList([])
+    }
+
+    const FileGetter = event => {
+        const files = []
+        if (event.length > 0) {
+            for (let i = 0; i < event.length; i++) {
+                event[i].getFile().then(file => {
+                    files.push(file)
+                })
+            }
+        } else {
+            // Retrieves the files loaded by the drag event or the select event
+            const fileList = event.dataTransfer ? event.dataTransfer.files : event.target.files
+            for (var i = 0; i < fileList.length; i++) {
+                const file = fileList.item(i)
+                files.push(file)
+            }
+        }
+
+        setFileList(files)
+        // files returned from this fuction will be acceptedFiles
+        return files
+    }
+
+    const upload_style = {
+        marginTop: '10px',
+        width: winWidth <= 700 ? '100%' : '100px'
+    }
+
+    const clear_style = {
+        marginTop: '10px',
+        marginLeft: '10px',
+        width: winWidth <= 700 ? '100%' : '100px'
+    }
+
+    const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
+        getFilesFromEvent: event => FileGetter(event)
+    })
 
     const uid = store.getState().uid
 
@@ -281,7 +351,7 @@ function Blogs() {
 
     const handleMore = (e) => {
         navigate('/blogpage', {
-            state: {bid: e.currentTarget.id}
+            state: { bid: e.currentTarget.id }
         })
     }
 
@@ -315,13 +385,20 @@ function Blogs() {
         // handle search blogs
     }
 
+    const [writeBlogOpen, setWriteBlogOpen] = useState(true)
+
     const writeBlog = () => {
         if (uid != 1) {
             openAdd()
         } else {
             // TODO: relocate to write blog page
+            if (writeBlogOpen === true) {
+                setWriteBlogOpen(false)
+            } else {
+                setWriteBlogOpen(true)
+            }
+            
         }
-
     }
 
     const onLoadMore = () => {
@@ -359,18 +436,32 @@ function Blogs() {
 
     return (
         <>
+            <div {...getRootProps({ className: 'drop-zone' + (writeBlogOpen ? '-close' : ''), style: {marginLeft: '20px', marginRight: '20px'} })}>
+                <input {...getInputProps()} />
+                <PlusCircleOutlined />
+            </div>
+
+            {
+                fileList.map(file => (
+                    <div className='uploaded_file' key={file.name}>{file.name}</div>
+                ))
+            }
+            <div className="upload_buttons">
+                <Button variant='outlined' onClick={handleUpload} hidden={fileList.length === 0 ? true : false} style={upload_style}>{props.language === 'en' ? 'UPLOAD' : '上传'}</Button>
+                <Button variant='outlined' onClick={handleClear} color='error' hidden={fileList.length === 0 ? true : false} style={clear_style}>{props.language === 'en' ? 'CLEAR' : '清除'}</Button>
+            </div>
             <div className="site-layout-content">
                 <div className="blog">
                     {/* <div className="blog_card_title">Latest blog</div> */}
                     <div className="blog_card">
-                        <BlogCard blogs={blogs} winWidth={winWidth} liked={likes.indexOf(blogs[0].bid) == -1 ? false : true}/>
+                        <BlogCard blogs={blogs} winWidth={winWidth} liked={likes.indexOf(blogs[0].bid) == -1 ? false : true} />
                     </div>
 
 
                     <div className="blog_right">
                         <div className="blog_btns">
                             <Search placeholder="Search for blogs" onSearch={onSearch} size={btnSize} style={searchStyle} disabled={blogs.length > 5 ? false : true} />
-                            <Button type="primary" size={btnSize} onClick={writeBlog} block style={writeBlogBtnStyle}>{uid == 1 ? "Write a blog" : "Leave a comment"}</Button>
+                            <Button type="primary" size={btnSize} onClick={writeBlog} block style={writeBlogBtnStyle}>{uid == 1 ? (writeBlogOpen ? "Write a blog" : "Close section") : "Leave a comment"}</Button>
                         </div>
 
                         <List
@@ -470,4 +561,11 @@ function Blogs() {
     )
 }
 
-export default Blogs
+const mapStateToProps = (state) => {
+    return {
+        uid: state.uid,
+        language: state.language
+    }
+}
+
+export default connect(mapStateToProps)(Blogs)
