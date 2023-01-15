@@ -37,7 +37,7 @@ function AFib(props) {
 
     }, [winWidth])
 
-    const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
+    const { getRootProps, getInputProps } = useDropzone({
         getFilesFromEvent: event => FileGetter(event)
     })
 
@@ -73,7 +73,7 @@ function AFib(props) {
     }
 
     const FileGetter = event => {
-        const files = []
+        const files = fileList.slice(0)
         if (event.length > 0) {
             for (let i = 0; i < event.length; i++) {
                 event[i].getFile().then(file => {
@@ -92,6 +92,12 @@ function AFib(props) {
         setFileList(files)
         // files returned from this fuction will be acceptedFiles
         return files
+    }
+
+    const handleRemove = e => {
+        let tmp_list = fileList.slice(0) //deep copy
+        tmp_list.splice(e.target.id, 1)
+        setFileList(tmp_list)
     }
 
     const upload_style = {
@@ -118,8 +124,12 @@ function AFib(props) {
                 </div>
 
                 {
-                    fileList.map(file => (
-                        <div className='uploaded_file' key={file.name}>{file.name}</div>
+                    fileList.map((file, index) => (
+                        <div className="uploaded_file" key={index}>
+                            <div className='uploaded_file_name'>{file.name}</div>
+                            <button className="remove_file_btn" onClick={handleRemove} id={index} key={index}>×</button>
+                        </div>
+
                     ))
                 }
                 <div className="upload_buttons">

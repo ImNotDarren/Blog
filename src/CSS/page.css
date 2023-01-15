@@ -435,11 +435,33 @@
 }
 
 .uploaded_file {
+    position: relative;
+    display: flex;
     margin-top: 10px;
     padding: 8px;
     background-color: rgb(120, 120, 255);
     border-radius: 5px;
+}
+
+.uploaded_file_name {
     color: white;
+}
+
+.remove_file_btn {
+    position: absolute;
+    right: 10px;
+    color: white;
+    background-color: transparent;
+    border: none;
+    border-radius: 5px;
+    width: 24px;
+    height: 24px;
+    
+}
+
+.remove_file_btn:hover {
+    background-color: rgba(0, 0, 0, 0.078);
+    transition: 0.5s;
 }
 
 @media screen and (min-width: 700px) {
