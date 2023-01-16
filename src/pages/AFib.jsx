@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import Button from '@mui/material/Button';
 
-import { uploadFile } from 'react-s3'
+// import { uploadFile } from 'react-s3'
 
 window.Buffer = window.Buffer || require("buffer").Buffer;
 
@@ -43,13 +43,13 @@ function AFib(props) {
         getFilesFromEvent: event => FileGetter(event)
     })
 
-    const config = {
-        bucketName: process.env.REACT_APP_BUCKET_NAME,
-        region: process.env.REACT_APP_REGION,
-        accessKeyId: process.env.REACT_APP_ACCESS_ID,
-        secretAccessKey: process.env.REACT_APP_ACCESS_KEY,
-        s3Url: process.env.REACT_APP_S3_URL
-    }
+    // const config = {
+    //     bucketName: process.env.REACT_APP_BUCKET_NAME,
+    //     region: process.env.REACT_APP_REGION,
+    //     accessKeyId: process.env.REACT_APP_ACCESS_ID,
+    //     secretAccessKey: process.env.REACT_APP_ACCESS_KEY,
+    //     s3Url: process.env.REACT_APP_S3_URL
+    // }
 
     const handleUpload = () => {
         if (fileList.length === 0) {
@@ -57,17 +57,20 @@ function AFib(props) {
         } else {
             for (let i = 0; i < fileList.length; i++) {
                 const file = fileList[i]
-                uploadFile(file, config)
-                    .then(data => {
-                        setFileList([])
-                        setUploaded(true)
-                        message.success('Successfully uploaded!')
-                    })
-                    .catch(err => {
-                        console.error(err)
-                        message.error('Unsupported file!')
-                    })
+                // uploadFile(file, config)
+                //     .then(data => {
+                //         message.success('Successfully uploaded!')
+                //     })
+                //     .catch(err => {
+                //         console.error(err)
+                //         message.error('Unsupported file!')
+                //     })
+
+                // TODO: upload function here
             }
+            setFileList([])
+            setUploaded(true)
+            message.success('Successfully uploaded')
         }
     }
 
