@@ -443,6 +443,11 @@
     border-radius: 5px;
 }
 
+.uploaded_file:hover {
+    background-color: rgb(152, 152, 255);
+    transition: 0.5s;
+}
+
 .uploaded_file_name {
     color: white;
 }
