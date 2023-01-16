@@ -14,6 +14,8 @@ function AFib(props) {
 
     const [fileList, setFileList] = useState([])
 
+    const [uploaded, setUploaded] = useState(false)
+
     const [winWidth, setWinWidth] = useState(document.querySelector('body').offsetWidth)
 
     useEffect(() => {
@@ -58,6 +60,7 @@ function AFib(props) {
                 uploadFile(file, config)
                     .then(data => {
                         setFileList([])
+                        setUploaded(true)
                         message.success('Successfully uploaded!')
                     })
                     .catch(err => {
@@ -100,6 +103,10 @@ function AFib(props) {
         setFileList(tmp_list)
     }
 
+    const handleConfirm = () => {
+        setUploaded(false)
+    }
+
     const upload_style = {
         marginTop: '10px',
         width: winWidth <= 700 ? '100%' : '100px'
@@ -118,7 +125,7 @@ function AFib(props) {
                 <div className="test">This is a test page.</div>
                 <div className="test">Drag and drop your files to the box below ⬇️</div>
 
-                <div {...getRootProps({ className: 'drop-zone' })}>
+                <div {...getRootProps({ className: uploaded ? 'drop-zone-uploaded' : 'drop-zone' })}>
                     <input {...getInputProps()} />
                     <PlusCircleOutlined />
                 </div>
@@ -135,6 +142,11 @@ function AFib(props) {
                 <div className="upload_buttons">
                     <Button variant='outlined' onClick={handleUpload} hidden={fileList.length === 0 ? true : false} style={upload_style}>{props.language === 'en' ? 'UPLOAD' : '上传'}</Button>
                     <Button variant='outlined' onClick={handleClear} color='error' hidden={fileList.length === 0 ? true : false} style={clear_style}>{props.language === 'en' ? 'CLEAR' : '清除'}</Button>
+                </div>
+
+                <div className="afib_results" hidden={!uploaded}>
+                    Your results will be displayed here
+                    <button className='restart_btn' onClick={handleConfirm} hidden={!uploaded}>CONFIRM</button>
                 </div>
 
 
