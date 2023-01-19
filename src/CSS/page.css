@@ -568,6 +568,18 @@
     }
 }
 
+.cpp_prediction {
+    margin-top: 20px;
+    font-size: 25px;
+    color: rgb(61, 61, 61);
+    transition: 0.1s;
+}
+
+.cpp_prediction_hidden {
+    font-size: 0px;
+    transition: 0.1s;
+}
+
 
 .color{
     color: rgb(0, 72, 255);

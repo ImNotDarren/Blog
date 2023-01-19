@@ -18,7 +18,6 @@ function CPP(props) {
     const [url, setUrl] = useState('')
 
     const [predictedPrice, setPredictedPrice] = useState(-1)
-    const [price, setPrice] = useState(-1)
 
     const [winWidth, setWinWidth] = useState(document.querySelector('body').offsetWidth)
 
@@ -55,6 +54,7 @@ function CPP(props) {
 
     const getUrl = e => {
         setUrl(e.currentTarget.value)
+        setPredictedPrice(-1)
     }
 
     const handleSubmit = () => {
@@ -66,9 +66,7 @@ function CPP(props) {
             fetch('http://flask-be.eba-yxg2mgcp.us-east-1.elasticbeanstalk.com/cpp/' + new_url + '/' + year)
                 .then(res => res.json())
                 .then(res => {
-                    setPredictedPrice(res['predictedPrice'])
-                    setPrice(res['price'])
-                    console.log(res['year'])
+                    setPredictedPrice(parseInt(res['predictedPrice']))
                 })
         } else {
             message.error('Wrong URL!')
@@ -77,11 +75,12 @@ function CPP(props) {
 
     const handleClear = () => {
         setUrl('')
+        setPredictedPrice(-1)
     }
 
     const handleYear = e => {
-        console.log(e.target.value)
         setYear(e.target.value)
+        setPredictedPrice(-1)
     }
 
 
@@ -118,9 +117,8 @@ function CPP(props) {
                     <Button variant='outlined' color='error' onClick={handleClear} sx={{ width: winWidth <= 560 ? '100%' : '100px' }}>clear</Button>
                 </div>
 
-                <div className="cpp_prediction" hidden={price === -1 ? true : false}>
-                    price: ${price}
-                    predicted price: ${predictedPrice}
+                <div className={predictedPrice === -1 ? "cpp_prediction_hidden" : "cpp_prediction"}>
+                    Predicted price in {year}: ${predictedPrice}
                 </div>
 
             </div>
