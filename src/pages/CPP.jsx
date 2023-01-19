@@ -63,7 +63,7 @@ function CPP(props) {
         if (url.startsWith(urlpre, 0)) {
             let new_url = url.slice(35, -1)
             // make a request to backend
-            fetch('http://flask-be.eba-yxg2mgcp.us-east-1.elasticbeanstalk.com/cpp/' + new_url + '/' + year)
+            fetch('https://flask.darren-liu.com/cpp/' + new_url + '/' + year)
                 .then(res => res.json())
                 .then(res => {
                     setPredictedPrice(parseInt(res['predictedPrice']))
