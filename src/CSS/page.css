@@ -552,9 +552,14 @@
     color: rgb(92, 92, 92);
 }
 
+.input {
+    display: flex;
+    margin-top: 20px;
+}
+
 .cpp_btns {
     display: flex;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 @media screen and (max-width: 560px) {
