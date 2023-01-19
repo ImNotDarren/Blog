@@ -62,6 +62,7 @@ function CPP(props) {
         const urlpre = 'https://www.cars.com/vehicledetail/'
         if (url.startsWith(urlpre, 0)) {
             let new_url = url.slice(35, -1)
+            setPredictedPrice('Calculating...')
             // make a request to backend
             fetch('https://flask.darren-liu.com/cpp/' + new_url + '/' + year)
                 .then(res => res.json())
