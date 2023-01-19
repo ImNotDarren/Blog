@@ -10,6 +10,7 @@ import Comments from '../pages/Comments'
 import BlogPage from '../pages/BlogPage'
 import Pub from '../pages/Pub'
 import AFib from '../pages/AFib'
+import CPP from '../pages/CPP'
 
 
 const BaseRouter = () => (
@@ -21,6 +22,7 @@ const BaseRouter = () => (
                 <Route path="/blogs" element={<Blogs />}></Route>
                 <Route path="/publications" element={<Pub />}></Route>
                 <Route path="/publications/afib" element={<AFib />}></Route>
+                <Route path="/publications/cpp" element={<CPP />}></Route>
                 <Route path="/music" element={<Music />}></Route>
                 <Route path="/event" element={<Event />}></Route>
                 <Route path="/comments" element={<Comments />}></Route>
