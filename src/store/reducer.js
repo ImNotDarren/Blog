@@ -17,7 +17,8 @@ const defaultState = {
     email,
     language,
     server: 'https://www.imnotdddarren.com',
-    // server: 'http://localhost:8080'
+    // server: 'http://localhost:8080',
+    python_server: 'https://flask.darren-liu.com'
 }
 
 
@@ -63,7 +64,7 @@ export default (state = defaultState, action) => {
             break
 
         case "language":
-            sessionStorage.setItem('language', newState.language == 'en' ? 'zh' : 'en')
+            sessionStorage.setItem('language', newState.language === 'en' ? 'zh' : 'en')
             newState.language = sessionStorage.getItem('language')
 
             break

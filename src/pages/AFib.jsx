@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { PlusCircleOutlined } from '@ant-design/icons'
 import { message } from 'antd'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
+import Plot from 'react-plotly.js'
 
 import Button from '@mui/material/Button';
-
-// import { uploadFile } from 'react-s3'
 
 window.Buffer = window.Buffer || require("buffer").Buffer;
 
@@ -17,6 +16,8 @@ function AFib(props) {
     const [uploaded, setUploaded] = useState(false)
 
     const [winWidth, setWinWidth] = useState(document.querySelector('body').offsetWidth)
+
+    const [result, setResult] = useState(-1)
 
     useEffect(() => {
 
@@ -39,7 +40,7 @@ function AFib(props) {
 
     }, [winWidth])
 
-    const { getRootProps, getInputProps } = useDropzone({
+    const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
         getFilesFromEvent: event => FileGetter(event)
     })
 
@@ -54,23 +55,44 @@ function AFib(props) {
     const handleUpload = () => {
         if (fileList.length === 0) {
             console.log('no file')
-        } else {
-            for (let i = 0; i < fileList.length; i++) {
-                const file = fileList[i]
-                // uploadFile(file, config)
-                //     .then(data => {
-                //         message.success('Successfully uploaded!')
-                //     })
-                //     .catch(err => {
-                //         console.error(err)
-                //         message.error('Unsupported file!')
-                //     })
 
-                // TODO: upload function here
+        } else if (fileList.length > 1) {
+            message.error('Only upload one file at a time!')
+        } else {
+            const file = fileList[0]
+            // uploadFile(file, config)
+            //     .then(data => {
+            //         message.success('Successfully uploaded!')
+            //     })
+            //     .catch(err => {
+            //         console.error(err)
+            //         message.error('Unsupported file!')
+            //     })
+
+            // TODO: upload function here
+
+            // check if it's a csv file
+            if (!file.name.endsWith('.csv')) {
+                message.error('Not a .csv file!')
+            } else {
+                const data = new FormData()
+                data.append('file_from_react', file)
+                // upload to flask
+                fetch(props.python_server + '/afib', {
+                    method: 'POST',
+                    body: data
+                })
+                    .then(res => res.json())
+                    .then(res => {
+                        setResult(res)
+                        setFileList([])
+                        setUploaded(true)
+
+                        message.success('Successfully uploaded')
+                    })
+
             }
-            setFileList([])
-            setUploaded(true)
-            message.success('Successfully uploaded')
+
         }
     }
 
@@ -108,6 +130,7 @@ function AFib(props) {
 
     const handleConfirm = () => {
         setUploaded(false)
+        setResult(-1)
     }
 
     const upload_style = {
@@ -121,12 +144,40 @@ function AFib(props) {
         width: winWidth <= 700 ? '100%' : '100px'
     }
 
+    const resultDisplay = (
+        <div className='result'>
+            {
+                result === -1 ? '' :
+                    result['pred'].map((res, index) => (
+                        <div className="signals" key={index}>
+                            <Plot
+                                data={[
+                                    {
+                                        x: [...Array(2400).keys()],
+                                        y: result.data[index],
+                                        marker: {color: res === 0 ? '' : 'red'}
+                                    }
+                                ]}
+                                layout={{height: 300, width: 1300, title: 'The ' + (index + 1) + (index === 0 ? 'st' : (index === 1) ? 'nd' : (index === 2) ? 'rd' : 'th') + ' signal'}}
+                            />
+                            <div className={"afib_classification" + (res === 0 ? '' : '_af')}>{res === 0 ? 'Non-AF' : 'AF'}<br/>{'Confidence: ' + Math.abs(result['pred_prob'][index].toFixed(2))}</div>
+                        </div>
+                    ))
+
+            }
+        </div>
+    )
+
 
     return (
         <>
             <div className='pub_content'>
-                <div className="test">This is a test page.</div>
-                <div className="test">Drag and drop your files to the box below ⬇️</div>
+                <div className="afib_title" hidden={result === -1 ? false : true}>
+                    Drag and drop your .csv file to the box below ⬇️
+                    <br />
+                    <div style={{fontSize: '13px'}}>(Please only include no more than 10 records, each containing 30s of signals. <a href='https://darren-blog-bucket.s3.us-east-1.amazonaws.com/example.csv'>See this example file</a>)</div>
+                    
+                </div>
 
                 <div {...getRootProps({ className: uploaded ? 'drop-zone-uploaded' : 'drop-zone' })}>
                     <input {...getInputProps()} />
@@ -148,7 +199,7 @@ function AFib(props) {
                 </div>
 
                 <div className="afib_results" hidden={!uploaded}>
-                    Your results will be displayed here
+                    {result['error'] === 0 ? resultDisplay : result['error']}
                     <button className='restart_btn' onClick={handleConfirm} hidden={!uploaded}>CONFIRM</button>
                 </div>
 
@@ -161,7 +212,8 @@ function AFib(props) {
 const mapStateToProps = (state) => {
     return {
         uid: state.uid,
-        language: state.language
+        language: state.language,
+        python_server: state.python_server
     }
 }
 

@@ -64,7 +64,7 @@ function CPP(props) {
             let new_url = url.slice(35, -1)
             setPredictedPrice('Calculating...')
             // make a request to backend
-            fetch('https://flask.darren-liu.com/cpp/' + new_url + '/' + year)
+            fetch(props.python_server + '/cpp/' + new_url + '/' + year)
                 .then(res => res.json())
                 .then(res => {
                     setPredictedPrice(parseInt(res['predictedPrice']))
