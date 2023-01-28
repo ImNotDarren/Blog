@@ -531,14 +531,18 @@
 
 .afib_classification {
     color:rgb(78, 78, 78);
-    margin-left: 30px;
     margin-top: 130px;
 }
 
 .afib_classification_af {
     color:rgb(255, 68, 68);
-    margin-left: 30px;
     margin-top: 130px;
+}
+
+@media screen and (max-width: 1100px) {
+    .afib_classification {
+        margin-left: 0px;
+    }
 }
 
 .signals {

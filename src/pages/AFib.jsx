@@ -19,18 +19,27 @@ function AFib(props) {
 
     const [result, setResult] = useState(-1)
 
+    const plot_width_map = {
+        1500: 1300,
+        1300: 1000,
+        999: 800
+    }
+
     useEffect(() => {
 
         const handleResize = e => {
-            if (e.target.innerWidth <= 560) {
-                setWinWidth(560)
-            } else if (e.target.innerWidth <= 700) {
-                setWinWidth(700)
-            } else if (e.target.innerWidth < 1000) {
-                setWinWidth(999)
-            } else {
-                setWinWidth(1000)
-            }
+            // if (e.target.innerWidth <= 560) {
+            //     setWinWidth(560)
+            // } else if (e.target.innerWidth <= 700) {
+            //     setWinWidth(700)
+            // } else if (e.target.innerWidth < 1000) {
+            //     setWinWidth(999)
+            // } else if (e.target.innerWidth <= 1300) {
+            //     setWinWidth(1300)
+            // } else {
+            //     setWinWidth(1500)
+            // }
+            setWinWidth(e.target.innerWidth)
         }
         window.addEventListener('resize', handleResize)
 
@@ -144,6 +153,10 @@ function AFib(props) {
         width: winWidth <= 700 ? '100%' : '100px'
     }
 
+    const plot_width = winWidth > 1100 ? winWidth * 0.8 : winWidth * 0.97
+
+    const plot_height = plot_width > 1300 ? (plot_width * 0.25) : (plot_width > 1100 ? 350 : winWidth * 0.2 + 150)
+
     const resultDisplay = (
         <div className='result'>
             {
@@ -158,9 +171,9 @@ function AFib(props) {
                                         marker: {color: res === 0 ? '' : 'red'}
                                     }
                                 ]}
-                                layout={{height: 300, width: 1300, title: 'The ' + (index + 1) + (index === 0 ? 'st' : (index === 1) ? 'nd' : (index === 2) ? 'rd' : 'th') + ' signal'}}
+                                layout={{height: plot_height, width: plot_width, title: 'The ' + (index + 1) + (index === 0 ? 'st' : (index === 1) ? 'nd' : (index === 2) ? 'rd' : 'th') + ' signal'}}
                             />
-                            <div className={"afib_classification" + (res === 0 ? '' : '_af')}>{res === 0 ? 'Non-AF' : 'AF'}<br/>{'Confidence: ' + Math.abs(result['pred_prob'][index].toFixed(2))}</div>
+                            <div className={"afib_classification" + (res === 0 ? '' : '_af')} hidden={winWidth <= 1100 ? true : false}>{res === 0 ? 'Non-AF' : 'AF'}<br/>{'Confidence: ' + Math.abs(result['pred_prob'][index].toFixed(2))}</div>
                         </div>
                     ))
 
