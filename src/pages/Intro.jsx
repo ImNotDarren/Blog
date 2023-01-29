@@ -236,9 +236,8 @@ function Intro(props) {
                     <div className="email">darrenliu0701@gmail.com</div>
 
                     <div className="education">
-                        {props.language == 'en' ? 'Currently taking bootcamp at' : '现于'}
+                        {props.language == 'en' ? 'Studied at' : '曾就读于'}
                         <Button type="dashed" size={button_size} onClick={showMetis} style={text_btn_style.container(matches)}>Metis</Button>
-                        {props.language == 'en' ? '' : '学习'}
                     </div>
 
                     <Modal
@@ -258,8 +257,8 @@ function Intro(props) {
                             <div>Classification</div>
                             <div>Unsupervised Learning / NLP</div>
                             <div>Deep Learning</div>
-                            <div style={{ color: 'lightgray' }}>------------ ongoing ------------</div>
-                            <div style={{ color: 'lightgray' }}>Introduction to Data Engineering</div>
+                            {/* <div style={{ color: 'lightgray' }}>------------ ongoing ------------</div> */}
+                            <div>Introduction to Data Engineering</div>
                         </div>
                     </Modal>
 
