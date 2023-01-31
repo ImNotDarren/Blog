@@ -4,14 +4,17 @@ import gfm from 'remark-gfm';
 import MarkNav from 'markdown-navbar';
 import 'markdown-navbar/dist/navbar.css';
 import { connect } from 'react-redux';
-import { useLocation } from 'react-router-dom'
+import { useLocation, useSearchParams, useNavigate } from 'react-router-dom'
 import 'github-markdown-css/github-markdown-light.css'
 
 function BlogPage(props) {
 
+    const navigate = useNavigate()
 
     const location = useLocation()
     const { state } = location
+    const [searchParams] = useSearchParams()
+    const bid = searchParams.getAll('bid')[0]
 
     const [blog, setBlog] = useState({ bid: 1, title: 'Loading...', author: 1, publish_time: 'Loading...', abst: 'Loading...', content: 'Loading...' })
     const [content, setContent] = useState('loading...')
@@ -20,15 +23,23 @@ function BlogPage(props) {
 
 
     useEffect(() => {
+
+        if (bid === undefined) {
+            navigate(`/error`)
+        }
+
         fetch(props.server + '/getBlogById', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: state.bid
+            body: bid
         })
             .then(res => res.json())
             .then((result) => {
+                if (result === null) {
+                    navigate(`/error`)
+                }
                 setBlog(result)
                 fetch(aws_s3_url + result.content)
                     .then(res => res.text())
