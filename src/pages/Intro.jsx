@@ -202,7 +202,7 @@ function Intro(props) {
     const handleHYH = () => {
         if (props.uid === 2) {
             message.info('点你爹干嘛韩鸡你')
-        } 
+        }
     }
 
     const goGithub = () => {

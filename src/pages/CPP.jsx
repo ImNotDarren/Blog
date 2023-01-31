@@ -67,7 +67,12 @@ function CPP(props) {
             fetch(props.python_server + '/cpp/' + new_url + '/' + year)
                 .then(res => res.json())
                 .then(res => {
+                    if (parseInt(res['predictedPrice']) === -1) {
+                        message.error('Wrong URL')
+                    }
+                    
                     setPredictedPrice(parseInt(res['predictedPrice']))
+                    
                 })
         } else {
             message.error('Wrong URL!')
