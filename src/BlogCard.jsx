@@ -79,9 +79,7 @@ function BlogCard(props) {
     }
 
     const handleMore = (e) => {
-        navigate('/blogpage', {
-            state: {bid: e.currentTarget.id}
-        })
+        navigate(`/blogpage?bid=${e.currentTarget.id}`)
     }
 
     const menuItems = [
