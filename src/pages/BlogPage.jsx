@@ -38,7 +38,7 @@ function BlogPage(props) {
             .then(res => res.json())
             .then((result) => {
                 if (result === null) {
-                    navigate(`/error`)
+                    navigate(`/blogs`)
                 }
                 setBlog(result)
                 fetch(aws_s3_url + result.content)
