@@ -25,7 +25,7 @@ function BlogPage(props) {
     useEffect(() => {
 
         if (bid === undefined) {
-            navigate(`/error`)
+            navigate(`/blogs`)
         }
 
         fetch(props.server + '/getBlogById', {
