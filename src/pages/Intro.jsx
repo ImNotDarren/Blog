@@ -342,9 +342,11 @@ function Intro(props) {
                     <div className="">
                         <Tag className="skill_tags" color="volcano">React.JS</Tag>
                         <Tag className="skill_tags" color="volcano">Node.JS</Tag>
+                        <Tag className="skill_tags" color="volcano">Express framework</Tag>
                         <Tag className="skill_tags" color="volcano">Spring Boot</Tag>
                         <Tag className="skill_tags" color="volcano">Flask</Tag>
-                        <Tag className="skill_tags" color="volcano">{props.language === 'en' ? 'Database skills' : '数据库管理'} (MySQL, Oracle, MongoDB)</Tag>
+                        <Tag className="skill_tags" color="volcano">BullMQ</Tag>
+                        <Tag className="skill_tags" color="volcano">{props.language === 'en' ? 'Database skills' : '数据库管理'} (MySQL, Oracle, MongoDB, Redis)</Tag>
                         <Tag className="skill_tags" color="volcano">AWS</Tag>
                     </div>
 
