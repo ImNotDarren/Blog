@@ -364,6 +364,15 @@ function Intro(props) {
                         <Tag className="skill_tags" color="green">Tableau</Tag>
                     </div>
 
+                    <div className="">
+                        <Tag className="skill_tags" color="purple">{props.language == 'en' ? 'Writing Lyrics' : '作词'}</Tag>
+                        <Tag className="skill_tags" color="purple">{props.language == 'en' ? 'Compose' : '作曲'}</Tag>
+                        <Tag className="skill_tags" color="purple">{props.language == 'en' ? 'Music Arrangement' : '编曲'}</Tag>
+                        <Tag className="skill_tags" color="purple">{props.language == 'en' ? 'Music Production' : '音乐制作'}</Tag>
+                        <Tag className="skill_tags" color="purple">{props.language == 'en' ? 'Mixing' : '混音'}</Tag>
+                        <Tag className="skill_tags" color="purple">{props.language == 'en' ? 'Music Recording' : '录音'}</Tag>
+                    </div>
+
 
 
                     <Divider orientation="left" plain>
