@@ -9,6 +9,7 @@ import van_goghs_dream from '../assets/album_covers/van_goghs_dream.jpg'
 import original_song from '../assets/album_covers/original_song.jpg'
 import well from '../assets/album_covers/well.jpg'
 import darren from '../assets/album_covers/darren.jpg'
+import dream from '../assets/album_covers/dream.jpeg'
 import { connect } from 'react-redux';
 
 function Intro(props) {
@@ -159,6 +160,15 @@ function Intro(props) {
         </a>
     )
 
+    const dream_content = (
+        <a href="">
+            <div className="intro_album_cover_div">
+                <img className="intro_album_cover" src={dream} alt="" />
+            </div>
+            <div className='intro_album_name'>Dream</div>
+        </a>
+    )
+
     const showBU = () => {
         setVisibleBU(true)
     }
@@ -227,7 +237,7 @@ function Intro(props) {
     return (
         <div>
             <div className="darren_avatar">
-                <Avatar size={props.language == 'en' ? 80 : 90} icon={<img src={darren_avatar} alt="" onClick={handleHYH} />} />
+                <Avatar size={props.language === 'en' ? 80 : 90} icon={<img src={darren_avatar} alt="" onClick={handleHYH} />} />
             </div>
 
             <div className="site-layout-content">
@@ -360,17 +370,17 @@ function Intro(props) {
                     </div>
 
                     <div className="">
-                        <Tag className="skill_tags" color="green">{props.language == 'en' ? 'Exploratory Data Analysis' : '探索性数据分析'}</Tag>
+                        <Tag className="skill_tags" color="green">{props.language === 'en' ? 'Exploratory Data Analysis' : '探索性数据分析'}</Tag>
                         <Tag className="skill_tags" color="green">Tableau</Tag>
                     </div>
 
                     <div className="">
-                        <Tag className="skill_tags" color="purple">{props.language == 'en' ? 'Writing Lyrics' : '作词'}</Tag>
-                        <Tag className="skill_tags" color="purple">{props.language == 'en' ? 'Compose' : '作曲'}</Tag>
-                        <Tag className="skill_tags" color="purple">{props.language == 'en' ? 'Music Arrangement' : '编曲'}</Tag>
-                        <Tag className="skill_tags" color="purple">{props.language == 'en' ? 'Music Production' : '音乐制作'}</Tag>
-                        <Tag className="skill_tags" color="purple">{props.language == 'en' ? 'Mixing' : '混音'}</Tag>
-                        <Tag className="skill_tags" color="purple">{props.language == 'en' ? 'Music Recording' : '录音'}</Tag>
+                        <Tag className="skill_tags" color="purple">{props.language === 'en' ? 'Writing Lyrics' : '作词'}</Tag>
+                        <Tag className="skill_tags" color="purple">{props.language === 'en' ? 'Compose' : '作曲'}</Tag>
+                        <Tag className="skill_tags" color="purple">{props.language === 'en' ? 'Music Arrangement' : '编曲'}</Tag>
+                        <Tag className="skill_tags" color="purple">{props.language === 'en' ? 'Music Production' : '音乐制作'}</Tag>
+                        <Tag className="skill_tags" color="purple">{props.language === 'en' ? 'Mixing' : '混音'}</Tag>
+                        <Tag className="skill_tags" color="purple">{props.language === 'en' ? 'Music Recording' : '录音'}</Tag>
                     </div>
 
 
@@ -446,6 +456,14 @@ function Intro(props) {
                                     2021.08.14 - {props.language === 'en' ? 'Single' : '单曲'}:
                                     <Popover placement='top' content={well_content} trigger="click">
                                         <Button type="dashed" size={music_button_size} style={well_style.container(matches)}>{props.language === 'en' ? 'We\'ll' : '未见'}</Button>
+                                    </Popover>
+                                </div>
+                            </Timeline.Item>
+                            <Timeline.Item>
+                                <div className="achievement">
+                                    2023.03.31 - {props.language === 'en' ? 'Single' : '单曲'}:
+                                    <Popover placement='top' content={dream_content} trigger="click">
+                                        <Button type="dashed" size={music_button_size} style={darren_style.container(matches)}>Dream</Button>
                                     </Popover>
                                 </div>
                             </Timeline.Item>

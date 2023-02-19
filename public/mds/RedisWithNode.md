@@ -1,10 +1,26 @@
 # Redis with Node.js
 
+### Start Redis service
+
+```
+$ brew services start redis
+```
+
+### Install node-redis packages
+
+```
+$ cd [project directory]
+```
+
+```
+$ npm install redis
+```
+
 ### import packages
 
 ```js
 const redis = require('redis')
-const redisUrl = 'redis:://127.0.0.1:6379'
+const redisUrl = 'redis://127.0.0.1:6379'
 const client = redis.creatgeClient(redisUrl)
 ```
 
