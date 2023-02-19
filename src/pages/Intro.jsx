@@ -9,7 +9,6 @@ import van_goghs_dream from '../assets/album_covers/van_goghs_dream.jpg'
 import original_song from '../assets/album_covers/original_song.jpg'
 import well from '../assets/album_covers/well.jpg'
 import darren from '../assets/album_covers/darren.jpg'
-import dream from '../assets/album_covers/dream.jpeg'
 import { connect } from 'react-redux';
 
 function Intro(props) {
@@ -167,7 +166,7 @@ function Intro(props) {
     const dream_content = (
         <a href="https://blog.darren-liu.com/music?mid=0" onClick={handleMusicClick}>
             <div className="intro_album_cover_div">
-                <img className="intro_album_cover" src={dream} alt="" />
+                <img className="intro_album_cover" src='https://darren-blog-bucket.s3.us-east-1.amazonaws.com/Dream.jpeg' alt="" />
             </div>
             <div className='intro_album_name'>Dream</div>
         </a>

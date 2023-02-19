@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation, useSearchParams } from 'react-router-dom'
 import 'antd/dist/antd.css'
-import dream from '../assets/album_covers/dream.jpeg'
 
 function Music() {
 
@@ -18,7 +17,7 @@ function Music() {
         0: {
             'head': 'Brand new single coming on March 31st, 2023!',
             'title': 'Dream',
-            'art': dream,
+            'art': 'https://darren-blog-bucket.s3.us-east-1.amazonaws.com/Dream.jpeg',
             'cont': [
                 'Performed by: Darren Liu',
                 'Written by: Darren Liu',
