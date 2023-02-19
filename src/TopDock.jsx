@@ -42,7 +42,7 @@ function TopDock(props) {
                     <Nav.Link eventKey={3} href="/blogs" style={tabStyle.container(matches)}>{props.language == 'en' ? 'Blogs' : '博客'}</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey={4} href="/music" style={tabStyle.container(matches)} disabled>{props.language == 'en' ? 'Music' : '音乐'}</Nav.Link>
+                    <Nav.Link eventKey={4} href="/music" style={tabStyle.container(matches)}>{props.language == 'en' ? 'Music' : '音乐'}</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                     <Nav.Link eventKey={5} href={props.uid == 1 ? "/event" : "/comments"}  style={tabStyle.container(matches)} >{props.uid == 1 ? (props.language == 'en' ? 'Events' : '事件') : (props.language == 'en' ? 'Comments' : '评论')}</Nav.Link>

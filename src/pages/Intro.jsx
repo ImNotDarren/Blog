@@ -160,8 +160,12 @@ function Intro(props) {
         </a>
     )
 
+    const handleMusicClick = () => {
+        props.handleSwitch(4)
+    }
+
     const dream_content = (
-        <a href="">
+        <a href="https://blog.darren-liu.com/music?mid=0" onClick={handleMusicClick}>
             <div className="intro_album_cover_div">
                 <img className="intro_album_cover" src={dream} alt="" />
             </div>
@@ -483,4 +487,16 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(Intro)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        handleSwitch(page) {
+            const action = {
+                type: 'switchTab',
+                value: page
+            }
+            dispatch(action)
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Intro)
