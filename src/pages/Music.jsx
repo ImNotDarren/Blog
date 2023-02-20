@@ -15,7 +15,7 @@ function Music() {
 
     const music_info = {
         0: {
-            'head': 'Brand new single coming on March 31st, 2023!',
+            'head': 'Brand new single coming',
             'title': 'Dream',
             'art': 'https://darren-blog-bucket.s3.us-east-1.amazonaws.com/Dream.jpeg',
             'cont': [
@@ -27,14 +27,22 @@ function Music() {
                 'Recorded by: Yi Liu / Darren Liu',
                 'Mixed by: Yi Liu at Silence Music',
                 'Mastered by: Yi Liu at Silence Music'
-            ]
+            ],
+            'release_time': (new Date(Date.UTC(2023, 2, 30, 16, 0))).toString().split(' ')
         }
     }
+
+    const timezoneOffset = (new Date()).getTimezoneOffset();
+    console.log(timezoneOffset);
+
+    console.log((new Date(Date.UTC(2023, 2, 30, 16, 0))).toString())
 
     return (
         <>
             <div className="site-layout-content" style={{ display: 'block' }}>
-                <div className="music_head">{music_info[mid]['head']}</div>
+                <div className="music_head">{`
+                    ${music_info[mid]['head']} at ${music_info[mid]['release_time'][4].split(':')[0]}:${music_info[mid]['release_time'][4].split(':')[1]} ${(parseInt(music_info[mid]['release_time'][4].split(':')[0]) >= 12 ? 'PM' : 'AM')} on ${music_info[mid]['release_time'][1]}. ${music_info[mid]['release_time'][2]}, ${music_info[mid]['release_time'][3]}!
+                `}</div>
                 <div className="music_intro">
                     <img className="music_art" src={music_info[mid]['art']} alt="" />
                     <div className="music_info">
