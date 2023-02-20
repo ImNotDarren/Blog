@@ -608,7 +608,7 @@
 
 .music_intro {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .music_head {
@@ -617,39 +617,64 @@
     font-weight: 700;
     color:#3069cb;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 .music_art {
+    display: flex;
+}
+
+.music_art_img {
     width: 280px;
     height: 280px;
     border-radius: 8%;
-    margin-right: 50px;
+    margin: auto
 }
 
 .music_info {
     display: block;
+    text-align: center;
 }
 
 .music_title {
     font-size: 30px;
     font-weight: 700;
+    margin-top: 20px;
 }
 
 .music_contributors {
     font-size: 18px;
     font-weight: 300;
     white-space: pre-wrap;
+    width: 100%;
+}
+
+.lyrics {
+    font-size: 18px;
+    font-weight: 350;
+    white-space: pre-wrap;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.music_links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.music_link {
+    font-size: 18px;
+    margin: 5px 10px 10px 10px;
 }
 
 @media screen and (max-width: 682px) {
     .music_head {
         font-size: 23px;
-        font-family: Arial, Helvetica, sans-serif;
-        color:#3069cb;
-        margin-bottom: 20px;
     }
 
-    .music_art {
+    .music_art_img {
        width: 200px;
        height: 200px;
     }
@@ -663,27 +688,23 @@
         font-size: 15px;
         font-weight: 300;
     }
+
+    .lyrics {
+        font-size: 15px;
+        font-weight: 350;
+    }
+
+    .music_link {
+        font-size: 15px;
+    }
 }
 
 @media screen and (max-width: 560px) {
-    .music_intro {
-        flex-direction: column;
-    }
-
-    .music_art {
+    .music_art_img {
         width: 180px;
         height: 180px;
-        margin: auto;
         /* margin-right: 0;
         margin-bottom: 20px; */
-    }
-
-    .music_title {
-        margin-top: 20px;
-    }
-
-    .music_info {
-        text-align: center;
     }
 }
 
