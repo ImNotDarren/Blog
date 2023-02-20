@@ -4,6 +4,22 @@ import 'antd/dist/antd.css'
 
 function Music() {
 
+    const display_time = (release_time) => {
+        // return `${(music_info[mid]['release_time'][4].split(':')[0] === '00' ? '12' : music_info[mid]['release_time'][4].split(':')[0])}:${music_info[mid]['release_time'][4].split(':')[1]} ${(parseInt(music_info[mid]['release_time'][4].split(':')[0]) >= 12 ? 'PM' : 'AM')} on ${music_info[mid]['release_time'][1]}. ${music_info[mid]['release_time'][2]}, ${music_info[mid]['release_time'][3]}`
+        let hour = parseInt(release_time[4].split(':')[0])
+        hour = hour === 0 ? 12 : (hour > 12 ? hour - 12 : hour)
+
+        let minute = release_time[4].split(':')[1]
+
+        let month = release_time[1]
+        let day = release_time[2]
+        let year = release_time[3]
+
+        let datetime = hour + ':' + minute + (parseInt(release_time[4].split(':')[0]) >= 12 ? 'PM' : 'AM') + ' on ' + month + '. ' + day + ', ' + year
+        return datetime
+        
+    }
+
     const location = useLocation()
     const { state } = location
     const [searchParams] = useSearchParams()
@@ -32,16 +48,11 @@ function Music() {
         }
     }
 
-    const timezoneOffset = (new Date()).getTimezoneOffset();
-    console.log(timezoneOffset);
-
-    console.log((new Date(Date.UTC(2023, 2, 30, 16, 0))).toString())
-
     return (
         <>
             <div className="site-layout-content" style={{ display: 'block' }}>
                 <div className="music_head">{`
-                    ${music_info[mid]['head']} at ${music_info[mid]['release_time'][4].split(':')[0]}:${music_info[mid]['release_time'][4].split(':')[1]} ${(parseInt(music_info[mid]['release_time'][4].split(':')[0]) >= 12 ? 'PM' : 'AM')} on ${music_info[mid]['release_time'][1]}. ${music_info[mid]['release_time'][2]}, ${music_info[mid]['release_time'][3]}!
+                    ${music_info[mid]['head']} at ${display_time(music_info[mid]['release_time'])}!
                 `}</div>
                 <div className="music_intro">
                     <img className="music_art" src={music_info[mid]['art']} alt="" />
