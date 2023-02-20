@@ -1,28 +1,45 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation, useSearchParams } from 'react-router-dom'
 import 'antd/dist/antd.css'
+import { connect } from 'react-redux';
 
-function Music() {
+function Music(props) {
 
     const display_time = (time) => {
         let release_time = time.toString().split(' ')
-        // return `${(music_info[mid]['release_time'][4].split(':')[0] === '00' ? '12' : music_info[mid]['release_time'][4].split(':')[0])}:${music_info[mid]['release_time'][4].split(':')[1]} ${(parseInt(music_info[mid]['release_time'][4].split(':')[0]) >= 12 ? 'PM' : 'AM')} on ${music_info[mid]['release_time'][1]}. ${music_info[mid]['release_time'][2]}, ${music_info[mid]['release_time'][3]}`
-        let hour = parseInt(release_time[4].split(':')[0])
-        hour = hour === 0 ? 12 : (hour > 12 ? hour - 12 : hour)
 
-        let minute = release_time[4].split(':')[1]
+        const month_zh = {
+            'Jan': '01',
+            'Feb': '02',
+            'Mar': '03'
+        }
 
-        let month = release_time[1]
-        let day = release_time[2]
-        let year = release_time[3]
+        if (props.language === 'en') {
+            let hour = parseInt(release_time[4].split(':')[0])
+            hour = hour === 0 ? 12 : (hour > 12 ? hour - 12 : hour)
 
-        let datetime = hour + ':' + minute + (parseInt(release_time[4].split(':')[0]) >= 12 ? 'PM' : 'AM') + ', ' + month + '. ' + day + ' ' + year
-        return datetime
-        
+            let minute = release_time[4].split(':')[1]
+
+            let month = release_time[1]
+            let day = release_time[2]
+            let year = release_time[3]
+
+            let datetime = hour + ':' + minute + (parseInt(release_time[4].split(':')[0]) >= 12 ? 'PM' : 'AM') + ', ' + month + '. ' + day + ' ' + year
+            return datetime
+        } else {
+            let hour = parseInt(release_time[4].split(':')[0])
+            let minute = release_time[4].split(':')[1]
+            let month = month_zh[release_time[1]]
+            let day = release_time[2]
+            let year = release_time[3]
+            let datetime = year + '.' + month + '.' + day + ' ' + hour + ':' + minute
+            return datetime
+        }
+
+
+
     }
 
-    const location = useLocation()
-    const { state } = location
     const [searchParams] = useSearchParams()
     let mid = searchParams.getAll('mid')[0]
 
@@ -34,17 +51,17 @@ function Music() {
     const link_pair = {
         0: 'Spotify',
         1: 'Apple Music',
-        2: 'QQMusic',
-        3: 'Netease Music'
+        2: props.language === 'en' ? 'QQMusic' : 'QQ音乐',
+        3: props.language === 'en' ? 'Netease Music' : '网易云音乐'
     }
 
     const music_info = {
         0: {
-            'head': today < (new Date(Date.UTC(2023, 2, 30, 16, 0))) ? 'Brand new single coming' : 'Brand new single \"Dream\" now released!',
+            'head': today < (new Date(Date.UTC(2023, 2, 30, 16, 0))) ? (props.language === 'en' ? 'Brand new single coming' : '全新单曲将于') : (props.language === 'en' ? 'Brand new single \"Dream\" now released!' : '全新单曲「Dream」现已发行！'),
             'title': 'Dream',
             'art': 'https://darren-blog-bucket.s3.us-east-1.amazonaws.com/Dream.jpeg',
-            'cont': [
-                'Performed by: Darren Liu',
+            'cont': props.language === 'en' ? [
+                'Darren Liu',
                 'Written by: Darren Liu',
                 'Produced by: Darren Liu',
                 'Backing Vocal Arranged by: Darren Liu',
@@ -52,6 +69,17 @@ function Music() {
                 'Recorded by: Yi Liu / Darren Liu',
                 'Mixed by: Yi Liu at Silence Music',
                 'Mastered by: Yi Liu at Silence Music'
+            ] : [
+                '刘思佐',
+                '词：刘思佐',
+                '曲：刘思佐',
+                '编曲：刘思佐',
+                '制作人：刘思佐',
+                '和声编写：刘思佐',
+                '和声：刘思佐',
+                '录音师：刘毅 / 刘思佐',
+                '混音师：刘毅@Silence Music',
+                '母带处理工程师：刘毅@Silence Music'
             ],
             'release_time': (new Date(Date.UTC(2023, 2, 30, 16, 0))),
             'links': ['', '', '', ''], // spotify, apple music, qq music, netease music
@@ -103,11 +131,13 @@ I won't wake up like before
     return (
         <>
             <div className="site-layout-content" style={{ display: 'block' }}>
-                <div className="music_head">{`
+                <div className="music_head">{props.language === 'en' ? `
                     ${music_info[mid]['head']} ${(today < music_info[mid]['release_time'] ? ' at ' + display_time(music_info[mid]['release_time']) + '!' : '')}
+                ` : `
+                ${music_info[mid]['head']} ${(today < music_info[mid]['release_time'] ? display_time(music_info[mid]['release_time']) + '全网首发！' : '')}
                 `}</div>
                 <div className="music_intro">
-                    
+
                     <div className="music_art">
                         <img className="music_art_img" src={music_info[mid]['art']} alt="" />
                     </div>
@@ -137,4 +167,12 @@ I won't wake up like before
     )
 }
 
-export default Music
+const mapStateToProps = (state) => {
+    return {
+        uid: state.uid,
+        language: state.language,
+        server: state.server
+    }
+}
+
+export default connect(mapStateToProps)(Music)
