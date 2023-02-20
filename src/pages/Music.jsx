@@ -114,7 +114,7 @@ I won't wake up like before
                     <div className="music_info">
                         <div className="music_title">{music_info[mid]['title']}</div>
 
-                        <div className="music_links" hidden={today < music_info[mid]['release_time'] ? true : false}>
+                        <div className="music_links" hidden={music_info[mid]['links'][0] === '' ? true : false}>
                             {music_info[mid]['links'].map((value, key) => {
                                 return (
                                     <a className="music_link" key={key} href={value}>{link_pair[key]}</a>
