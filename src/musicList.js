@@ -1,7 +1,7 @@
 function getMusic(mid, today, language) {
     const music_info = {
         0: {
-            'head': today < (new Date(Date.UTC(2023, 2, 30, 16, 0))) ? (language === 'en' ? 'Brand new single \"Dream\" coming' : '全新单曲「Dream」将于') : (language === 'en' ? 'Brand new single \"Dream\" now released!' : '全新单曲「Dream」现已发行！'),
+            'head': today < (new Date(Date.UTC(2023, 2, 30, 16, 0))) ? (language === 'en' ? 'Brand new single "Dream" coming' : '全新单曲「Dream」将于') : (language === 'en' ? 'Brand new single "Dream" now released!' : '全新单曲「Dream」现已发行！'),
             'title': 'Dream',
             'art': 'https://darren-blog-bucket.s3.us-east-1.amazonaws.com/Dream.jpeg',
             'cont': language === 'en' ? [
