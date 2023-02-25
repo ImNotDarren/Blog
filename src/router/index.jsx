@@ -1,4 +1,4 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from '../Home'
 import Intro from '../pages/Intro'
 import Error from '../pages/Error'
@@ -17,7 +17,7 @@ const BaseRouter = () => (
     <BrowserRouter forceRefresh={false}>
         <Routes>
             <Route path="/" element={<Home />}>
-            <Route path="/" element={<Intro />}></Route>
+                <Route path="/" element={<Intro />}></Route>
                 <Route path="/intro" element={<Intro />}></Route>
                 <Route path="/blogs" element={<Blogs />}></Route>
                 <Route path="/publications" element={<Pub />}></Route>
@@ -31,7 +31,7 @@ const BaseRouter = () => (
             <Route path="/login" element={<Login />}></Route>
             <Route path="/*" element={<Error />}></Route>
         </Routes>
-        
+
     </BrowserRouter>
 )
 

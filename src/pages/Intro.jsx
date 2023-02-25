@@ -107,7 +107,7 @@ function Intro(props) {
     const darren_content = (
         < a href="" >
             <div className="intro_album_cover_div">
-                <img className="intro_album_cover" src={darren} alt="" />
+                <img className="intro_album_cover" src="https://darren-blog-bucket.s3.us-east-1.amazonaws.com/DARREN.png" alt="" />
             </div>
             <div className='intro_album_name'>DARREN</div>
         </a >
@@ -166,7 +166,7 @@ function Intro(props) {
     const dream_content = (
         <a href="https://blog.darren-liu.com/music?mid=0" onClick={handleMusicClick}>
             <div className="intro_album_cover_div">
-                <img className="intro_album_cover" src='https://darren-blog-bucket.s3.us-east-1.amazonaws.com/Dream.jpeg' alt="" />
+                <img className="intro_album_cover" src='https://darren-blog-bucket.s3.us-east-1.amazonaws.com/Dream.png' alt="" />
             </div>
             <div className='intro_album_name'>Dream</div>
         </a>
