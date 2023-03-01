@@ -16,10 +16,10 @@ const defaultState = {
     avatar,
     email,
     language,
-    // server: 'https://www.imnotdddarren.com',
-    server: 'http://localhost:8080',
-    // python_server: 'https://flask.darren-liu.com'
-    python_server: 'http://127.0.0.1:5000'
+    server: 'https://www.imnotdddarren.com',
+    // server: 'http://localhost:8080',
+    python_server: 'https://flask.darren-liu.com'
+    // python_server: 'http://127.0.0.1:5000'
 }
 
 
